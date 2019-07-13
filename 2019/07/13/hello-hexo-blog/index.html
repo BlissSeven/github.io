@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="This is a hexo blog test">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="blissseven.top/2019/07/13/hello-hexo-blog/hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg">
-<meta property="og:updated_time" content="2019-07-13T07:20:32.176Z">
+<meta property="og:image" content="blissseven.top/2019/07/13/hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg">
+<meta property="og:updated_time" content="2019-07-13T07:33:31.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hello-hexo-blog">
 <meta name="twitter:description" content="This is a hexo blog test">
-<meta name="twitter:image" content="blissseven.top/2019/07/13/hello-hexo-blog/hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg">
+<meta name="twitter:image" content="blissseven.top/2019/07/13/hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -76,7 +76,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: true
     }
 </script>
 
@@ -108,6 +108,13 @@
 
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -300,8 +307,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="This-is-a-hexo-blog-test"><a href="#This-is-a-hexo-blog-test" class="headerlink" title="This is a hexo blog test"></a>This is a hexo blog test</h2><p><img src="./hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg" alt="微信图片_20190625195218"></p>
+        <contents>
 
+<h2 id="This-is-a-hexo-blog-test"><a href="#This-is-a-hexo-blog-test" class="headerlink" title="This is a hexo blog test"></a>This is a hexo blog test</h2><p><img src="%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg" alt="微信图片_20190625195218"></p>
+</contents>
       
     </div>
     
@@ -312,7 +321,7 @@
         <p><span>本文标题:</span><a href="/2019/07/13/hello-hexo-blog/">hello-hexo-blog</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
         <p><span>发布时间:</span>2019-07-13, 15:17:49</p>
-        <p><span>最后更新:</span>2019-07-13, 15:20:32</p>
+        <p><span>最后更新:</span>2019-07-13, 15:33:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/13/hello-hexo-blog/" title="hello-hexo-blog">blissseven.top/2019/07/13/hello-hexo-blog/</a>
             <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/07/13/hello-hexo-blog/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -473,6 +482,27 @@
 
 
 
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <div class="scroll" id="scroll">

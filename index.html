@@ -74,7 +74,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: true
     }
 </script>
 
@@ -106,6 +106,13 @@
 
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -289,8 +296,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="This-is-a-hexo-blog-test"><a href="#This-is-a-hexo-blog-test" class="headerlink" title="This is a hexo blog test"></a>This is a hexo blog test</h2><p><img src="./hello-hexo-blog/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg" alt="微信图片_20190625195218"></p>
+        <contents>
 
+<h2 id="This-is-a-hexo-blog-test"><a href="#This-is-a-hexo-blog-test" class="headerlink" title="This is a hexo blog test"></a>This is a hexo blog test</h2><p><img src="%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190625195218.jpg" alt="微信图片_20190625195218"></p>
+</contents>
       
     </div>
     
@@ -444,6 +453,27 @@
 
 
 
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <div class="scroll" id="scroll">
