@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="bliss7">
+
+
+
+<meta name="description" content="TCP/TP协议 TCP/IP详解">
+<meta name="keywords" content="TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP网络协议">
+<meta property="og:url" content="blissseven.top/2019/04/04/tcp-ip-note/index.html">
+<meta property="og:site_name" content="bliss7&#39;s blog">
+<meta property="og:description" content="TCP/TP协议 TCP/IP详解">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="blissseven.top/2019/04/04/tcp-ip-note/TCP-IP%E5%8D%8F%E8%AE%AE%E5%85%B3%E7%B3%BB%E5%9B%BE(A3%E7%BA%B8%E5%BC%A0%E8%A7%84%E6%A0%BC).png">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/A3LzhN7a90NY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/D91jgtBfdKKj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/7iatLbWg7hSO.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/P7PYb1C8JSRY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/9g28nbRU48Eo.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/bKxD5xLV24r6.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/CaTBcBSlOwnU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/HgeyDSIy3DBz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/kKfV9xoT7EuQ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190405/NH3IMklG8YW3.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/LghBoVdPgbL7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/pooromEOanqD.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/DMPX7TOM6G6u.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/Pnwq7jYHfLWS.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/xn23VBYLE3AE.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/1OjiXA0JAwUn.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/VbXuGabg30YX.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/MvspyPaMtEgk.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/wVf0Yjr0F6nh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/S0bAV3U04ys1.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/jG9PJwX1g7F4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/lp02PfVJt4c9.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/QcEsFkEUEIck.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/vMt1opcThTRy.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/KmFJBPBX80Ul.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/GI1X6VkGoRAV.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/uwLCkisWmEAL.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/wHE7GYTe2ul7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/wNlO2FY5XemT.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/qzedik0vVsuU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/sqaHbWKDXjE2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/SoARmv2I0DMg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/Cs9nlaHpwLV9.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/kfgvQmLx6ceC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/TPvJ00qLkM1c.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/kDCI8d3eHBIJ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/c9Rd4j0YFFdr.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/QReuCtAQPxNh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/L99ukCAr8jV7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/sksxeThYrFHF.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/FdOxsKlMwKu8.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/qyV3UnUVRBLh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/kHwV3ORsPDDo.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/l7ALNaDAPxFt.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/RxtXay1fahEc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/PcC3WyTx0kFV.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/6gJ0qYWMkWyF.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/5tXfDbMDRJ7V.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/Q4l6mKOlhSPq.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/j6fCn07z2SWw.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190407/TEcNYiDH8hHv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/IAyD5lcoVH3k.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/HK2DtSjhnGvz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/6McohHNMnT1v.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/R6Yut5IiC2ms.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/J6VxGGXmpIPA.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/nrKHFiinFAwb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/MUvsnpo5keDa.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/qQEdFmE86aME.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/KyI6V1niVmNa.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/fCLcPfWr43do.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/TWM4v9rU7Afh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/wAmvpdnUuhRu.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/pxyTzds9OvRP.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190408/PkBAgezK8cjU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/qPpfqVrrcOPi.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/PLhtqitFI8bV.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/UFFb6roD2DBY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/CuNoKNHiITBh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/88QEjnhFf8ar.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/1jB4ssfPKaHQ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/j5W7seTQliSE.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/6ix6qPXivdP4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/Ah6BhT9UVt8m.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/GD1mfjuVWRU6.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/gC2Epali3XGQ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/6BjTXm0gt4kv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/L0w0nGhL2Jq7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/9ymglpJc5zxj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/ldiEhXlnzvq0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/yqFUvOj9PaQv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/4qftmQp6yGyx.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/dB39333NT9gh.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/jQ4QTm5THEq3.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/OmH3UaUwyOLS.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/VzLeVC3pXE95.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/c5b96RwV0yzx.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/22nWjMi4DEeR.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190406/lp02PfVJt4c9.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/NPbesepxDKqv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/e0LeBr1AjVDI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/IT3XVNWjUY5T.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/RW6eXnulYTmJ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/Ek4glDhjPwHo.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/JsJa9lfXdKdd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/pxwEXAHuTSoI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/kueY0afaNUyz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/3QaNpGuWieFH.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/LeBTqFelUsNf.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/jSCvNB7XMJk2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/eR74jDHybHcj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/mMKkOOra6LUk.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/OCVh5jsxyAhl.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/JXHiWe0ToTHP.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/E3lscMiAXE6V.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/055eq0bFaJo0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/4oN1sWJSwGa5.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/suaj3D2PWdCY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/sImkY0lnhX4X.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/dRG1vxlj2dfI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/wgJUgc277bGC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/2niTNaIuz2oL.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/3URNoIVX5pNQ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190409/tXgSmbLx1nbI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/2b96RK2EP6xH.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/JhMF9LeGhKm0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/DSTVNmr4HImO.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/DVH5Qkn7BkOB.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/F0bSiE6Sw2YD.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/fPIa7nHjv4WO.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/YCs6uenfotXb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/SoeBbTeVovDR.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/aPtBL9e6PI2N.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/qcDM7wFyc5af.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/A5mLl2n9d7Ac.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/citdSNVKwv5g.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/GiwDf8jydbpe.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/IW9Jtr6HKj8m.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/wW2WHTds8xrC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/8AMLnhHgXyzf.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/OGm31qwaIIEz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/8DGswJwtNps0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/t0xBR4pQNU1p.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/mDxTB7JDNdtn.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/fIBeFlrwkOnU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/MRcgT5BKDH1J.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/paNXC469JwnH.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/DJJUXIPGNA0q.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/myMlC8kVKXdt.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/BP8YLRhcf67t.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/XBJNDJwAWBE5.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/nkwneo2RWLr6.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/tAi4YnnpGdQE.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/38cW6kia9qgt.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/sO5VAduFhh3o.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/B576otwzRfgk.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/TrLTBiSYdkXP.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/SM29VQ2PsI7X.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/YokR62cdl19G.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/3YifFDoG141b.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/5B1NlCVxrgjT.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/8uDaGhaQidqw.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/73xE8O6erY41.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/DIllWQiYhe9H.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/Ou1Q34TIaU52.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/jxF3eEh5kU1I.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/C6rVt1YyvT05.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/EpleNQvg1BvN.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/wbRPLy9zOu1g.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/VAsgOIUMPkds.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/vpvClDEUgVBB.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/1WIDJjioXXNG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/RuvSc58EMcgU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/I04bXR3j5wMO.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/BuwF6UYVQ10G.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/k0dGrBCJCYW2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/lzMqBNajvx3v.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/AB8e3a9xqYUA.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/dXsN3JpfbLim.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190410/yQhAXzTNTAiW.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/zlyJcbpYaWHd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/QX1ltJ2JBM6v.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/1pBB63IaAPY5.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/NUuoCQ5jAw5I.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/g4E2gINO8zcM.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/f7vc0NM0wzFG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/DFfGFKBWB9Yr.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/Xu8ALS9trLeR.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/4aarnSaGD65q.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/fX9JqeoVJgCz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/aSV04KT8JwPd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/i7thLAfpsYPD.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/sSqXRH76NoHC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/bbqy58qgYdRY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/TR05xUkpkP8I.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/Y361KNRIwW5d.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/7bqynsgd9Lyc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/fdyqfbGYf1CO.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/OdJCczf8sBET.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/PJVWOCc1rhM6.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/4GgQdqkEcp8q.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/4tHRwKUHQqMf.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/8IbC9CyGagly.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/lGdKwjdNhzl3.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/eyHwqN8oHy73.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/MsWPrJfxqxru.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/t6xcQyrVPL9h.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190411/Qp5Nnyqlcjfo.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/J4fdLWatUUlk.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/IeTFTIcL7sql.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/KJQSqDFkg7ic.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/23g8KbMhhnek.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/pf8dRzPojGML.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/rxQoHHDUVwsz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/g253hsoDCkTC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/1EIuuWfpntN5.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/A1nLKYeWwe1M.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/iisAnO2xGLX3.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/s4cqDYY9dkCr.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/jVDGEj8k9Jhz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/EzdYpj7k3A0g.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/LH0DsGJxw2s2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/HQ1EHLT3aKJY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/JCEs3ODCwO2v.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/wCr9kqcWBwbA.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/nAVz4syOk8rC.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190412/xCPPeSANo6ll.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/CPWyI9YNATus.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/qW5RTK530738.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/0NJEcoIRgK8w.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/7PkuLmx8M3jv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/eQ50ShPeTNpG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/betkljkNnjq0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/6nwBs0ImrQNr.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190413/NBxAbRp7Mdyu.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/FUbXWOGNK6TI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/i6IP4VyVX0DA.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/XrsoSJs0oanv.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/OdK67WBlXgKK.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/jefcTxJUqbd9.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/ktKdEeoL1NCY.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/NYVii4RTv4cc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/2j8E3nXBgRLm.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/OlptRi21RS0b.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/EPvrmVJCCyLs.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/9lolhN7W8puo.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/i6qALcY9vXnt.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/rkIjROF4E5uN.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/WFC6uGFEqqBJ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/Ok2VEVcYy81G.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/SNanmbVatWxu.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/yb1SLLsn0NK6.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/DqrGeehaSfkz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/jrUHTXUYCSQK.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/Dpy0CmIfYy96.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/SIGdHS5NTzct.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/X7vR5QxOpniU.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/IxGPcmcoen5l.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/uYuEzcY6M2IS.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/mIGsBdksemXy.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/APofJd3cXb03.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/6AUw7ytrx6Y5.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/w1t1KYVYx3Fb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/KUhFkaT8u5Uj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/kXt0QJwR01n8.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/a4d606GNEzWz.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/sO7YGkdn10i4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/20190414/n3UPG4G9RPpT.png?imageslim">
+<meta property="og:updated_time" content="2019-07-23T05:41:34.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP&#x2F;IP网络协议">
+<meta name="twitter:description" content="TCP/TP协议 TCP/IP详解">
+<meta name="twitter:image" content="blissseven.top/2019/04/04/tcp-ip-note/TCP-IP%E5%8D%8F%E8%AE%AE%E5%85%B3%E7%B3%BB%E5%9B%BE(A3%E7%BA%B8%E5%BC%A0%E8%A7%84%E6%A0%BC).png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="bliss7&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>TCP/IP网络协议 | bliss7&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">bliss7</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-11/">C++11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-model/">object_model</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">bliss7</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">bliss7</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-tcp-ip-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/04/tcp-ip-note/" class="article-date">
+      <time datetime="2019-04-03T16:00:00.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TCP/IP网络协议
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>TCP/TP协议</li>
+<li>TCP/IP详解</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h3><ul>
+<li>概述</li>
+<li>链路层</li>
+<li>IP:网际协议</li>
+</ul>
+<h3 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h3><ul>
+<li>ARP</li>
+<li>ICMP</li>
+<li>PING</li>
+<li>Traceroute</li>
+<li>IP选路</li>
+</ul>
+<h3 id="第三天"><a href="#第三天" class="headerlink" title="第三天"></a>第三天</h3><ul>
+<li>UDP</li>
+<li>广播和多播</li>
+<li>DNS</li>
+<li>TFTP</li>
+</ul>
+<h3 id="第四天"><a href="#第四天" class="headerlink" title="第四天"></a>第四天</h3><ul>
+<li>TCP</li>
+</ul>
+<h3 id="第五天"><a href="#第五天" class="headerlink" title="第五天"></a>第五天</h3><ul>
+<li>TCP</li>
+</ul>
+<h3 id="第六天"><a href="#第六天" class="headerlink" title="第六天"></a>第六天</h3><ul>
+<li>FTP 协议分析</li>
+<li>Telnet</li>
+<li>HTTP</li>
+<li>SMTP/POP3</li>
+<li>SSL</li>
+<li>SNMP</li>
+<li>SIP</li>
+</ul>
+<p><img src="TCP-IP%E5%8D%8F%E8%AE%AE%E5%85%B3%E7%B3%BB%E5%9B%BE(A3%E7%BA%B8%E5%BC%A0%E8%A7%84%E6%A0%BC).png" alt="TCP-IP协议关系图(tcp-ip-note/TCP-IP协议关系图(A3纸张规格).png)"></p>
+<h3 id="第一天-1"><a href="#第一天-1" class="headerlink" title="第一天"></a>第一天</h3><h4 id="1-1-概述分层"><a href="#1-1-概述分层" class="headerlink" title="1.1 概述分层"></a>1.1 概述分层</h4><p><img src="http://image.blissseven.top/blog/20190405/A3LzhN7a90NY.png?imageslim" alt="mark"></p>
+<ul>
+<li>链路层：处理与电缆（或其他任何传输媒介）的物理接口细节</li>
+<li>网络层 处理分组在网络中的活动，e.g 分组选路</li>
+<li>运输层 为两台主机上的应用程序提供端到端的通讯</li>
+<li>应用层 处理特定的应用程序细节 </li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190405/D91jgtBfdKKj.png?imageslim" alt="mark"></p>
+<h4 id="1-2-运行FTP的两台主机"><a href="#1-2-运行FTP的两台主机" class="headerlink" title="1.2 运行FTP的两台主机"></a>1.2 运行FTP的两台主机</h4><p><img src="http://image.blissseven.top/blog/20190405/7iatLbWg7hSO.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>大多网络应用程序设计为<strong>客户-服务器</strong>模式</p>
+</li>
+<li><p>双方都有对应的一个或者多个协议进行通讯</p>
+</li>
+<li><p><strong>应用程序</strong>通常都是<strong>用户进程</strong>，而<strong>下三层</strong>一般在<strong>内核</strong>执行</p>
+</li>
+<li><p>应用层关心应用程序的细节，下三层处理通讯细节</p>
+</li>
+<li><p><strong>分层为应用程序隐藏通讯细节！！！！</strong></p>
+</li>
+</ul>
+<h4 id="1-3-通过路由器链接的两个网络"><a href="#1-3-通过路由器链接的两个网络" class="headerlink" title="1.3 通过路由器链接的两个网络"></a>1.3 通过路由器链接的两个网络</h4><p><img src="http://image.blissseven.top/blog/20190405/P7PYb1C8JSRY.png?imageslim" alt="mark"></p>
+<ul>
+<li>端系统 end system —PC 服务器</li>
+<li>中间系统 intermediate system—路由器</li>
+<li>应用层和运输层使用端到端（end to end）协议</li>
+<li><strong>网络层提供的是逐跳协议</strong> hop to hop —PC和路由器 路由器和PC</li>
+<li>网络IP提供的是一种不可靠的服务，只是<strong>尽可能快的把分组源节点送到目的节点，但不提供可靠性保障</strong></li>
+<li>TCP在不可靠的IP层上提供一个可靠的运输层</li>
+<li>互联网的目的之一就是在应用程序中隐藏所有的物理细节</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190405/9g28nbRU48Eo.png?imageslim" alt="mark"></p>
+<ul>
+<li>假设电脑–大厦，应用程序–某个房间，房间号–端口号（标识一个应用程序），FTP 客户端和服务器通过FTP协议 应用程序到应用程序直接进行通讯， TCP协议主机到主机，端到端。IP协议一个城市的快递公司，链路层–一个媒介，介质到介质。</li>
+<li>IP 逐跳 以太网逐媒介</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190405/bKxD5xLV24r6.png?imageslim" alt="mark"></p>
+<h4 id="1-4-TCP-IP协议簇中不同层次的协议"><a href="#1-4-TCP-IP协议簇中不同层次的协议" class="headerlink" title="1.4 TCP/IP协议簇中不同层次的协议"></a>1.4 TCP/IP协议簇中不同层次的协议</h4><p><img src="http://image.blissseven.top/blog/20190405/CaTBcBSlOwnU.png?imageslim" alt="mark"></p>
+<ul>
+<li>TCP使用不可靠的IP服务，并提供一种可靠的运输层服务</li>
+<li>UDP为应用程序发送和接受数据报，不可靠（查询：DNS53，数据传输：TFTP69，SNMP 161，实时流量：语音视频流）</li>
+<li>IP是网络层的主要协议，同时被TCP和UDP使用，还有IPX</li>
+<li>ICMP是IP协议的附属协议 （ping 一个应用程序，调用ICMP，当IP包丢时，会通过ICMP告诉源，什么问题导致丢失）</li>
+<li>ARP ip地址解析为MAC地址</li>
+</ul>
+<h4 id="1-5-封装"><a href="#1-5-封装" class="headerlink" title="1.5 封装"></a>1.5 封装</h4><p><img src="http://image.blissseven.top/blog/20190405/HgeyDSIy3DBz.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>以太网数据帧的物理特性使其长度必须保持在46-1500字节之间，不够46 补够46，大于1500分片</p>
+</li>
+<li><p>以太网的帧首部也有一个16bit的帧类型域（IP ARP,ppoe）（以太网协议号），告诉  下一个头部是什么</p>
+</li>
+<li><p>IP 在首部存入一个长度为8bit的数值，称作<strong>协议域</strong>（ICMP TCP UDP ESP GRE）(IP协议号)</p>
+</li>
+<li><p>TCP /UDP都用一个16bit的端口号表示不同的应用程序（FTP TELNET HTTP）</p>
+</li>
+<li><p>发送方叫封装，接收方叫分用</p>
+</li>
+<li><p>最基本的协议号和端口号</p>
+<ul>
+<li>以太网协议号<ul>
+<li>IP:<strong>0X0800</strong>  | <strong>ARP:0X0806</strong>  |  <strong>PPPOE 0X8863 0X8864</strong></li>
+</ul>
+</li>
+<li>IP 协议号<ul>
+<li><strong>ICMP</strong>:1  |  <strong>TCP</strong>:6  |  <strong>UDP</strong>:17  |  GRE:47  |  ESP:50  |  AH:51</li>
+</ul>
+</li>
+<li>端口号<ul>
+<li><strong>FTP</strong>: 20 21  |  <strong>SSH</strong>:22  |  <strong>Telnet</strong>：23  |  <strong>SMTP</strong>:25  |  TACACS+:49  | HTTP:80  |  <strong>HTTPS</strong>:443  |  IKE: 500</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-6-分用"><a href="#1-6-分用" class="headerlink" title="1.6 分用"></a>1.6 分用</h4><p><img src="http://image.blissseven.top/blog/20190405/kKfV9xoT7EuQ.png?imageslim" alt="mark"></p>
+<h4 id="1-7-端口号"><a href="#1-7-端口号" class="headerlink" title="1.7 端口号"></a>1.7 端口号</h4><ul>
+<li><strong>服务器一般通过知名端口号识别</strong>（ftp 20 21 telnet 23 目的端口号即为服务器端端口号）</li>
+<li><strong>客户端口号又称临时端口号（存在时间很短）</strong></li>
+<li><strong>大多数TCP/IP实现给临时端口号分配1024-5000之间的端口号</strong></li>
+<li><strong>大于5000 的端口号是为其他服务器预留的</strong></li>
+</ul>
+<h4 id="1-8-实现过程"><a href="#1-8-实现过程" class="headerlink" title="1.8 实现过程"></a>1.8 实现过程</h4><p><img src="http://image.blissseven.top/blog/20190405/NH3IMklG8YW3.png?imageslim" alt="mark"></p>
+<ul>
+<li>软件是同4.xBSD系统的网络版一起发布的，它的源代码是许多实现的基础</li>
+</ul>
+<h4 id="2-1-链路层-以太网和IEEE802封装"><a href="#2-1-链路层-以太网和IEEE802封装" class="headerlink" title="2.1 链路层 以太网和IEEE802封装"></a>2.1 链路层 以太网和IEEE802封装</h4><ul>
+<li><p>以太网</p>
+<ul>
+<li>一般指数字设备公司、英特尔公司、Xerox公司在1982年联合公布的一个标准</li>
+<li>采用CSMA/CD 的媒体接入方法（Carrier Sense. Multiple Access with Collision Detection）</li>
+<li>速率10Mb/s，地址18bit</li>
+<li>之后由IEEE 802.3委员会将其规范化，但两者直接对以太网帧的格式定义有所不同.IEEE802.3所规范的以太网有时又被称为802.3以太网（非IP协议 CDP,VTP）</li>
+</ul>
+</li>
+<li><p>IEEE 802封装</p>
+<ul>
+<li>802.3 针对整个CSMA/CD网络</li>
+<li>802.4 针对令牌总线网络</li>
+<li>802.5 针对令牌环网络</li>
+</ul>
+</li>
+<li><p>MAC地址长48bit。任何一个网卡的mac地址唯一</p>
+<ul>
+<li>根据MAC地址转发</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190406/LghBoVdPgbL7.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/20190406/pooromEOanqD.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/20190407/DMPX7TOM6G6u.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/20190407/Pnwq7jYHfLWS.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="2-2-封装格式"><a href="#2-2-封装格式" class="headerlink" title="2.2 封装格式"></a>2.2 封装格式</h4><p><img src="http://image.blissseven.top/blog/20190406/xn23VBYLE3AE.png?imageslim" alt="mark"></p>
+<ul>
+<li>两种帧格式都采用48bit（6字节）的目的地址和和源地址，类型即高速下一个为IP头部</li>
+<li>ARP RARP协议对32bit的IP地址和48bit的硬件地址进行映射</li>
+<li>802定义的<strong>有效长度值与以太网的有效类型值无一相同，这样就可以对两种帧格式进行区分</strong>。</li>
+<li>目的服务访问点(Destination Service Access Point ,DSAP)和源服务访问点（Source Service Access Point，SSAP）的值都为<strong>0xaa，ctrl字段为3.随后的三个字节org code都设置为0</strong>。随后的2个字节类型字段和以太网帧格式一样。802.3规定数据部分至少为38字节，而对于以太网至少为46字节。为了保证这一点，不够的要补充pad字节。 </li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190406/1OjiXA0JAwUn.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/20190406/VbXuGabg30YX.png?imageslim" alt="mark"></p>
+<h4 id="2-3-环回口"><a href="#2-3-环回口" class="headerlink" title="2.3 环回口"></a>2.3 环回口</h4><p><img src="http://image.blissseven.top/blog/20190406/MvspyPaMtEgk.png?imageslim" alt="mark"></p>
+<ul>
+<li>传给<strong>环回地址（一般为127.x.x.x）的任何数据均作为IP输入</strong></li>
+<li><strong>传给广播地址或多播地址的数据报复制一份给环回接口，然后送到以太网上。这是因为广播传送和多播传送的定义包含主机本身。广播的数据报根本就没有出去，不是发出去再收回来</strong></li>
+<li>任何传给该主机IP地址的数据均送到环回接口</li>
+</ul>
+<h4 id="2-4-MTU和路径MTU"><a href="#2-4-MTU和路径MTU" class="headerlink" title="2.4 MTU和路径MTU"></a>2.4 MTU和路径MTU</h4><p><img src="http://image.blissseven.top/blog/20190406/wVf0Yjr0F6nh.png?imageslim" alt="mark"></p>
+<ul>
+<li><strong>以太网和802.3对数据帧的长度</strong>都有一个限制，其最大值分别是<strong>1500和1492字节</strong>。<strong>链路层的这个特性称作MTU，最大传输单元。出方向的时候查看MTU</strong>，</li>
+<li>如果IP层有一个数据报要传送，而且数据的长度比链路层的MTU还大，那么IP层就要分片（fragementation）</li>
+<li>点到点的链路层（SLIP /PPP）的MTU<strong>并非指的是网络媒体的物理特性</strong>，相反，他是一个<strong>逻辑限制，目的是为交互使用提供足够快的响应时间</strong></li>
+<li>两台通信主机通信路径中的最小MTU，成为路径MTU</li>
+<li>路径MTU再两个方向上是不一致的</li>
+<li>MTU计算出方向</li>
+</ul>
+<h4 id="3-1-网络层和数据链路层的关系"><a href="#3-1-网络层和数据链路层的关系" class="headerlink" title="3.1 网络层和数据链路层的关系"></a>3.1 网络层和数据链路层的关系</h4><ul>
+<li>网络层的主要作用是实<strong>现终端节点之间的通信。</strong>这种终端节点之间的通信也叫点对点通信。（主机到主机，IP到IP）</li>
+<li>数据链路层的主要作用是在<strong>互联同一种数据链路的节点之间进行包/帧传递</strong>，而一旦跨越<strong>多种数据链路，就需要借助于网络层</strong>。网络层可以跨越不同的数据链路，即使再不同的数据链路上也能实现两端点之间的数据包传输</li>
+<li><img src="http://image.blissseven.top/blog/20190406/S0bAV3U04ys1.png?imageslim" alt="mark"></li>
+<li><strong>数据链路层提供直连(网络层面的直连)两个设备之间的通信功能</strong>。作为网络层的IP负责在没有直连的两个网络之间进行通信传输</li>
+<li><img src="http://image.blissseven.top/blog/20190406/jG9PJwX1g7F4.png?imageslim" alt="mark"></li>
+<li>每张票只能在某一限定区间内移动。区间内就是网络上的数据链路。而这个区间的出发点和目的点就是数据链路的源地址和目标地址等首部信息。整个全程的行程表就是网络层</li>
+<li>MAC地址标识同一个链路不同计算机的识别码，IP用于在连接到网络中的所有主机中识别出进行通信的目标地址</li>
+</ul>
+<h4 id="3-2-IP介绍"><a href="#3-2-IP介绍" class="headerlink" title="3.2 IP介绍"></a>3.2 IP介绍</h4><ul>
+<li>IP为TCP/IP协议族中最为核心协议。TCP/UDP/ICMP/IGMP数据都以IP数据报格式传输</li>
+<li>IP提供不可靠的无连接的数据报传送服务</li>
+<li>不可靠（unreliable）指的是不能保证IP数据报能成功到达目的地。IP仅提供最好的传输服务。如果发生某种错误。IP有一个简单的错误处理算法，丢弃该数据报，然后发送ICMP消息给信源端。任何要求的可靠性必须由上层来提供（tcp/ip）</li>
+<li>无连接（connectionless）IP并不维护任何关于后续数据报的状态信息。每个数据报的处理是相互独立的。IP数据报可以不按发送顺序接受。如果一信源向相同的信宿发送两个连续的数据报（A,B），每个数据报都是独立的进行路由选择，可能选择不同的路线，因此B可能再A之前到达。TCP对数据包排序，顺序不对时，缓存。</li>
+<li>ifconfig/netstat</li>
+</ul>
+<h4 id="3-3-IP首部"><a href="#3-3-IP首部" class="headerlink" title="3.3 IP首部"></a>3.3 IP首部</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190406/lp02PfVJt4c9.png?imageslim" alt="mark"></li>
+</ul>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190406/QcEsFkEUEIck.png?imageslim" alt="mark"></li>
+<li></li>
+</ul>
+<h4 id="3-4-首部字段分析1"><a href="#3-4-首部字段分析1" class="headerlink" title="3.4 首部字段分析1"></a>3.4 首部字段分析1</h4><ul>
+<li>版本，4bit组成。表示标识IP首部的版本号，IPV4版本号为4。<ul>
+<li><img src="http://image.blissseven.top/blog/20190406/vMt1opcThTRy.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>首部长度，4bit构成。IP首部大小。单位为4字节（32bit），即一行。对于没有可选项的IP包。首部长度为5。即IP首部长度为20字节。</li>
+<li>首部长度最大15 *4字节=60个字节，15行。选项最多40个字节<ul>
+<li><img src="http://image.blissseven.top/blog/20190406/KmFJBPBX80Ul.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>区分服务位，TOS位<ul>
+<li>8bit构成，表明服务质量。</li>
+<li><img src="http://image.blissseven.top/blog/20190406/GI1X6VkGoRAV.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190406/uwLCkisWmEAL.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190406/wHE7GYTe2ul7.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>总长度，表<strong>示IP首部和数据部分合起来的总字节数</strong>。长16bit。因此IP包最大为65535=2^16字节。<ul>
+<li>目前还不存在能够传输最大长度为65535字节的IP包的数据链路。不过，因为有IP分片处理，从IP的上一层角度看，不论底层采用何种数据链路，都可以认为能够以IP的最大包长传输数据</li>
+</ul>
+</li>
+<li><strong>标识ID，16bit组成。用于分片重组</strong>。同一个分片的标识值相同，不同分片标识值不同。通常，每发送一个IP包，它的值也会逐渐增加。此外，如果ID相同，但目标地址、源地址或协议不同的话，也会认为是不同的分片。一个数据报，一个ID，可能分成很多片。</li>
+<li>标志，flag<ul>
+<li>3bit构成，表示<strong>包被分片的相关信息</strong>。</li>
+<li><img src="http://image.blissseven.top/blog/20190406/wNlO2FY5XemT.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>片位移FO–Fragment Offset<ul>
+<li>13bit构成。<strong>标识被分片的每一个片段相对于原始数据的位置</strong>。第一个分片对应的值为0。由于FO域占13bit。因此最多可以标识8192=2^13个相对位置。单位为8字节。因此最大可表示原始数据8x8192=65536字节的位置。</li>
+</ul>
+</li>
+<li>TTL 生存时间<ul>
+<li>8bit构成。可以<strong>中转多少个路由器，每经过一个路由就减一，防止环形路由</strong>。</li>
+</ul>
+</li>
+<li>协议<ul>
+<li>8bit构成。<strong>表示IP首部的下一个首部属于哪个协议</strong>。</li>
+<li>1 ICMP 6 TCP 17 UDP</li>
+</ul>
+</li>
+<li>首部校验和（Header CheckSum）<ul>
+<li>16bit构成。只校验数据报的首部，不校验数据部分。确保IP数据包不被破坏。</li>
+</ul>
+</li>
+<li>源地址<ul>
+<li>32bit，表示发送端IP地址</li>
+</ul>
+</li>
+<li>目标地址<ul>
+<li>32bit，接收端IP地址</li>
+</ul>
+</li>
+<li>可选项<ul>
+<li>最多40字节</li>
+<li><img src="http://image.blissseven.top/blog/20190407/qzedik0vVsuU.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>填充Padding<ul>
+<li>再由可选项的情况下，首部长度可能不是32bit的整数倍，为此向该字段填0，调整为32bit的整数倍。</li>
+</ul>
+</li>
+<li>数据<ul>
+<li>存入数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-5-IP路由的选择"><a href="#3-5-IP路由的选择" class="headerlink" title="3.5 IP路由的选择"></a>3.5 IP路由的选择</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190407/sqaHbWKDXjE2.png?imageslim" alt="mark"></li>
+<li>该例子中所有主机和路由器都使用了默认路由。事实上，大多数主机和一些路由器可以用默认路由来处理任何目的，除非它在本地局域网上</li>
+<li><strong>数据报中的目的IP地址始终不发生任何变化（只有使用源路由选项时，目的IP地址地址才可能被修改，很罕见</strong>）。所有<strong>路由选择决策都是基于这个目的IP地址</strong></li>
+<li>每个链路层可能具有不同的数据帧首部，而且链路层的目的地址（如果有的话）始终指向下一站的链路层地址。在例子中，两个以太网封装了含有下一站以太网的链路层首部，但是SLIP链路没有这样做。以太网地址一般通过ARP获得。</li>
+<li><img src="http://image.blissseven.top/blog/20190407/SoARmv2I0DMg.png?imageslim" alt="mark"></li>
+<li>源目IP始终保持不表（除非有NAT存在）</li>
+<li>每一跳数据链路层地址都随之改变，源为出接口物理地址，目的为路由的下一跳的物理地址</li>
+</ul>
+<h4 id="3-6-特殊情况的IP地址"><a href="#3-6-特殊情况的IP地址" class="headerlink" title="3.6 特殊情况的IP地址"></a>3.6 特殊情况的IP地址</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190407/Cs9nlaHpwLV9.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>0表示所有bit为0；-1表示所有比特为1；netid,subnetid 和hostid分别表示不为全0 全1的对应字段。子网号栏为空表示该地址没有进行子网划分</strong>。</p>
+</li>
+<li><p>表<strong>的头两项为特殊的源地址，中间项为特殊的环回地址，最后四项为广播地址</strong></p>
+</li>
+<li><p>表中头两项，网络号为0，如主机使用BOOTP协议确定本机IP地址时只能作为初始化过程中的源地址出现。</p>
+</li>
+<li><p>DHCP   UDP包，有源IP地址，为0.0.0.0 目的IP 255.255.255.255</p>
+</li>
+<li><p>192.168.1.0/24 24 指网络号加子网号的总位数，在没有划分之前ip地址是网络号+主机号，划分子网之后，出现了子网号，<strong>子网号是从主机号借的位。 子网掩码中前多少号为1</strong></p>
+</li>
+<li><p>在使用TCP/IP 协议的网络中，主机标识段host ID 为全1 的IP 地址为广播地址，广播的分组传送给host<br>ID段所涉及的所有计算机。例如，对于10.1.1.0 （255.255.255.0 ）网段，其广播地址为10.1.1.255 （255 即为2<br>进制的11111111 ），当发出一个目的地址为10.1.1.255 的分组（封包）时，它将被分发给该网段上的所有计算机。</p>
+</li>
+<li><p><strong>网络地址就是：把IP地址转成二进制和子网掩码进行与运算</strong></p>
+</li>
+<li><p>广播地址：网络地址的主机位全部变成1 </p>
+</li>
+<li><p>网络地址+1即为第一个主机地址，广播地址-1即为最后一个主机地址</p>
+</li>
+<li><p>主机的数量=2^二进制位数的主机-2</p>
+</li>
+</ul>
+<h3 id="第二天-1"><a href="#第二天-1" class="headerlink" title="第二天"></a>第二天</h3><h4 id="1-0-建立TCP连接与ARP的关系"><a href="#1-0-建立TCP连接与ARP的关系" class="headerlink" title="1.0 建立TCP连接与ARP的关系"></a>1.0 建立TCP连接与ARP的关系</h4><p>应用接受用户提交的数据，触发TCP建立连接，TCP的第一个SYN报文通过connect函数到达IP层，IP层通过查询路由表：</p>
+<ul>
+<li><p>如果目的IP和自己在同一个网段：</p>
+<ul>
+<li>当<strong>IP层的ARP高速缓存表中存在目的IP对应的MAC地址时</strong>，则调用网络接口send函数（参数为IP Packet和目的MAC））将数据提交给网络接口，网络接口完成Ethernet Header + IP + CRC的封装，并发送出去；</li>
+<li>当IP层的ARP高速缓存表中不存在目的IP对应的MAC地址<strong>时，则IP层将TCP的SYN缓存下来，发送ARP广播请求目的IP的MAC，</strong>收到ARP应答之后，将应答之中的&lt;IP地址，对应的MAC&gt;对缓存在本地ARP高速缓存表中，然后完成TCP  SYN的IP封装，调用网络接口send函数（参数为IP Packet和目的MAC））将数据提交给网络接口，网络接口完成Ethernet  Header + IP + CRC的封装，并发送出去；。</li>
+</ul>
+</li>
+<li><p>如果目的<strong>IP地址和自己不在同一个网段，就需要将包发送给默认网关，这需要知道默认网关的MAC地址</strong>：</p>
+<ul>
+<li>当IP层的ARP高速缓存表中存在默认网关对应的MAC地址时，则调用网络接口send函数（参数为IP Packet和默认网关的MAC）将数据提交给网络接口，网络接口完成Ethernet Header + IP + CRC</li>
+<li>当<strong>IP层的ARP高速缓存表中不存在默认网关对应的MAC地址时，则IP层将TCP的SYN缓存下来，发送ARP广播请求默认网关的MAC，收到ARP应答之后，将应答之中的&lt;默认网关地址，对应的MAC&gt;对缓存在本地ARP高速缓存表中，然后完成TCP  SYN的IP封装</strong>，调用网络接口send函数（参数为IP Packet和默认网关的MAC）将数据提交给网络接口，网络接口完成Ethernet  Header + IP + CRC的封装，并发送出去。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-1-ARP介绍"><a href="#1-1-ARP介绍" class="headerlink" title="1.1 ARP介绍"></a>1.1 ARP介绍</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190407/kfgvQmLx6ceC.png?imageslim" alt="mark"></li>
+<li>当一台主机把以太网数据帧发送到位于同一局域网上的另一台主机时，<strong>是根据48bit的以太网地址来确认目的接口</strong>的。<strong>设备驱动程序从不检查IP数据报中的目的IP地址</strong></li>
+<li>地址解析为这两种不同的地址形式提供映射。</li>
+<li>ARP 为IP地址到对应的硬件地址之间提供动态映射。动态—自动完成</li>
+<li>RARP被那些没有磁盘驱动器的系统使用，需要系统管理员进行手动设置</li>
+<li></li>
+<li><img src="http://image.blissseven.top/blog/20190407/TPvJ00qLkM1c.png?imageslim" alt="mark"></li>
+<li>直连时，解析目的主机MAC地址，否则解析下一跳<strong>默认网关 或者路由的MAC地址</strong></li>
+<li>逻辑地址（一般IP），物理地址（MAC/DLCI/全局IP）</li>
+<li>仅仅知道目的逻辑地址，不知道物理地址，设备不会向网络发送任何数据帧</li>
+</ul>
+<h4 id="1-2逻辑到物理地址的解析协议"><a href="#1-2逻辑到物理地址的解析协议" class="headerlink" title="1.2逻辑到物理地址的解析协议"></a>1.2逻辑到物理地址的解析协议</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190407/kDCI8d3eHBIJ.png?imageslim" alt="mark"></p>
+</li>
+<li><p>以太网 ARP</p>
+</li>
+<li><p>帧中继 （Franme Relay Inverse ARP）</p>
+</li>
+<li><p>MGRE（NHRP）</p>
+</li>
+<li><p>这些均支持自动和手动模式</p>
+</li>
+<li><p>点对点网络无需地址解析协议</p>
+<ul>
+<li>PPP 点对点网络</li>
+<li>点对点GRE网络</li>
+<li>IPSec VTI网络</li>
+<li>存储FC网络</li>
+<li>数据中心FP网络</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-ARP高速缓存"><a href="#1-3-ARP高速缓存" class="headerlink" title="1.3 ARP高速缓存"></a>1.3 ARP高速缓存</h4><ul>
+<li>ARP高效运行的关键是，<strong>每个主机都有一个ARP高速缓存/存放了最近Internet地址到硬件地址之间的映射记录</strong>。高速缓存每一项的生存时间一般为20分钟，起始时间从被创建时开始。</li>
+<li>PC arp -a arp -d清除</li>
+<li>路由器 show arp   clear arp</li>
+</ul>
+<h4 id="1-4-ARP的分组格式"><a href="#1-4-ARP的分组格式" class="headerlink" title="1.4 ARP的分组格式"></a>1.4 ARP的分组格式</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190407/c9Rd4j0YFFdr.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/QReuCtAQPxNh.png?imageslim" alt="mark"></li>
+<li>帧类型0800 IP 0806 ARP 0835 RARP</li>
+<li>紧跟着帧类型字段的前4字段指定了最后四个字段的类型和长度</li>
+<li>硬件类型 以太网 =1</li>
+<li><strong>协议类型 IPv4 0x0800</strong></li>
+<li>硬件长度 <strong>以太网地址长度6 字节</strong></li>
+<li>协议长<strong>度 IPv4=4字节</strong></li>
+<li>操作码 1 request 2 reply 3 RARP请求 4 RARP 应答</li>
+<li><img src="http://image.blissseven.top/blog/20190407/L99ukCAr8jV7.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/sksxeThYrFHF.png?imageslim" alt="mark"></li>
+<li>大部分的广播包，它们有一个共同特征：<strong>二层封装时目的MAC是全f（ffff.ffff.ffff）或三层封装时目的IP是全1（255.255.255.255）</strong>。可以这样更方便的记住：目的地址最大的，就是广播。</li>
+<li>“问”是通过广播形式实现，”答”是通过单播形式。</li>
+</ul>
+<h4 id="1-5-交换机工作原理"><a href="#1-5-交换机工作原理" class="headerlink" title="1.5 交换机工作原理"></a>1.5 交换机工作原理</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190407/FdOxsKlMwKu8.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/qyV3UnUVRBLh.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/kHwV3ORsPDDo.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/l7ALNaDAPxFt.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/RxtXay1fahEc.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/PcC3WyTx0kFV.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/6gJ0qYWMkWyF.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190407/5tXfDbMDRJ7V.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-6-特殊的ARP-ARP代理"><a href="#1-6-特殊的ARP-ARP代理" class="headerlink" title="1.6 特殊的ARP-ARP代理"></a>1.6 特殊的ARP-ARP代理</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190407/Q4l6mKOlhSPq.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>R1没有路由能力，不分直连不直连</strong>。</p>
+</li>
+<li><p><strong>有路由能力的直连的直接解析，没有直连的解析网关</strong></p>
+</li>
+<li><p>一台主机（通常路由器）应答要发送至另一台机器的ARP请求。通过“伪造”其身份，<strong>路由器负责将信息包路由到“真实”目的地。代理ARP可以帮助子网中的计算机到达远程子网，而无需配置路由或默认网关</strong>。</p>
+</li>
+<li><p>　代理ARP就是通过使用一个主机(通常为router)，来作为指定的设备使用自己的 MAC 地址来对另一设备的ARP请求作出应答。</p>
+</li>
+<li><p>为什么需要代理ARP？<strong>路由器的重要功能之一就是把局域网的广播包限制在该网内，阻止其扩散，否则会造成网络风暴</strong>。</p>
+<p>　　<strong>ARP请求是个广播包，它询问的对象如果在同一个局域网内，就会收到应答</strong>。<strong>但是如果询问的对象不在同一个局域网该如何处理？路由器就提供的代理ARP为这个问题提供了解决方案。</strong></p>
+</li>
+<li><p>　两台<strong>主机A和B处于同一网段但不同的广播段时，主机A发送ARP请求主机B的MAC地址时，因为路由器不转发广播包的原因</strong>，ARP请求只能到达路由器。如果路由器启用了<strong>代理ARP功能，并知道主机B属于它连接的网络，那么路由器就用自己接口的MAC地址代替主机B的MAC地址来对主机A进行ARP应答。</strong>主机A接收ARP应答，但并不知道代理ARP的存在</p>
+</li>
+<li><p>优点：<strong>代理ARP能在不影响路由表的情况下添加一个新的Router，使子网对该主机变得透明化。一般代理ARP应该使用在主机没有配置默认网关或没有任何路由策略的网络上</strong>。</p>
+</li>
+<li><p>缺点：从工作工程可以看到，这其实是一种ARP欺骗。而且，通过两个<strong>物理网络之间的路由器的代理ARP功能其实互相隐藏了物理网络</strong>，这导致<strong>无法对网络拓扑进行网络概括</strong>。此外，代理ARP增加了使用它的那段网络的ARP流量，主机需要更大的ARP缓存空间，也不会为不使用ARP进行地址解析的网络工作。</p>
+</li>
+</ul>
+<h4 id="1-7-免费ARP"><a href="#1-7-免费ARP" class="headerlink" title="1.7 免费ARP"></a>1.7 免费ARP</h4><ul>
+<li>作用1 告诉<strong>整个广播域，目前这个IP对应的MAC是什么</strong>  （网络设备冷备）</li>
+<li>作用2 看看<strong>广播内有没有别的主机使用自己的IP，如果使用了，界面上弹出IP冲突</strong>（防止地址冲突）</li>
+<li><img src="http://image.blissseven.top/blog/20190407/j6fCn07z2SWw.png?imageslim" alt="mark"></li>
+<li><strong>接收方，接收到包后，尽管目的IP不是自己，但会读取源IP和源MAC，并更新自己的ARP缓存</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190407/TEcNYiDH8hHv.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="2-1-ICMP介绍"><a href="#2-1-ICMP介绍" class="headerlink" title="2.1 ICMP介绍"></a>2.1 ICMP介绍</h4><ul>
+<li>ICMP<strong>为IP层的一个组成部分。传递差错报文以及其他需要注意的信息。ICMP报文通常被IP层或者更高层协议（TCP/UDP）使用</strong>。一些ICMP报文把差错报文返回给用户进程</li>
+<li>一旦丢包，<strong>丢包的路由器将差错报文发送源</strong>。</li>
+<li><strong>ICMP报文在IP数据报内部被传输</strong></li>
+<li>ICMP报<strong>文前四个字节都相同</strong>，IP 首部20字节。</li>
+<li><img src="http://image.blissseven.top/blog/20190408/IAyD5lcoVH3k.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/HK2DtSjhnGvz.png?imageslim" alt="mark"></li>
+<li>ICMP协议号为1  <strong>ICMP</strong>:1  |  <strong>TCP</strong>:6  |  <strong>UDP</strong>:17  |  GRE:47  |  ESP:50  |  AH:51</li>
+<li>echo request 类型为8 代码为0</li>
+<li>echo reply 类型为0 代码为0</li>
+<li>校验和：<ul>
+<li>以太网管自己的，IP校验和IP头部，TCP /ICMP 管自己头部和后面所有的</li>
+</ul>
+</li>
+<li><img src="http://image.blissseven.top/blog/20190408/6McohHNMnT1v.png?imageslim" alt="mark"></li>
+<li>最后<strong>两列表示ICMP报文是查询报文还是差错报文</strong></li>
+<li>当发送一份ICMP差错报文时，报文始终包含<strong>IP的首部</strong>和<strong>产生ICMP差错报文的IP数据报的前8个字节</strong>，这样接受ICMP差错报文的模块就会把它与某个<strong>特定的协议（根据IP数据报首部中的协议字段来判断</strong>）和<strong>用户进程（根据包含在IP数据报前8个字节中的TCP或UDP报文首部中的TCP或UDP端口号来判断</strong>）联系起来。</li>
+</ul>
+<h4 id="2-2-差错报文"><a href="#2-2-差错报文" class="headerlink" title="2.2 差错报文"></a>2.2 差错报文</h4><ul>
+<li>下列情况不会导致产生ICMP差错报文，为了防止过去允许ICMP差错报文对广播分组响应所带来的广播风暴<ul>
+<li><strong>ICMP差错报文，但是ICMP查询报文可能会产生差错报文</strong></li>
+<li><strong>目的地址是广播地址或多播地址的IP数据报</strong></li>
+<li>作为链路层广播的数据报</li>
+<li>不是IP分片的第一片，只有第一片才有四层端口号的信息。</li>
+<li><strong>源地址不是单个主机的数据报。即源地址不能为零地址、环回地址、广播地址、多播地址</strong></li>
+</ul>
+</li>
+<li><img src="http://image.blissseven.top/blog/20190408/R6Yut5IiC2ms.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/J6VxGGXmpIPA.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/nrKHFiinFAwb.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/MUvsnpo5keDa.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="2-3-ping介绍"><a href="#2-3-ping介绍" class="headerlink" title="2.3 ping介绍"></a>2.3 ping介绍</h4><ul>
+<li>用于进行通信的主机或路由器之间，<strong>判断所发送的数据包是否已经成功到达对端的一种消息</strong></li>
+<li>ICMP Echo Request —————ICMP Echo Reply</li>
+<li>ping 可以确定问题出在哪里，也可以<strong>测出到这台主机的往返时间，表明该主机离我们有多远</strong></li>
+<li><strong>一台主机的可达性可能不止取决于IP是否可达，还取决于使用何种协议以及端口号，ping不通，不见得一定不通</strong></li>
+<li>成发送回显请求的ping程序为客户，而被ping的主机为服务器。大<strong>都数的TCP/IP实现都在内核中直接支持ping服务器</strong>。这种服务器不是一个用户进程（第六章介绍的两种ICMP查询服务，地址掩码和时间戳请求，也都是直接在内核中进行处理的）</li>
+<li><img src="http://image.blissseven.top/blog/20190408/qQEdFmE86aME.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/KyI6V1niVmNa.png?imageslim" alt="mark"></li>
+<li>对于其他类型的ICMP查询报文，服务器必须相应标识符和序列号字段。另外，<strong>客户发送的选项数据必须回显，假设客户对这些信息都会感兴趣</strong></li>
+<li>Unix系统在实现ping程序时是把ICMP报文中的<strong>标识符字段</strong>置成发送<strong>进程的ID号</strong>。这样即使在同一台主机上同时运行了多个ping程序实例，ping程序也可以识别出返回的信息。</li>
+<li>在windows下，不管开多少个窗口ping的identifier都是相同的，而且每增加一个出去的ping包序列号增加256，能分清楚回来的包吗？？</li>
+<li><strong>序号逐个增1</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190408/fCLcPfWr43do.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/TWM4v9rU7Afh.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="IP选项"><a href="#IP选项" class="headerlink" title="IP选项"></a>IP选项</h4><h4 id="2-4-IP记录路由选项"><a href="#2-4-IP记录路由选项" class="headerlink" title="2.4 IP记录路由选项"></a>2.4 IP记录路由选项</h4><ul>
+<li>ping程序都提供-R选项，以提供<strong>记录路由</strong>的功能。使得ping程序在发送出去的IP数据报中设置IP <strong>RR选项</strong>（在IP可选项部分）（该IP数据报包含ICMP回显请求报文）。这样，每个处理该数据报的路由器都会把它的IP地址放入选项字段中，当<strong>数据报到达目的端时，IP地址清单应该复制到ICMP回显应答</strong>中，这样返回途中所经过的路由器地址也被加入到清单中。当ping程序收到回显应答时，他就会打印出这份IP地址清单</li>
+<li><strong>源端主机生成RR选项，中间路由器对RR选项进行处理，以及把ICMP回显请求中的RR清单复制到ICMP回显应答中，所有这些都为选项功能。</strong>幸运的是，现在大多数系统都支持这些选项，只有一些系统不把ICMP请求中的IP清单复制到ICMP应答中。</li>
+<li>但是，<strong>最大的问题是IP首部中只有有限的空间来存放IP地址</strong>。我们从IP首部图中可以看出，IP首部中的首部长度字段只有4bit，因此整个IP首部最长只能包含15<em>32 =60个字节.由于IP首部固定长度20字节，*</em>RR选项用于3个字节，这样只剩下37个字节来存放IP地址清单，也就是说，只能存放9个IP地址**。</li>
+<li>记录路由出方向的IP</li>
+<li>来来回回都记录</li>
+<li><img src="http://image.blissseven.top/blog/20190408/wAmvpdnUuhRu.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190408/pxyTzds9OvRP.png?imageslim" alt="mark"></li>
+<li><strong>code为一个字节，指明IP选项的类型</strong>。<strong>对于RR选项来说，值为7</strong>。len为RR选项总字节长度，这种情况下为39（尽管可以为RR选项设置比最大长度小的长度，但是ping程序总是提供39字节的选项字段，最多可以记录9个IP，由于IP首部中留给选项的空间有限，它一般情况下设置成最大值）</li>
+<li>ptr为指针字段，一个基于1的指针，指向存放下一个IP地址的位置，最小值为4，指向存放第一个IP地址的位置。随着每个IP地址存入清单，ptr的值分别为8，12，16，最大36.当记录下9个IP地址后，ptr值为40，表示清单已满</li>
+<li>当路由（多穴）在清单中记录IP地址时，记录出口地址。当原始主机（运行ping的主机）收到带有RR选型的ICMP回显应答时，它也要把它的入口地址放入清单中。</li>
+</ul>
+<h4 id="2-5-IP时间戳选项"><a href="#2-5-IP时间戳选项" class="headerlink" title="2.5 IP时间戳选项"></a>2.5 IP时间戳选项</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190408/PkBAgezK8cjU.png?imageslim" alt="mark"></li>
+<li><strong>时间戳选项代码0x44</strong>，其他两个字段len ptr与记录路由选项相同。<strong>选项总长度（一般36/40）和指向下一个可用空间的指针（5，9，13）</strong></li>
+<li>接下来两个字段是4bit值，OF表示溢出字段，FL表示标志字段</li>
+<li>时间戳的取值一般为<strong>UTC午夜开始计时的毫秒数</strong>。与ICMP时间戳请求和应答相似，如果路由器不使用这种格式，他就可以插入任何它使用的时间表示格式。但是必须打开时间戳中的高位以表明为非标准值</li>
+</ul>
+<h4 id="3-1-Traceroute-VS-IP路径记录"><a href="#3-1-Traceroute-VS-IP路径记录" class="headerlink" title="3.1 Traceroute VS IP路径记录"></a>3.1 Traceroute VS IP路径记录</h4><ul>
+<li><strong>不是所有路由都支持记录路由选项，Traceroute不需要路由具备任何特殊的功能</strong></li>
+<li>记录路由一般是单向的选项，发送端设置了该选项，那么接收端不得不从收到的IP首部中提取出所有的信息，然后全部返回给发送端。我们看到大多数ping服务器的实现（内核中的ICMP回显应答功能）把收到的RR清单返回，但是这样使得记录下来的IP地址翻了一番（一来一回）。（<strong>Traceroute 只需要目的端运行一个UDP模块，其他不需要任何特殊的服务器应用程序</strong>）</li>
+<li>IP首部留给选项的空间有限，不能存放当前大多数的路径</li>
+</ul>
+<h4 id="3-2-Traceroute"><a href="#3-2-Traceroute" class="headerlink" title="3.2 Traceroute"></a>3.2 Traceroute</h4><ul>
+<li><p><strong>可以看到一个IP数据报从一台主机到另一台主机所经过的路由</strong></p>
+</li>
+<li><p>Traceroute 使<strong>用ICMP报文和IP首部中的TTL字段（</strong>生存周期）。TTL字段由发送端初始设置一个8bit字段。当前为64。ping程序发送ICMP回显应答，经常把<strong>TTL设为最大值255</strong></p>
+</li>
+<li><p><strong>每个处理数据报的路由器都需要把TTL值减1或者减去数据报在路由器中停留的秒数</strong>。由于大多数的路由器转发数据报的时延都小于1s，因此<strong>TTL最终成为一个跳站的计数器</strong></p>
+</li>
+<li><p>当路由器收到一份IP数据报，如果其<strong>TTL字段是0或1，则路由器不转发该数据报（接收到这种数据报的目的主机可以将它交给应用程序，这是因为不需要转发该数据报。但是在通常情况下，系统不应接受TTL为0的数据报</strong>）。相反，路由器将该数据报丢弃，并给信源机发一份<strong>ICMP超时信息</strong>。Traceroute程序的关键在于<strong>包含这份ICMP信息的IP报文的信源地址是该路由器的IP地址</strong></p>
+</li>
+<li><p>如何判断是否已经到达目的主机？</p>
+<ul>
+<li>Traceroute发送一份<strong>UDP数据</strong>报给目的主机，但它选择一个不可能的值作为<strong>UDP端口号</strong>（大于30000，目的端口号），使目的主机的任何一个应用程序都不可能使用该端口。应为当该数据报到达时，将使目的主机的UDP模块产生一份“端口不可达”的ICMP报文。traceroute要做的就是<strong>区分接收到的ICMP报文是超时还是端口不可达，以判断什么时候结束</strong></li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/qPpfqVrrcOPi.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/PLhtqitFI8bV.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/UFFb6roD2DBY.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/CuNoKNHiITBh.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/88QEjnhFf8ar.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/1jB4ssfPKaHQ.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/j5W7seTQliSE.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/6ix6qPXivdP4.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="3-3-IP源站选路选项"><a href="#3-3-IP源站选路选项" class="headerlink" title="3.3 IP源站选路选项"></a>3.3 IP源站选路选项</h4><ul>
+<li>由发送者指定路由，有两种方式<ul>
+<li><strong>严格的源站路由选择</strong>。<strong>发送端指明IP数据报所必须采用的确切路由</strong>。如果一个路由器发现源站路由所指定的下一个路由不在其直接链接的网络上，那么它就返回一个“源站路由失败”的ICMP差错报文。</li>
+<li><strong>宽松的源站路由</strong>。<strong>发送端指明了一个数据报经过的IP地址清单</strong>，但是数据报在清单上指明的任意两个地址之间可以通过其他路由器。</li>
+</ul>
+</li>
+<li>这个格式与记录路由选项格式基本一致。不同之处是，对于源站选路，必须在发送IP数据报前填充IP地址清单。而对于记录路由选项，需要为IP地址清单分配并清空一些空间，并让路由器填充该清单中的各项。同时，对于源站选路，只要为所需要的IP地址数分配空间并进行初始化，通常其数量小于9（预先填好值）。对于记录路由选项而说，必须尽可能分配空间，已达到9个地址。</li>
+<li>对于宽松的源站选路而说，code的值为0x83；对于严格的源站选路，其值为0x89，len和ptr字段与路径记录部分所描述的一样。</li>
+<li><img src="http://image.blissseven.top/blog/20190409/Ah6BhT9UVt8m.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="3-4-IP源站选路的操作机制"><a href="#3-4-IP源站选路的操作机制" class="headerlink" title="3.4 IP源站选路的操作机制"></a>3.4 IP源站选路的操作机制</h4><ul>
+<li>源站路由选项的实际称呼为“源站及记录路由”，对于宽松的源站选路和严格的源站选路分别用LSRR 和SSRR表示，这是因为数据报在沿路由发送过程中，对IP地址清单进行了跟新<ul>
+<li>a. 发送主机从应用程序接收源站路由清单，将第一个表项去掉（它为数据报的最终目的地址），将剩余的项移到1个项中，如下图，并将原来的目的地址作为清单的最后一项。指针仍然指向清单的第一项（即，指针值为4）</li>
+<li>b.每个处理数据报的路由器都检测其是否为数据报的最终目的地址，如果不是，则正常转发数据报（在这种情况下，必须指明管送源站选路，否则就不能接收到该数据报）</li>
+<li>c. 如果该路由器为最终目的，且指针不太与路径的长度，那么<ul>
+<li><ol>
+<li>由ptr所指定的清单中的下一个地址为数据报的最终目的地址</li>
+<li>由外出接口相对应的IP地址取代刚才使用的源地址</li>
+<li>指针+4</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Host Requirements RFC指明，TCP客户必须能指明源站选路，同时，TCP服务器必须能够接受源站选路，并且对于该TCP连接的所有保温都能采用反向路由。如果TCP服务器下面接收到一个不同的源站选路，那么新的源站路由将取代旧的源站路由。</li>
+<li><img src="http://image.blissseven.top/blog/20190409/GD1mfjuVWRU6.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="3-5-IP选路"><a href="#3-5-IP选路" class="headerlink" title="3.5 IP选路"></a>3.5 IP选路</h4><ul>
+<li>选路为IP最重要功能之一</li>
+<li>如图为一个路由守护程序daemon，通常是一个用户进程</li>
+<li>在unix系统中，大多数普通的守护程序都<strong>是路由程序和网关程序</strong></li>
+<li>路由表经常被IP访问，但是它被路由守护程序更新的频度却低的很多</li>
+<li>当接收到<strong>ICMP重定向报文</strong>时，路由表也要被更新</li>
+<li>netstat显示路由表</li>
+<li><img src="http://image.blissseven.top/blog/20190409/gC2Epali3XGQ.png?imageslim" alt="mark"></li>
+<li>route print  /netstat -rn</li>
+<li>选路原理<ul>
+<li>1 搜索匹配的主机地址</li>
+<li>2 搜索匹配的网络地址</li>
+<li>3 搜索默认表项（默认表项一般在路由表中被指定为一个网络表项，其网络号为0）</li>
+<li><strong>IP执行选路机制，而路由守护程序一般提供选路策略</strong></li>
+</ul>
+</li>
+<li><img src="http://image.blissseven.top/blog/20190409/6BjTXm0gt4kv.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/L0w0nGhL2Jq7.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/9ymglpJc5zxj.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/ldiEhXlnzvq0.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/yqFUvOj9PaQv.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="第三天-1"><a href="#第三天-1" class="headerlink" title="第三天"></a>第三天</h4><h4 id="1-1-UDP介绍"><a href="#1-1-UDP介绍" class="headerlink" title="1.1 UDP介绍"></a>1.1 UDP介绍</h4><ul>
+<li><p>UDP是一个简单的<strong>面向数据报</strong>的运输层协议：<strong>进程的每个输出操作都正好产生一个UDP数据报，并组装成一份待发送的IP数据包</strong></p>
+</li>
+<li><p>与面向流字符的协议不同，如TCP，TCP的<strong>应用程序产生的全体数据</strong>与<strong>真正发送的单个IP数据报</strong>可能没有什么关系。</p>
+</li>
+<li><p>UDP不提供可靠性，它把应用程序传给IP层的数据发送出去，但是不保证它们能到达目的地</p>
+</li>
+<li><p>应用程序必须关心IP数据报的长度，如果超过网络的MTU，需要对IP数据报进行分片</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/4qftmQp6yGyx.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>UDP是制造IP分片的主要协议</strong></p>
+</li>
+<li><p>应用程序每有一个数据包，不管数据量大小，UDP就加上UDP头部，IP头部组成一个IP数据报发送</p>
+</li>
+<li><p>而TCP会选择合适的大小，小的数据包会组装成大的数据包，存在对流的控制</p>
+</li>
+<li><p>应用</p>
+<ul>
+<li>查询类DNS<ul>
+<li>没有TCP三次握手，快</li>
+<li>多个DNS同时查询</li>
+</ul>
+</li>
+<li>数据传输TFTP<ul>
+<li>停止等待协议，慢 （需应用层确认数据）</li>
+<li>适合于无盘工作站</li>
+</ul>
+</li>
+<li>语音视频流<ul>
+<li>支持广播和组播</li>
+<li>支持丢包，保障效率</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-UDP首部"><a href="#1-2-UDP首部" class="headerlink" title="1.2 UDP首部"></a>1.2 UDP首部</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190409/dB39333NT9gh.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/jQ4QTm5THEq3.png?imageslim" alt="mark"></li>
+<li>IP头部协议号<strong>ICMP</strong>:1  |  <strong>TCP</strong>:6  |  <strong>UDP</strong>:17  |  GRE:47  |  ESP:50  |  AH:51</li>
+<li><strong>端口号，表示发送进程和接受进程</strong></li>
+<li><strong>TCP端口号与UDP端口号是相互独立的</strong>（rsh和syslog=514）</li>
+<li>尽管相互独立，如果TCP和UDP同时提供某种指明服务，<strong>两个协议通常选择相同的端口号</strong>，纯粹为了使用方便，而不是协议本身的要求（DNS 两个都是53端口）</li>
+<li>UDP长度指的<strong>是UDP首部和UDP数据的字节长度，最小8字节</strong></li>
+</ul>
+<h4 id="1-3-UDP校验和"><a href="#1-3-UDP校验和" class="headerlink" title="1.3 UDP校验和"></a>1.3 UDP校验和</h4><ul>
+<li>UDP校验和覆盖UDP首部和UDP数据</li>
+<li>IP首部检验和覆盖IP首部</li>
+<li><strong>UDP检验和可选，TCP校验和必须</strong></li>
+<li>IP计算校验和和UDP计算校验和存在不同的地方。首先<strong>UDP数据报长度可以为奇数字节</strong>，但是校验和算法是把若干个16bit字相加。解决方法是必要时在最后添加填充字节0，只是为了校验和的计算（即，可能增加的填充字节不被传送）</li>
+<li><strong>UDP数据报和TCP段都包含一个12字节的伪首部</strong>，<strong>是为了计算校验和而设置</strong>的。伪首部包含IP首部一些字段，其目的是让<strong>UDP两次检查数据是否已经正确到达目的地</strong>（e.g.IP不接受地址不是本主机的数据报，以及IP不会把应传给另一高层的数据报传给UDP）</li>
+<li><img src="http://image.blissseven.top/blog/20190409/OmH3UaUwyOLS.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/VzLeVC3pXE95.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/c5b96RwV0yzx.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-4-IP分片"><a href="#1-4-IP分片" class="headerlink" title="1.4 IP分片"></a>1.4 IP分片</h4><ul>
+<li>IP把MTU（出接口，出去的时候查看MTU）与数据报长度（IP头部+IP数据）比较</li>
+<li>如果需要则进行分片。<strong>分片可以发生在原始发送端主机上，也可以发生在中间路由器上</strong></li>
+<li>把一份IP数据报分片之后，<strong>只有到达目的地才进行重新组装</strong>(FR fragment)</li>
+<li><strong>重新组装由目的端的IP层来完成</strong>，其目的是使分片和重新组装过程<strong>对传输层（TCP/UDP）是透明的</strong></li>
+<li>已经分片过的数据报有可能会再次进行分片</li>
+<li><img src="http://image.blissseven.top/blog/20190409/22nWjMi4DEeR.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190406/lp02PfVJt4c9.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/NPbesepxDKqv.png?imageslim" alt="mark"></li>
+<li>16位标识，<strong>初始IP数据报唯一的标识符</strong></li>
+<li>CU=0</li>
+<li>DF =Do not Fragementation</li>
+<li>MF =More Fragementation</li>
+<li>IP数据报被分片后，<strong>每一片都成为一个分组</strong>，具有自己的IP首部，并在选择路由时与其它分组独立。这样，当数据报的这些片到达目的端时<strong>有可能会失序</strong>，但是在IP首部种有足够的信息让接收端能正常组装这些数据报片</li>
+<li>尽管IP分片过程看起来透明，有个缺点：<strong>即使只丢失一片数据也要重传整个数据报</strong></li>
+<li>IP层本身没有超时重传的机制—由更高层来负责超时和重传（TCP有超时和重传机制，但UDP没有。一些UDP应用程序本身也执行超时和重传）。当来自TCP报文段的某一片丢失后。TCP在超时后会重发整个TCP报文段，该报文段对应于一份数据报。<strong>没有办法只重传数据报中一个数据报片。</strong></li>
+<li>如果对数据报分片的是中间路由器，而不是起始端系统，那么起始段系统就无法知道数据报是如何被分片的。所以，要避免分片。</li>
+<li><img src="http://image.blissseven.top/blog/20190409/e0LeBr1AjVDI.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/IT3XVNWjUY5T.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/RW6eXnulYTmJ.png?imageslim" alt="mark"></li>
+<li>分片注意事项<ul>
+<li>分片时，除最后一片外，其它每一片中的数据部分（<strong>除IP首部外的其余部分，IP负载）必须为8字节的整数倍</strong></li>
+<li>IP首部被复制到各个分片中，但是端口号在UDP首部（传输层信息），只在第一片中被发现</li>
+<li>IP数据报是指<strong>IP层端到端的传输单元</strong>（在分片之前和重新组装之后），<strong>分组是指在IP层和链路层之间传送的数据单元</strong>。<strong>一个分组可以是一个完整的IP数据报，也可以是IP数据报的一个分片</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190409/Ek4glDhjPwHo.png?imageslim" alt="mark"></li>
+<li>IP数据报数据范围为46-1500，所以垫片=6</li>
+<li></li>
+</ul>
+</li>
+<li>路径MTU Path MTU</li>
+<li>由于在整个数据包传输过程中，可能在多个节点经历分片。所以如果希望数据报总是不会被分片，就需要用这个路径上最小的MTU来发送数据包。这个在一个路径的某一个方向上最小的MTU就是路径MTU。两个方向上的path mtu可能不一样</li>
+</ul>
+<h4 id="1-5-ICMP不可达差错（需要分片）"><a href="#1-5-ICMP不可达差错（需要分片）" class="headerlink" title="1.5 ICMP不可达差错（需要分片）"></a>1.5 ICMP不可达差错（需要分片）</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190409/JsJa9lfXdKdd.png?imageslim" alt="mark"></li>
+<li>发生ICMP不可达差错的另一种情况是，<strong>当路由器收到一份需要分片的数据报1，而在IP首部又设置了不分片（DF）的标志bit</strong>。如果每个程<strong>序需要判断到达目的端的路径中最小MTU是多少–称作路径MTU发现机制，那么这个差错就可以被程序利用</strong></li>
+<li>如果路由器没有提供这种新的ICMP差错报文，那么下一站的MTU就设为0</li>
+<li><img src="http://image.blissseven.top/blog/20190409/pxwEXAHuTSoI.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/kueY0afaNUyz.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-6-最大UDP数据报长度"><a href="#1-6-最大UDP数据报长度" class="headerlink" title="1.6 最大UDP数据报长度"></a>1.6 最大UDP数据报长度</h4><ul>
+<li>IP数据报最大长度为65535字节，由IP首部16bit总长度字段限制</li>
+<li>限制1： <strong>应用程序可能会受到其程序接口的限制</strong>。socket API提供了一个可供引用程序调用的函数，已设置接受和发送缓存的长度。对于UDP socket，这个长度与应用程序可以读写的最大UDP数据报的长度直接相关。</li>
+<li>限制2：<strong>TCP/IP内核的实现</strong>。可能存在一些实现特性，使ip数据报长度小于65535字节。这个限制与<strong>源端和目的端的实现</strong>有关</li>
+<li>3.2节中提到，要求主机必须能够接收最短为576字节的IP数据报。在许多UDP应用程序设计中，其应用程序数据被限制成512字节或更小，因此比这个限制小。</li>
+<li><img src="http://image.blissseven.top/blog/20190409/3QaNpGuWieFH.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/LeBTqFelUsNf.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/jSCvNB7XMJk2.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190409/eR74jDHybHcj.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="2-1-广播与多播"><a href="#2-1-广播与多播" class="headerlink" title="2.1 广播与多播"></a>2.1 广播与多播</h4><ul>
+<li><p>三种IP地址：<strong>单播地址、广播地址、多播地址</strong></p>
+</li>
+<li><p>广播和多播进应用于UDP，它们对需将报文传往多个接收者的应用来说重要</p>
+</li>
+<li><p>TCP是一个面向连接的协议，它意味着分别运行于两主机（由IP地址确定）内的两个进程（由端口号确定）间存在一条连接，一定单播</p>
+</li>
+<li><p>有时一个主机要向网络上的所有其他主机发送帧，即，广播。通过ARP和RARP可以看到该过程</p>
+</li>
+<li><p>多播处于单播和广播之间：帧仅传送给属于多播组的多个主机</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/mMKkOOra6LUk.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/OCVh5jsxyAhl.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/JXHiWe0ToTHP.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/E3lscMiAXE6V.png?imageslim" alt="mark"></p>
+</li>
+<li><p>抓包程序，网卡都是杂合模式</p>
+</li>
+<li><p>组播在设备驱动程序（链路层）就已经被丢弃了</p>
+</li>
+<li><p>广播在UDP（传输层）之后被丢弃，消耗PC资源</p>
+</li>
+</ul>
+<h4 id="2-2-广播"><a href="#2-2-广播" class="headerlink" title="2.2 广播"></a>2.2 广播</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190409/055eq0bFaJo0.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>受限的广播 255.255.255.255</strong></p>
+</li>
+<li><p>指向网络的广播 10.255.255.255 192.168.1.255 //netid.255.255.255</p>
+<ul>
+<li><strong>指向网络的广播地址是主机号为全1的地址</strong>。A类网络广播地址为netid.255.255.255，其中netid为A类网络的网络号。</li>
+<li>一个路由器必须转发指向网络的广播，但它也必须有一个不进行转发的选择。</li>
+</ul>
+</li>
+<li><p>指向子网的广播 10.1.1.255 10.1.255.255  //跟子网掩码 netid.subnetid.255</p>
+<ul>
+<li><strong>指向子网的广播地址为主机号为全1且有特定子网号的地址</strong>。作为子网直接广播地址的IP地址需要了解子网的掩码。</li>
+<li>例如，如果路由器收到发往128.1.2.255的数据报，当B类网络128.1的子网掩码为255.255.255.0时，该地址就是指向子网的广播地址；但如果该子网的掩码为255.255.254.0，该地址就不是指向子网的广播地址。</li>
+</ul>
+</li>
+<li><p>指向所有子网的广播 10.255.255.255// 跟指向子网的广播地址不一样 //netid.255.255</p>
+<ul>
+<li>指向所有子网的广播也需要了<strong>解目的网络的子网掩码</strong>，以便与指向网络的广播地址区分开。<strong>指向所有子网的广播地址的子网号及主机号</strong>为全1。</li>
+<li>例如，如果目的子网掩码为255.255.255.0，那么IP地址128.1.255.255是一个指向所有子网的广播地址。<strong>然而，如果网络没有划分子网，这就是一个指向网络的广播。</strong></li>
+</ul>
+</li>
+<li><p>主机处理的地址 192.168.255.255 cisco路由支持</p>
+</li>
+<li><p>路由器支持255.255.255.255 主机不支持（当主机处理）</p>
+</li>
+<li><p><strong>最常用的是指向子网的广播。受限的广播通常只在系统初始启动时才会用到</strong>。</p>
+</li>
+</ul>
+<h4 id="2-3-组播"><a href="#2-3-组播" class="headerlink" title="2.3 组播"></a>2.3 组播</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190409/4oN1sWJSwGa5.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>多播组地址包括为1110的最高4bit和多播组号。通常可表示为点分十进制数，范围从224.0.0.0到239.255.255.255</strong></p>
+</li>
+<li><p>能够<strong>接收发往一个特定多播组地址数据的主机集合</strong>称为主机组(host group)。一个主机组可跨越多个网络。主机组中成员可随时加入或离开主机组。主机组中对主机的数量没有限制，同时<strong>不属于某一主机组的主机可以向该组发送信息</strong>。</p>
+</li>
+<li><p>一些多播组地址被IANA确定为知名地址。它们也被当作永久主机组，这和TCP及UDP中的熟知端口相似。同样，这些知名多播地址在RFC最新分配数字中列出。注意这些多播地址所代表的组是永久组，而它们的组成员却不是永久的。</p>
+<p>例如，224.0.0.1代表“该子网内的所有系统组”，224.0.0.2代表“该子网内的所有路由器组”。<strong>多播地址224.0.1.1用作网络时间协议NTP</strong>，224.0.0.9用作RIP-2(见10.5节)，224.0.1.2用作SGI公司的dogfight应用。</p>
+</li>
+<li><p>IANA拥有一个<strong>以太网地址块，即高位24 bit为00:00:5e</strong>（十六进制表示），这意味着该地址块所拥有的地址范围从00:00:5e:00:00:00到00:00:5e:ff:ff:ff。IANA将其中的一半分配为多播地址。<strong>为了指明一个多播地址，任何一个以太网地址的首字节必须是01</strong>，这意味着<strong>与IP多播相对应的以太网地址范围从01:00:5e:00:00:00到01:00:5e:7f:ff:ff。</strong></p>
+</li>
+<li><p><strong>这种地址分配将使以太网多播地址中的23bit与IP多播组号对应起来，通过将多播组号中的低位23bit映射到以太网地址中的低位23bit实现</strong>，这个过程如图12-3所示。</p>
+</li>
+<li><p>由于<strong>多播组号中的最高5bit在</strong>映射过程中被忽略，因此<strong>每个以太网多播地址对应的多播组是不唯一的</strong>。32个不同的多播组号被映射为一个以太网地址。例如，多播地址224.128.64.32（十六进制e0.80.40.20）和224.0.64.32（十六进制e0.00.40.20）都映射为同一以太网地址01:00:5e:00:40:20。</p>
+</li>
+<li><p>既然<strong>地址映射是不唯一的，设备驱动程序或IP层就必须对数据报进行过滤</strong>。因为网卡可能接收到主机不想接收的多播数据帧。</p>
+</li>
+<li><p>单个物理网络的多播是简单的。多播进程将目的IP地址指明为多播地址，设备驱动程序将它转换为相应的以太网地址，然后把数据发送出去。这些接收进程必须通知它们的IP层，它们想接收的发往给定多播地址的数据报，并且设备驱动程序必须能够接收这些多播帧。这个过程就是“加入一个多播组”（使用“接收进程”复数形式的原因在于对一确定的多播信息，在同一主机或多个主机上存在多个接收者，这也是为什么要首先使用多播的原因）。当一个主机收到多播数据报时，它必须向属于那个多播组的每个进程均传送一个复制。这和单个进程收到单播UDP数据报的UDP不同。使用多播，一个主机上可能存在多个属于同一多播组的进程</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/suaj3D2PWdCY.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/sImkY0lnhX4X.png?imageslim" alt="mark"></p>
+</li>
+<li></li>
+</ul>
+<h4 id="3-1-DNS-介绍"><a href="#3-1-DNS-介绍" class="headerlink" title="3.1 DNS 介绍"></a>3.1 DNS 介绍</h4><ul>
+<li><p>Host文件 C：\Windows\System32\drivers\etc\hosts  /etc/hosts</p>
+</li>
+<li><p>用于<strong>TCP/IP应用程序的分布式数据库，提供主机名字和IP地址之间的转换以及有关电子邮件的选录信息</strong></p>
+</li>
+<li><p>分布式是指在Internet上的单个站点不能拥有所有的信息</p>
+</li>
+<li><p>DNS提供了允许服务器和客户程序相互通信的协议</p>
+</li>
+<li><p>对DNS的访问是<strong>通过一个地址解析器（resolver）</strong>来完成的</p>
+</li>
+<li><p>解析器通常是应用程序的一部分。解析器并不像TCP/IP协议那样是操作系统的内核</p>
+</li>
+<li><p>操作系统内核中的TCP/IP协议簇对于DNS一点都不知道</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/dRG1vxlj2dfI.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="3-2-DNS服务器"><a href="#3-2-DNS服务器" class="headerlink" title="3.2 DNS服务器"></a>3.2 DNS服务器</h4><ul>
+<li><p>本章介绍如何使用TCP/IP协议（主要是UDP）与名字服务器通信，不介绍运行名字服务器或有关可选参数的细节</p>
+</li>
+<li><p>各个域的分层上都有各自的域名服务器</p>
+</li>
+<li><p><strong>各层域名服务器都了解该层以下分层中所有域名服务器的IP地址</strong>。因此它们从根域名服务器开始成树状结构</p>
+</li>
+<li><p>由于所有域名服务器都了解根域名服务器的地址，所以若从根开始按照顺序追踪，可以访问世界上所有域名服务器</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/wgJUgc277bGC.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/2niTNaIuz2oL.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190409/3URNoIVX5pNQ.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="3-3-DNS报文"><a href="#3-3-DNS报文" class="headerlink" title="3.3 DNS报文"></a>3.3 DNS报文</h4><ul>
+<li><p><img src="http://image.blissseven.top/blog/20190409/tXgSmbLx1nbI.png?imageslim" alt="mark"></p>
+</li>
+<li><p>报文有<strong>12字节的首部和4个长度可变的字段</strong>组成。</p>
+</li>
+<li><p>标识字段由客户程序设置并又服务器返回结果。客户程序通过它来确定相应与查询是否匹配</p>
+</li>
+<li><p>16bit标志字段</p>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190410/2b96RK2EP6xH.png?imageslim" alt="mark"></li>
+<li>QR 1bit 0表示查询报文，1表示响应报文</li>
+<li>opcode 4bit 0 标准查询 1 反向查询 2 服务器状态请求</li>
+<li>AA 1bit 授权回答  该名字服务器是授权于该域的</li>
+<li>TC 1bit 截断的 使用UDP时，它表示当应答的总长度超过512字节时，只返回前512个字节。</li>
+<li>RD 1bit 期望递归 </li>
+<li>RA 1bit 可用递归</li>
+<li>rcode 4 bit返回码 0没有差错 3 名字差错</li>
+<li>随后的4个16 bit字段说明最后4个变长字段中包含的条目数。对于查询报文，问题(question)数通常是1，而其他3项则均为0。类似地，对于应答报文，回答数至少是1，剩下的两项可以是0或非0。</li>
+</ul>
+</li>
+<li><p>查询问题</p>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190410/JhMF9LeGhKm0.png?imageslim" alt="mark"></li>
+<li><strong>查询名是要查找的名字，它是一个或多个标识符的序列</strong>。<strong>每个标识符以首字节的计数值来说明随后标识符的字节长度，每个名字以最后字节为0结束，长度为0的标识符是根标识符</strong>。计数字节的值必须是<strong>0~63的数</strong>，因为标识符的最大长度仅为63</li>
+<li><img src="http://image.blissseven.top/blog/20190410/DSTVNmr4HImO.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/DVH5Qkn7BkOB.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li><p>资源记录部分</p>
+<ul>
+<li><p>DNS报文中最后的三个字段，回答字段、授权字段和附加信息字段，均采用一种称为资源记录RR（Resource Record）的相同格式。图14-8显示了资源记录的格式。</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/F0bSiE6Sw2YD.png?imageslim" alt="mark"></p>
+</li>
+<li><p>域名为记录中资源数据对应的名字。格式与查询名字段格式相同</p>
+</li>
+<li><p>类型说明为RR的类型码。值与之前的查询类型值相同。类通常为1，指internet数据。</p>
+</li>
+<li><p>生存时间时是客户程序保留该资源记录的秒数，资源记录通常的生存时间通常2天。</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/fPIa7nHjv4WO.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/YCs6uenfotXb.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><img src="http://image.blissseven.top/blog/20190410/SoeBbTeVovDR.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/aPtBL9e6PI2N.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="4-1-TFTP简介"><a href="#4-1-TFTP简介" class="headerlink" title="4.1 TFTP简介"></a>4.1 TFTP简介</h4><ul>
+<li><p>Trivial File Transfer Protocol 简单文件传送协议，运行在UDP 端口69，缺乏FTP的高级特性，TFTP只负责将文件写入到远端服务器或者从远端服务器上读取文件。不能够列举、删除或者重命名文件或者目录，并且也不提供用户认证。目前，通常只在局域网内。</p>
+</li>
+<li><p>传输由client发起，发起一个request来读或者写server上的文件。client可以在request中包含一些可选的参数来和server进行协商。如果server允许这个request，那么文件默认以512字节为一个块或者用协商的大小来发送。为了防止IP分片。每个被传输的块通常被携带在一个IP包中。并且在下一块被传送之前，需要发送确认。如果包小于默认的512字节或者协商的大小，意味着传输要终止</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/qcDM7wFyc5af.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/A5mLl2n9d7Ac.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/citdSNVKwv5g.png?imageslim" alt="mark"></p>
+</li>
+<li><p>模式字段是一个ASCII码串netascii或octet（可大小写任意组合），<strong>同样以0字节结束</strong>。netascii表示数据是<strong>以成行的ASCII码字符组成，以两个字节—回车字符后跟换行字符（称为CR/LF）作为行结束符</strong>。这两个<strong>行结束字符在这种格式和本地主机使用的行定界符之间进行转化</strong>。octet则将<strong>数据看作8bit一组的字节流而不作任何解释</strong>。</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/GiwDf8jydbpe.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/IW9Jtr6HKj8m.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="第四天-1"><a href="#第四天-1" class="headerlink" title="第四天"></a>第四天</h4><h4 id="1-1-TCP介绍"><a href="#1-1-TCP介绍" class="headerlink" title="1.1 TCP介绍"></a>1.1 TCP介绍</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/wW2WHTds8xrC.png?imageslim" alt="mark"></li>
+<li>UDP是一种没有复杂控制，提供面向无连接通信服务的一种协议。将部分控制转移给应用程序去处理（e.g.TFTP），自己只提供作为传输层协议的最基本功能</li>
+<li>TCP 对传输、发送、通信进行控制的协议，只有在确认通信对端存在时才会发送数据，从而控制通信流量的浪费，根据TCP这些机制，在IP这种无连接的网络上也能够实现高可靠性的通信。</li>
+<li><strong>TCP的可靠性</strong><ul>
+<li><strong>应用数据被分割</strong>为TCP认为最为合适发送的数据块</li>
+<li>TCP发出一个字段后，<strong>启动一个定时器</strong>，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段</li>
+<li>当TCP收到来自TCP连接另一端的数据，将发送一个确认。这个确认不是理机发送，<strong>通常延迟几分之一秒</strong>，200ms。delayed_ack</li>
+<li>TCP保持<strong>首部和数据的校验和</strong></li>
+<li>TCP报文段作为IP数据报来传输，而IP数据报的到达有可能会失序，TCP报文段的到达也可能失序。如果必要，<strong>TCP对收到的数据进行重新排序，将收到的数据以正确的顺序交给应用层</strong>。</li>
+<li><strong>TCP提供对流量的控制</strong>。TCP连接的每一方都有固定大小的缓冲空间。<strong>TCP的接收端只允许另一端发送  接收端缓冲区所能容纳的数据。</strong>这将防止较快主机致使较慢主机的缓冲区溢出</li>
+</ul>
+</li>
+<li>TCP的字节流<ul>
+<li>两个应用程序通过TCP连接交换8bit字节构成<strong>字节流</strong>。<strong>TCP不在字节流中插入记录标识符</strong>。称“字节流服务”。如果一方的应用程序先传10字节，又传20字节，再传50字节，连接的另一方将无法了解发送方每次发送了多少字节。收方可以分四次接收这80个字节，每次接受二十字节。一端将字节流放到TCP连接上，同样的字节流将出现在TCP连接的另一端</li>
+<li>TCP对字节流的内容不做任何解释。TCP不知道传输的数据字节流是二进制数据亦或ASCII字符。对字节流的解释由TCP连接双方的应用层解释</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-TCP首部"><a href="#1-2-TCP首部" class="headerlink" title="1.2 TCP首部"></a>1.2 TCP首部</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/8AMLnhHgXyzf.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/OGm31qwaIIEz.png?imageslim" alt="mark"></li>
+<li>每个<strong>TCP段都包含源端和目的端的端口号，用于寻找发送端和收端应用进程</strong>。IP分用。<strong>这两个值和IP首部中的源端IP地址和目的端IP地址唯一确定一个TCP连接</strong>。五元组唯一确定session（+protocl）</li>
+<li>一个IP地址和一个端口也成为一个插口（socket）插口对（socketpair）</li>
+<li>序号用来标识从TCP发端向TCP收端发送的数据字节流，它标识在这个报文段中的<strong>第一个数据字节的序号</strong>。<strong>不会从0或1开始，而是在建立连接时由计算机生成的随机数作为其初始值</strong>。？？？？如果将字节流看作在两个应用程序间的单向流动，则TCP用序号对每个字节进行计数。<strong>序号为32bit的无符号数，序号到达2的32次方减1后又从0开始</strong>。SYN标志消耗了一个序号（FIN标志也占了一个序号）</li>
+<li>确认序号是上次已成功收到数据字节序号加1。只有ACK标志位1时确认序号字段才有效。</li>
+<li><strong>发送ACK无需占用任何序号</strong>，因为32bit的确认序号字段和ACK标志一样，总是TCP首部的一部分。因此，我们看到一旦一个连接建立起来，这个字段总是被设置,ACK标志也总是被设置为1</li>
+<li>TCP为应用层提供<strong>全双工服务</strong>。数据可以在两个方向上独立进行传输，因此，<strong>连接的每一端都必须保持每个方向上的传输数据序号</strong>。</li>
+<li>TCP可以表述为一个没有选择确认或否认的滑动窗口协议，（目前可以选择确认option SACK）。例如如果2-1024字节已经成功收到，下一报文段中包含序号2049-3072的字节，收端不能确认这个新的报文段，所能做的就是发挥一个确认序号为1025的ACK。无法对一个报文进行否认。例如，1024-2048字节的报文检验和出错，TCP接收端能做的就是发回一个确认序号为1024的ACK</li>
+<li>数据偏移，或者首部长度，表示TCP所传输的数据部分应该从TCP报的那个位开始计算，4个bit，字节位4字节（32bit）,没有选项字段的话，TCP首部20字节，可设置为5。TCP头部最大15*4=60字节</li>
+<li><img src="http://image.blissseven.top/blog/20190410/8DGswJwtNps0.png?imageslim" alt="mark"><ul>
+<li>URG ，包中有紧急处理的数据</li>
+<li>ACK，为1时，确认应答的字段有效，TCP规定除了最初建立连接时的SYN报之外，该位必须为1</li>
+<li>PSH 为1时，表示将收到的数据立刻传给上传应用协议，否则可先进行缓存</li>
+<li>RST 为1时，TCP连接中出现异常必须强制断开连接。</li>
+<li>SYN 为1时，<strong>希望建立连接，并在其序列号的字段进行序列号初始化值的设定</strong></li>
+<li>FIN 为1时，表示今后不会再有数据发送，希望断开连接（单向传输断开）。当通信结束希望断开连接时，<strong>通信双方的主机就可以相互交换FIN位置为1的TCP段</strong>。每个主机又对对方的fin包进行确认应答后就可以断开连接。<strong>主机收到FIN设置为1的TCP段后不必立即回复FIN包，而是可以等到缓存区中所有数据都已成功发送而被自动删除后再发</strong>（关闭连接）</li>
+<li><img src="http://image.blissseven.top/blog/20190410/t0xBR4pQNU1p.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>窗口大小<ul>
+<li>16bit，流量控制，用于通知从相同的TCP首部确认应答号所指位置开时能够接受的数据大小（8位字节）TCP不允许发送超过此处所表示大小的数据。窗口为0表示可以发送窗口探测，以了解最新窗口大小。但这个数据必须为1个字节。再下一次确认之前，最多发送这么多字节，接收方的流控</li>
+</ul>
+</li>
+<li>校验和<ul>
+<li><img src="http://image.blissseven.top/blog/20190410/mDxTB7JDNdtn.png?imageslim" alt="mark"></li>
+<li>TCP检验和覆盖TCP首部和TCP数据，TCP校验和必须，而UDP简要和可选，TCP/UDP检验和都要加上12字节的伪首部</li>
+</ul>
+</li>
+<li>紧急指针<ul>
+<li>16bit，只在URG控制位为1时有效。表hi本报文段中紧急数据的指针。正确来讲，从数据部分的首位到紧急指针所指示的位置为止都为紧急数据。紧急指针指出了紧急数据的末尾再报文段中的位置</li>
+<li>如何处理紧急数据属于应用层问题</li>
+</ul>
+</li>
+<li>选项<ul>
+<li>用于提高TCP的传输性能，根据数据偏移（首部长度）进行控制所以其长度最大为字节</li>
+<li>为32 bit的整数倍</li>
+<li><img src="http://image.blissseven.top/blog/20190410/fIBeFlrwkOnU.png?imageslim" alt="mark"></li>
+<li>MSS ，<strong>每个连接方通常都在通信的第一个报文段（为建立连接而设置SYN标志的那个段）中指明这个选项。指明本端所能接收的最大长度的报文段</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190410/MRcgT5BKDH1J.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/paNXC469JwnH.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/DJJUXIPGNA0q.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-连接的管理"><a href="#1-2-连接的管理" class="headerlink" title="1.2 连接的管理"></a>1.2 连接的管理</h4><ul>
+<li>TCP提供<strong>面向连接</strong>的通信传输。UDP是<strong>面向无连接</strong>的通信协议，不检查对端是否可以通信，直接将UDP包发送出去。TCP与此相反，会在数据通信之前，通过TCP首部发送一个SYN包作为建立连接的请求等待确认回答。如果对端发来确认应答，则认为可以进行数据通信。此外，在通信结束后会进行断开连接的处理（FIN包）</li>
+<li>TCP首部用于控制的字段来管理TCP连接，一个链接的建立和断开，正常过程至少来回发送7个包</li>
+<li><img src="http://image.blissseven.top/blog/20190410/myMlC8kVKXdt.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/BP8YLRhcf67t.png?imageslim" alt="mark"></li>
+<li>发送第一个SYN的一端执行主动打开（active open），接收这个SYN并发送下一个SYN的另一端执行被动打开（passive open）</li>
+<li>当一端为建立连接而发送它的SYN是，它为连接选择一个初始序号。ISN随时间而变化，且每个连接都有不同的ISN。RFC793指出ISN可看作一个32bit的计数器。每4ms加1。<strong>这样选择序号的目的在于防止在网络中被延迟的分组在以后又被传送，而导致某个连接的一方对它做错误的解释</strong>。</li>
+<li><img src="http://image.blissseven.top/blog/20190410/XBJNDJwAWBE5.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/nkwneo2RWLr6.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/tAi4YnnpGdQE.png?imageslim" alt="mark"></li>
+<li>客户通过向服务器发送一个SYN来创建要给主动打开，做欸三次握手的一部分。客户端把这段连接的序号设定为随机数A</li>
+<li>服务器端应当为要给合法的SYN回送一个SYN/ACK。ACK的确认码为A+1，SYN/ACK包本身又有一个随即序号B</li>
+<li>最后客户端再发送一个ACK。当服务端收到这个ACK后，就完成了握手，并进入连接创建状态。此时报序号被设定为收到的确认号A+1，而相应则为B+1。</li>
+</ul>
+<h4 id="1-3连接的断开"><a href="#1-3连接的断开" class="headerlink" title="1.3连接的断开"></a>1.3连接的断开</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/38cW6kia9qgt.png?imageslim" alt="mark"></li>
+<li>SYN 起始序号 结束序号 最大的报文大小</li>
+<li>建立一个连接需要三次握手，而终止一个连接需要四次握手。与TCP的半关闭有关。既然一个TCP连接是全双工的，因此每个方向必须单独的进行关闭。当一方完成它的数据发送任务后就能发送一个FIN来终止这个方向上的连接。当一端收到了FIN，它必需通知应用层另一端终止那个方向的数据传送。发送FIN通常是应用层进行关闭的结果</li>
+<li>收到一个FIN只意味着这一方向上没有数据留档。一个TCP连接在收到一个FIN后仍能发送数据。而这对于半关闭的应用来说是可能的，尽管在实际的应用中只有很少的TCP应用程序会这么做</li>
+<li>首先进行关闭的一方进行主动关闭，另一方执行被动关闭</li>
+<li><img src="http://image.blissseven.top/blog/20190410/sO5VAduFhh3o.png?imageslim" alt="mark"></li>
+<li>还可以发ACK，关闭是关闭数据传输</li>
+<li><strong>发送Fin将导致应用程序关闭它们的连接。这些FIN的ACK是TCP软件自动完成的</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190410/B576otwzRfgk.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/TrLTBiSYdkXP.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/SM29VQ2PsI7X.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-4-连接建立的超时"><a href="#1-4-连接建立的超时" class="headerlink" title="1.4 连接建立的超时"></a>1.4 连接建立的超时</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/YokR62cdl19G.png?imageslim" alt="mark"></li>
+<li>第一个SYN的重发机制</li>
+<li>第二个SYN和第一个差5.8s，第三个和第二个差24s</li>
+<li>大多数伯克利系统将建立一个新连接的最长时间限制为75s</li>
+<li><img src="http://image.blissseven.top/blog/20190410/3YifFDoG141b.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-5-最大报文长度"><a href="#1-5-最大报文长度" class="headerlink" title="1.5 最大报文长度"></a>1.5 最大报文长度</h4><ul>
+<li>并不是任何条件下都可协商。当建立一个连接时，每一方都有用于通告它期望接收的MSS选项（MSS选项只能出现在SYN报文中）。如果一方不接受来自另一方的MSS值，默认为536字节</li>
+<li>一般，如果没有分段发生，MSS越大越好。报文段越大允许每个报文段传送的数据越多，相对IP和TCP首部有更高的网络利用率。当TCP发送一个SYN时，都能将MSS值设置为外出接口上的MTU长度减去固定的IP首部和TCP首部长度。对于一个以太网，MSS可达1460字节。IEEE802.3封装最大1452字节</li>
+<li>如果目的IP地址为“非本地的 nonlocal”，MSS通常默认为536。如果目的IP网络号和子网号和我们的都相同，那么就是本地的。如果网络号相同，子网号不同，那么可能时本地的，也可能不是本地的。大多数TCP实现都提供了一个配置选项，让管理员说明不同的子网是属于本地的还是非本地的。这个选项的设置将确定MSS可以选择尽可能的大或者默认536。</li>
+<li><img src="http://image.blissseven.top/blog/20190410/5B1NlCVxrgjT.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/8uDaGhaQidqw.png?imageslim" alt="mark"></li>
+<li></li>
+</ul>
+<h4 id="1-6-TCP的半关闭"><a href="#1-6-TCP的半关闭" class="headerlink" title="1.6 TCP的半关闭"></a>1.6 TCP的半关闭</h4><ul>
+<li>很少程序使用</li>
+<li><img src="http://image.blissseven.top/blog/20190410/73xE8O6erY41.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-7-TCP状态变迁图"><a href="#1-7-TCP状态变迁图" class="headerlink" title="1.7 TCP状态变迁图"></a>1.7 TCP状态变迁图</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/DIllWQiYhe9H.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/Ou1Q34TIaU52.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-8-2MSL-等待状态"><a href="#1-8-2MSL-等待状态" class="headerlink" title="1.8 2MSL 等待状态"></a>1.8 2MSL 等待状态</h4><ul>
+<li>TIME_WAIT状态也称2MSL等待状态。每个具体TCP实现必须选择一个报文段最大生存时间MSL（maximum Segment Lifttime）。它是任何报文段被丢弃前在网络内的最长时间</li>
+<li>原因<ul>
+<li><strong>如果服务器再发送FIN后，没有收到客户端的ack。超过重传事件后，服务器重新发送FIN。此时客户端再发送ACK。如果没有TIME_WAIT状态，服务器可能一直收不到ACK，一直保持该会话</strong></li>
+<li>重传超时时间RTO，RTT往返时间,一般小于30s 1分钟 2分钟</li>
+</ul>
+</li>
+<li>RFC 793指出MSL为两分钟。实际实现为30s，1分钟或2分钟</li>
+<li>对一个具体实现所给定的MSL值，处理的原则是：当TCP执行一个TCP主动关闭，并发回最后一个ACK，该连接必须在TIME_WAIT状态停留时间为2倍的MSL。这样可以让TCP再次发送最后的ACK以防止这个ACK丢弃（另一端超时并重发最后的FIN）</li>
+<li>这种2MSL等待的另一个结果是这个TCP连接在2MSL等待期间，<strong>定义这个连接的插口（客户的IP地址和端口号，服务器的IP地址和端口号）不能在被使用</strong>。这个连接只能在2MSL结束后才能被使用</li>
+<li><strong>在连接处于2MSL等待时，任何迟到的报文段将被丢弃。因为处于2MSL等待的、由该插口对定义的连接在这段时间不能被再用</strong>，因此当要建立一个有效的连接时，来自该连接的一个较早替身的迟到报文段作为新连接的一部分不可能不被曲解。</li>
+<li><img src="http://image.blissseven.top/blog/20190410/jxF3eEh5kU1I.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/C6rVt1YyvT05.png?imageslim" alt="mark"></li>
+<li>客户执行主动关闭并进入TIME_WAIT状态是正常的。服务器通常执行被动关闭，不会进入TIME_WAIT状态。这暗示如果终止一个客户程序并重新启动这个客户程序，则这个新客户程序将不能重用相同的本地端口。</li>
+<li>对于服务器，使用熟知端口。如果我们终止一个已经建立连接的服务器程序，并试图立即重新启动这个服务器程序，服务器程序将不能把它的这个熟知端口赋值给它的端点，因为那个端口处于2MSL连接的一部分。</li>
+</ul>
+<h4 id="1-9-平静时间"><a href="#1-9-平静时间" class="headerlink" title="1.9 平静时间"></a>1.9 平静时间</h4><ul>
+<li>对于来自于某个连接的较早替身的迟到报文段，2MSL等待可防止将它解释称相同插口对的新连接的一部分。但这只有再处于2MSL等待连接中的主机处于正常工作状态时才有效</li>
+<li>如果使用处于2MSL等待端口的主机出现故障，它会在MSL秒内重新启动，并立即使用故障前仍处于2MSL的插口对来建立一个新的连接吗？？如果是这样，在故障前从这个连接发出而迟到的报文段会被错误的当作属于重启后新连接的报文段。无论如何选择重启后新连接的初始序号，都会发生这种情况</li>
+<li>为了防止这种情况，RFC793指出TCP在重新启动后的MSL秒内不能建立任何连接，这就是平静时间（quite time）</li>
+<li>只有极少数的实现版遵守这一规则，因为大多数主机重新启动的时间都比MSL时间长</li>
+</ul>
+<h4 id="1-10-FIN-WAIT-2状态"><a href="#1-10-FIN-WAIT-2状态" class="headerlink" title="1.10 FIN_WAIT_2状态"></a>1.10 FIN_WAIT_2状态</h4><ul>
+<li>在FIN_WAIT_2状态我们已经发出了FIN，并且另一端也已对它进行确认。除非我们在实行半关闭，否则将等待另一端的应用层意识到它已收到一个文件描述符说明，并向我们发一个FIN来关闭另一个方向的连接。只有当另一端的进程完成这个关闭，我们才会从FIN_WAIT_2状态进入TIME_WAIT状态。</li>
+<li>这意味着我们这有可能永远保持这个状态。另一端也将处于CLOSE_WAIT状态，并一直保持这个状态直到应用层决定进行关闭</li>
+<li>一般防火墙都有解决半关闭（FIN_WAIT_2）的超时时间设置，如果超时，防火墙会向双方发送RSET(伪装源)来踢掉连接。</li>
+</ul>
+<h4 id="1-11复位报文段"><a href="#1-11复位报文段" class="headerlink" title="1.11复位报文段"></a>1.11复位报文段</h4><ul>
+<li>TCP首部的RST比特</li>
+<li>无论何时一个报文段发往基准的连接（reference connection）出现错误，TCP都会发出一个复位报文段（基准的链接是指有目的IP地址和目的端口号以及源IP地址和源端口号指明的连接）。</li>
+<li><img src="http://image.blissseven.top/blog/20190410/EpleNQvg1BvN.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/wbRPLy9zOu1g.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/VAsgOIUMPkds.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-12-同时打开、关闭"><a href="#1-12-同时打开、关闭" class="headerlink" title="1.12 同时打开、关闭"></a>1.12 同时打开、关闭</h4><ul>
+<li><img src="http://image.blissseven.top/blog/20190410/vpvClDEUgVBB.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/1WIDJjioXXNG.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="1-13-TCP选项"><a href="#1-13-TCP选项" class="headerlink" title="1.13 TCP选项"></a>1.13 TCP选项</h4><ul>
+<li><p>TLV结构 type+length+value</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190410/RuvSc58EMcgU.png?imageslim" alt="mark"></p>
+</li>
+<li><p>每个选项的开始是1字节kind字段，说明选项的类型。kind字段为0和1的选项仅占1个字节。其他的选项在kind字节后还有len字节。它说明的长度是指总长度，包括kind字节和len字节。</p>
+<p><strong>设置无操作选项的原因在于允许发方填充字段为4字节的倍数。</strong>如果我们使用4.4BSD系统进行初始化TCP连接，tcpdump将在初始的SYN上显示下面TCP选项：</p>
+<p>&lt;mss 512, nop, wscale 0, nop, nop, timestamp 146647 0&gt;</p>
+<p>MSS选项设置为512，后面是NOP，接着是窗口扩大选项。第一个NOP用来将窗口扩大选项填充为4字节的边界。同样，10字节的时间戳选项放在两个NOP后，占12字节，同时使两个4字节的时间戳满足4字节边界。</p>
+</li>
+<li><p>nop一个空字节 Nop+wscale0 四个字节</p>
+</li>
+</ul>
+<h4 id="2-1-TCP的交互数据流"><a href="#2-1-TCP的交互数据流" class="headerlink" title="2.1 TCP的交互数据流"></a>2.1 TCP的交互数据流</h4><ul>
+<li><p>交互数据流：包的数量多，但多为小包</p>
+</li>
+<li><p>以Rlogin应用为例</p>
+</li>
+<li><p>通常每一个交互按键都会产生一个数据分组，这样就会产生四个报文段：</p>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190410/I04bXR3j5wMO.png?imageslim" alt="mark"></li>
+<li>来自客户的交互按键</li>
+<li>来自服务器的按键确认</li>
+<li>来自服务器的按键回显</li>
+<li>来自客户的按键回显确认</li>
+</ul>
+</li>
+<li><p>经受时延的确认</p>
+<ul>
+<li>通常TCP在接收到数据后并不立即发送ACK，相反，它推迟发送，以便将ACK与需要沿该方向发送的数据一起发送（数据捎带ACK），绝大多数实现采用的时延为200ms，即，TCP将以最大200ms的时延等待是否有数据一起发送</li>
+<li><img src="http://image.blissseven.top/blog/20190410/BuwF6UYVQ10G.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li><p>Nagle算法</p>
+<ul>
+<li>要求<strong>一个TCP连接上最多只有一个未被确认的未完成的小分组，在该分组的确认到达前不能发送其他的小分组</strong>。相反，<strong>TCP收集这些少量的分组，并在确认到来时以一个分组的方式发出去</strong>。该算法的<strong>优越性在于它是自适应的</strong>：确认到达的越快，数据也就发送的越快。而在希望减少微小分组数目的低速广域网上，则会发送更少的分组</li>
+<li>注意从<strong>左到右待发数据的长度是不同的，分别为1 1 2 1 2 2 3 1 和三个字节。</strong>这是因为<strong>客户只有收到前一个数据的确认后才发送已经收集的数据</strong>。通过Nagle算法，为发送16个字节的数据客户只需要9个报文段，而不是16个。</li>
+<li><img src="http://image.blissseven.top/blog/20190410/k0dGrBCJCYW2.png?imageslim" alt="mark"></li>
+<li>有时也需要关闭Nagle算法，e.g.小消息必须无时延的发送</li>
+<li>增加时延值，减小了小包的数量</li>
+<li><img src="http://image.blissseven.top/blog/20190410/lzMqBNajvx3v.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/AB8e3a9xqYUA.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/dXsN3JpfbLim.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190410/yQhAXzTNTAiW.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-TCP成块的数据流"><a href="#2-2-TCP成块的数据流" class="headerlink" title="2.2 TCP成块的数据流"></a>2.2 TCP成块的数据流</h4><ul>
+<li><p>TFTP使用了<strong>停止等待协议</strong>。数据发送方在确认下一个数据块之前需要等待接收对已发送数据的确认。本章介绍TCP使用的滑动窗口协议的另一种形式的流量控制方法。<strong>该协议允许发送方在停止并等待确认前可以发送多个分组</strong>。由于<strong>发送方不必每发一个分组就停下来等待确认，该协议可以加速数据的传输</strong>。</p>
+</li>
+<li><p>正常数据流</p>
+<ul>
+<li>确认机制：<ul>
+<li>通常使用的“<strong>隔一个报文段确认”</strong>策略，A发送一个报文给B，A再发送一个报文给B，B发送ACK确认收到的两个报文给A</li>
+<li>delay_ed ACK, 如果tcp对每个数据包都发送一个ack确认，那么只是一个单独的数据包为了发送一个ack代价比较高，所以tcp会延迟一段时间，如果这段时间内有数据发送到对端，则捎带发送ack，如果在延迟ack定时器触发(200ms)时候，发现ack尚未发送，则立即单独发送</li>
+</ul>
+</li>
+<li>我们在线路上看到的分组顺序依赖于许多无法控制的因素：发送方TCP的实现、接收方TCP的实现、接收进程读取数据（依赖于操作系统的调度）和网络的动态性（以太网的冲突和避让），对两个TCP而言，没有一种单一的、正确的方法来交换给定数量的数据</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/zlyJcbpYaWHd.png?imageslim" alt="mark"></p>
+<ul>
+<li>通过发送MSS大小，使的慢接收方对快发送方的流量控制</li>
+</ul>
+</li>
+<li><p>滑动窗口</p>
+<ul>
+<li>在建立TCP连接的同时，可以确定发送数据包的单位，也称其<strong>为最大消息长度</strong>（MSS Maximum Segment Size）。最理想的情况是，最大消息长度正好为IP中不会被分片处理的最大数据长度（一般1460-1500-20-20）</li>
+<li><strong>TCP在传送大量数据时，是以MSS的大小将数据进行分割发送。进行重发时也是以MSS为单位</strong></li>
+<li>MSS是在三次握手时，在两端主机之间被计算得出。两端的主机在发送建立连接的请求时，会在TCP首部中写入MSS选项，告诉对方自己的接口能够适应MSS的大小。然后会在两者之间选择一个较小的值投入使用</li>
+<li><img src="http://image.blissseven.top/blog/20190411/QX1ltJ2JBM6v.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190411/1pBB63IaAPY5.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190411/NUuoCQ5jAw5I.png?imageslim" alt="mark"></li>
+<li>将发送方要发送的字节从1至11标号。<strong>接收方通告的窗口成为提出的窗口（offered window）</strong>，它覆盖了从第4字节到第9字节的区域。<strong>表明接收方已经确认了包括第3字节在内的数据，且通告窗口大小为6</strong>。表明可以连续发送6个报文无需确认，实际只发送3个报文，未被确认，回顾第17章，知道<strong>窗口大小是与确认序号相对应</strong>的。发送方计算它的可用窗口，该窗口表明多少数据可以立即传送。当接收方确认数据后，这个滑动窗口不时的向右移动。窗口两个边沿的相对运动增加或减少了窗口的大小</li>
+<li><img src="http://image.blissseven.top/blog/20190411/g4E2gINO8zcM.png?imageslim" alt="mark"></li>
+<li>称窗口左边向右边靠近时为窗口靠拢。<strong>发生在数据被发送和确认时</strong></li>
+<li>当窗口右边沿向右移动时将允许发送更多的数据，称之为<strong>窗口张开</strong>。这<strong>种现象发生在另一端的接收进程读取已经确认的数据并释放了TCP的接收缓存时</strong>。</li>
+<li>当右边沿向左移动，成为窗口收缩。Host Requirements RFC强烈建议不要这么做</li>
+<li><img src="http://image.blissseven.top/blog/20190411/f7vc0NM0wzFG.png?imageslim" alt="mark"></li>
+<li>发送方不必发送一个全窗口大小的数据</li>
+<li>来自接收方的一个报文段确认数据并把窗口左边沿向右滑动。这是因为窗口的大小是相对于确认序号的</li>
+<li>正如从报文段7到报文段8中变化的那样，窗口的大小可以减小，但是窗口的右边沿不能向左移动</li>
+<li>接收方在发送一个ACK前，不必等待窗口被填满。在前面我们看到许多实现每收到两个报文段就会发送一个ACK</li>
+<li>PUSH<ul>
+<li>发送方使用该标志通知接收方将所收到的数据尽快全部提交给接受进程</li>
+<li>数据包括与<strong>PUSH一起传送的数据以及接收方TCP已经为接受进程收到的其他数据</strong>（已缓存的数据）</li>
+</ul>
+</li>
+<li>A的slide window 左侧是自己发出，并被对方确认的字节序列号，右侧是左侧+ B通告window size。</li>
+</ul>
+</li>
+<li><p>慢启动</p>
+<ul>
+<li>TCP三次同步握手建立连接之后，会<strong>采用slow start 算法来快速摸到传输路径带宽的峰值</strong>。</li>
+<li>本章所有例子中，发送方一开始便向网络发送多个报文段，直至达到接收方通告的窗口大小为止。当发送方和接收方处于同一个局域网时，这种方式是可以的。<strong>但是如果在发送方和接收方之间存在多个路由器和速率较慢的链路时，就有可能出现一些问题。一些中间路由器必须缓存分组，并有可能耗尽存储器的空间</strong>，然后发生丢包</li>
+<li>TCP采用慢启动算法来<strong>降低一开始就发送过多的数据到网络</strong></li>
+<li>慢启动为发送方的TCP增加了另一个窗口：拥塞窗口（congestion window）记为cwnd。当与另一个网络的主机建立TCP连接时，拥塞窗口被初始化为<strong>1个报文段（即另一端通告的报文段大小）</strong>。每收到一个ACK，拥塞窗口就增加一个报文段（<strong>cwnd以字节为单位，但是慢启动以报文段为单位进行增加</strong>）。<strong>发送方取拥塞窗口与通告窗口中的最小值作为发送上限</strong>。<strong>拥塞窗口是由发送方使用的流量控制，而通告窗口则是接收方使用的流量控制</strong></li>
+<li>发送方开始时发送一个报文段，然后等待ACK。当<strong>收到该ACK</strong>时，拥塞窗口从1增加到2，即可以发送两个报文段。当收到这两个的报文段的ACK时，拥塞窗口就增加为4.<strong>是一种指数增加的关系</strong></li>
+<li>在某些点<strong>上可能达到了互联网的容量</strong>，于是中间路由器开始丢弃分组，发送方检测到丢包，相当于得到通知：<strong>发送方的拥塞窗口开的过大，需要进行调整</strong>。</li>
+<li><img src="http://image.blissseven.top/blog/20190411/DFfGFKBWB9Yr.png?imageslim" alt="mark"></li>
+<li>发送一个分组的时间<ul>
+<li>通常发送一个分组的时间取决于两个因素：<strong>传播时延和发送时延</strong>（带宽）</li>
+<li>对于一个给定的两个接点之间的通路，<strong>传播时延</strong>（光速）一般为固定的，而发送时延则取决于分组的大小</li>
+<li>在<strong>速率较慢的情况下，发送时延起主要作用，而在千兆比特速率下，传播时延起主要作用</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>成块数据的吞吐量</p>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190411/Xu8ALS9trLeR.png?imageslim" alt="mark"></li>
+<li>时间19之后，没有收到ack所以最大只能发送4个报文。</li>
+<li>带宽时延乘积<ul>
+<li>为了最大限度的利用链路带宽<strong>，必须确保发送方源源不断的收到接收方发送的ACK</strong>，<strong>作为对接收到数据的确认和更新Window size的大小</strong></li>
+<li>在开始阶段，<strong>通告的window size必须大于等于带宽和往返时延的乘积</strong>，才能确保在收到第一个ACK之前，能够一直发送数据流量。因为发送<strong>第一个数据报文到收到对应的ACK</strong>，时间至少为RTT时间（发一个数据报到收到ACK的时间）</li>
+<li>因此<strong>传送通道容量</strong>为<ul>
+<li>capacity(bit)=bandwidth(b/s)* round-trip time(s) 带宽时延乘积</li>
+<li>cwnd和 windows size 最小值 大于等于 bandwidth* rount-trip-time</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拥塞<ul>
+<li>当数据到达一个大的管道（如一个快速局域网）并向一个较小的管道（如一个较慢的广域网）发送时便会发生拥塞。当多个输入流到达一个路由器，而路由器的输出流小于这些输入流的总和时也会发生拥塞。</li>
+<li><img src="http://image.blissseven.top/blog/20190411/4aarnSaGD65q.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li>紧急方式<ul>
+<li>TCP提供了紧急方式，它使一端可以高速另一端有些紧急具有某种方式的<strong>“紧急数据”已经放置在普通的数据流中</strong>。另一端被通知这个紧凑数据已被放置在普通的数据流中，有接收方决定如何处理。可以通过设置TCP首部中的两个字段来发出这种一端到另一端的紧急指针已经被放置在数据流中的通知。<strong>URG被置1，并且一个16bit的紧急指针被置为一个正的偏移量</strong>，<strong>该偏移量与TCP首部中的序号字段相加，得到紧急数据中的最后一个字节的序号</strong>。</li>
+<li>TCP必须通知接受进程，已收到一个紧急数据指针。接受进程读取数据流，并被告知何时碰到紧急数据指针。<strong>只要从接收方当前读取位置到紧急数据指针之间由数据存在，就认为应用程序处于紧急模式</strong>。在紧急指针通过之后，应用程序便转回到正常方式</li>
+<li>TCP本身对紧急数据知之甚少，没有办法指明紧急数据从数据流的何处开始。TCP通过连接传送的唯一信息就是紧急指针已经开始（TCP首部中的URG比特）和指向紧急数据最后一个字节的指针，其他事情交给应用程序去处理。</li>
+<li>作用<ul>
+<li>Telnet Rlogin 中断键</li>
+<li>FTP当用户放弃一个文件的传输</li>
+<li>Telnet和Rlogin从服务器到客户使用紧急方式是因为在这个方向上的数据流很可能要被客户的TCP停止（也即，它通告了一个大小为0的窗口）。但是如果服务器进程进入了紧急方式，尽管它不能够发送任何数据，服务器TCP也会立即发送紧急指针和URG标志。当<strong>客户TCP接收到这个通知时就会通知客户进程，于是客户可以从服务器读取其输入、打开窗口并使数据流动</strong>。</li>
+<li>A发送数据至B，B缓冲满，发送window size=0给A，A又要往B发送数据通过紧急模式</li>
+<li><img src="http://image.blissseven.top/blog/20190411/fX9JqeoVJgCz.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190411/aSV04KT8JwPd.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-TCP的超时和重传"><a href="#2-3-TCP的超时和重传" class="headerlink" title="2.3 TCP的超时和重传"></a>2.3 TCP的超时和重传</h4><ul>
+<li><p>TCP提供可靠的运输层。使用的方法之一就是确认从另一端收到的数据。但数据和确认都有可能丢失。TCP通过在发送端发送数据时设置一个定时器来解决这种问题。如果当定时器溢出时还没有收到接收方确认，发送端就重传该数据。<strong>对任何实现而言，关键之处在于超时和重传的策略，即怎样决定超时间隔和重传的间隔。</strong></p>
+</li>
+<li><p>对每个连接，TCP管理4个不同的定时器</p>
+<ul>
+<li><strong>重传定时器</strong>用于当发送一个数据报文时，在规定时间内，发送方需要收到另一端发出的接收报文确认。本章详细介绍该定时器，以及一些相关问题，拥塞避免</li>
+<li>坚持persist定时器使窗口大小信息保持不断流动，即使另一端关闭了其接收窗口 chapter23</li>
+<li>保活keepalive定时器用于检测一个空闲连接的另一端是否依然保持连接。chapter23</li>
+<li>2MSL定时器测量一个连接处于TIME_WAIT状态的时间。chapter18.6</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/i7thLAfpsYPD.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/sSqXRH76NoHC.png?imageslim" alt="mark"></p>
+<ul>
+<li>重传之间的时间间隔为1 3 6 12 24 48 和多个62秒</li>
+<li>当第一次发送后所设置的超时时间实际上为1.5秒，服务器时间戳最小精度为500ms</li>
+<li><strong>指数退避 exponential backoff</strong></li>
+<li>首次分组传输（第6行，24.480秒）与复位信号传输（第19行，566.488秒）之间的时间差为9分钟</li>
+<li>solaris2.2 允许管理者修改这个时间（tcp_ip_abort_interval），且其默认值为2分钟，而不是常用的9分钟</li>
+</ul>
+</li>
+<li><p>往返时间测量</p>
+<ul>
+<li><p>TCP超时与重传中最重要的部分就是对一个TCP连接的往返时间RTT的测量。由于网络状况的多变性，RTT时间经常会发生变化，TCP应该跟踪这些变化并相应的改变超时重传时间</p>
+</li>
+<li><p>RFC 793 计算方法</p>
+<ul>
+<li>使用一个低通滤波器来更新一个被平滑的RTT值，记为O</li>
+<li>R&lt;- &amp;R+(1-&amp;)M</li>
+<li>&amp;一个推荐值为0.9的平滑因子。每次进行新测量的时候这个被平滑的RTT将得到更新。</li>
+<li>该算法在给定这个随RTT的变化而变化的平滑因子的条件下，RFC推荐的<strong>重传超时时间</strong>RTO的值应设置为RTO=R@，@为推荐值为2的时延离散因子</li>
+</ul>
+</li>
+<li><p>基于均值和方差来计算RTO</p>
+<ul>
+<li>除了被平滑的RTT，还需要跟踪RTT的方差</li>
+<li><img src="http://image.blissseven.top/blog/20190411/bbqy58qgYdRY.png?imageslim" alt="mark"></li>
+<li>M为当前测出的RTT值，A为被平滑的RTT（均值的估计器），D为被平滑的均值偏差。Err刚得到的测量结果与当前的RTT估计其之差。A和D均被用于计算下一个重传时间。增量g起平均作用，为1/8（0.125）。偏差的增益为h，取值0.25。当RTT变化时，较大的偏差增益使RTO快速上升</li>
+<li><strong>g h 倍数4均为2的倍数的原因，通过移位实现</strong></li>
+<li>A为被平滑的RTT，D为被平滑的RTT方差，RTO=A+4D</li>
+</ul>
+</li>
+<li><p>重传多义性问题</p>
+<ul>
+<li>在一个分组重传时：假定一个分组被发送。当超时发生时，RTO正进行指数退避，分组以更长的RTO进行重传，然后收到一个确认。那么这个ACK是针对第一个分组还是第二个分组呢，在计算RTT值时考虑</li>
+<li>Karn 算法，当一个超时和重传发生时，<strong>在重传数据的确认最后到达之前，不能更新RTT估计器</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190411/TR05xUkpkP8I.png?imageslim" alt="mark"></li>
+<li>一次测量完成，再进行下一次测量</li>
+<li>大多数源于伯克利<strong>的TCP实现在任何时候对每个连接仅测量一次RTT值</strong>。在发送一个报文段时，如果给定连接的定时器已经被使用，则该报文段不被计时</li>
+<li>对每个连接而言，除了这个滴答计数器，<strong>报文段中数据的起始序号也被记录下来</strong>。<strong>当收到一个包含这个序号的确认后，该定时器就被关闭</strong>。如果ACK到达时数据没有被重传，则被平滑的RTT和被平滑的均值偏差将基于这个新测量进行更新。</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/Y361KNRIwW5d.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/7bqynsgd9Lyc.png?imageslim" alt="mark"></p>
+<ul>
+<li>发第一个包丢掉时，重传时间6s，第二个也丢掉了，发第三个时重传时间12s</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/fdyqfbGYf1CO.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+</li>
+<li><p>拥塞举例</p>
+<ul>
+<li><img src="http://image.blissseven.top/blog/20190411/OdJCczf8sBET.png?imageslim" alt="mark"></li>
+<li>有两种<strong>分组丢失的指示：超时和接收到重复的确认</strong><ul>
+<li>使用<strong>超时作为丢包指示，需要一个好的RTT算法</strong></li>
+</ul>
+</li>
+<li>重复的ACK,发送端一直发送的数据的起始序列号不是接收方发送ACK的序列号时会发送重复的ACK。收到三个重复的ACK，认为这个包已经丢掉了</li>
+<li><strong>拥塞避免算法是一种处理丢失分组的方法</strong></li>
+<li>该算法假定<strong>由于分组收到损坏引起的丢失是非常少的（远低于1%），因此分组丢失就意味着在源主机滑动目的主机的某处网络上发生了拥塞</strong></li>
+<li>拥塞避免算法和慢启动算法是两个目的不同、独立的算法。当拥塞发生时，我们希望降低分组进入网络的传输效率，于是可以调用慢启动来实现这一点。在实际中，这两个算法通常一起实现</li>
+<li>拥塞避免和慢启动都是<strong>发送方使用的流量控制</strong>（<em>慢启动允许一方发送连续的未经确认的分组，增加方式采用指数增加，拥塞避免算法允许一方发送连续的未经确认的分组，增加方式采用线性增加</em>），而<strong>通告窗口则是接收方进行的流量控制</strong>。<strong>拥塞避免是发送方对网络可能发生拥塞的估计</strong>，而后者则与接收方分配给该<strong>连接的接收缓存大小</strong>有关。</li>
+</ul>
+</li>
+<li><p>拥塞避免算法</p>
+<ul>
+<li><p>拥塞避免算法和慢启动算法都需要<strong>对每个连接维持两个变量</strong>：<strong>一个拥塞窗口cwnd</strong>和一个<strong>慢启动门限ssthresh</strong>。</p>
+</li>
+<li><ol>
+<li>对一个给定的连接，初始化cwnd为1个报文段，ssthresh为65535个字节</li>
+<li>TCP发出未经确认的报文总大小不能超过cwnd和接收方通告窗口的大小</li>
+<li>当拥塞发生时（超时或收到重复确认），ssthresh被设置为当前窗口大小的一半（cwnd和接收方通告窗口的最小值，<strong>但至少为2个报文段</strong>）。此外，如果是超时引起了拥塞，则cwnd被设置为1个报文段（这就是慢启动），另一种是收到重复确认</li>
+<li>当<strong>新的数据被对方确认时，就增加cwnd</strong>，但增加的方式依赖于我们是否正在进行慢启动或拥塞避免。<strong>如果cwnd小于等于ssthresh则正在进行慢启动，否则正在进行拥塞避免</strong>。<strong>慢启动一直持续到我们回到当拥塞发生时所处位置一半时才停止</strong>（因为我们记录了在步骤3中给我们知道麻烦窗口大小的一半，就是ssthresh），接下来执行的是拥塞避免</li>
+</ol>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/PJVWOCc1rhM6.png?imageslim" alt="mark"></p>
+</li>
+<li><p>慢启动算法初始设置cwnd为1个报文段，此后每收到一个确认就加1，这会使窗口在每个RTT时间内按指数方式增长，发送1个报文段，2个，4个</p>
+</li>
+<li><p>拥塞避免算法要求<strong>每收到一个确认将cwnd增加1/cwnd</strong>。与慢启动指数的增加相比，是一种加性增长。我们希望在一个往返时间内最多为cwnd增加1个报文段（不管在这个RRT中收到了多少了ACK），然<strong>而慢启动将根据这个往返时间中所收到的确认的个数增加cwnd</strong>。</p>
+</li>
+<li><p>丢包的另一种指示是收到了重复的ACK</p>
+</li>
+<li><p>快速重传算法</p>
+<ul>
+<li>如果一连串收到3个或3个以上的重复的ACK，就非常有可能是一个报文段丢失了，于是我们就重传丢失的数据报文段，而<strong>无需等待超时定时器溢出</strong></li>
+</ul>
+</li>
+<li><p>快速恢复算法</p>
+<ul>
+<li><p><strong>快速重传后执行的不是慢启动，而是拥塞避免算法</strong></p>
+</li>
+<li><p>没有执行慢启动原因</p>
+<ul>
+<li>收到重复的ACK不仅仅告诉我们一个分组丢失了，还告诉我们一个数据报离开网络顺利的到达接收者。这是由于接收方只有在收到另一个报文段并发现这个报文段不是我当前需要序号的报文才产生重复的ACK，说明有一个报文段已经离开了网络并进入了对方的缓存，<strong>也就是说，在收发两端之间仍然有流动的数据，而我们不想执行慢启动来突然减少数据流</strong></li>
+<li>慢启动时，cwnd初始化为1，拥塞避免算法时，cwnd初始化为ssthresh</li>
+</ul>
+</li>
+<li><p>1 当受到第三个重复的ACK时，将ssthresh设置为当前拥塞窗口cwnd的一半。重传丢失的报文段。<strong>设置cwnd为ssthresh加上3倍的报文段的大小</strong>。（ssthresh本应立即设置为当重传发生时正在起作用的窗口大小的一半，但是在接收到重复ack的过程中允许cwnd保持增加，这是因为每个重复的ack都表示1个报文段已离开了网络，<strong>收到3个重复的ack，表示有3个报文离开了网络，并被接收TCP缓存了这几个报文段</strong>，正在等待所缺数据的到达）</p>
+</li>
+<li><p>2 每次收到另一个重复的ack时，cwnd增加1个报文段大小并发送1个分组</p>
+</li>
+<li><p>3 <strong>当下一个确认新数据的ACK到达时，设置cwnd为ssthresh（在第1步中设置的值）</strong>。这个ACK应该是<strong>在进行重传后的一个往返时间内对步骤1中重传的确认</strong>。另外，这个ACK也应该是对<strong>丢失的分组和收到的第1个重复的ACK之间的所有中间报文的确</strong>认。这一步采用的是拥塞避免，因为当分组丢失时我们将当前的速率减半</p>
+</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/4GgQdqkEcp8q.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/4tHRwKUHQqMf.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/8IbC9CyGagly.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/lGdKwjdNhzl3.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/eyHwqN8oHy73.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/MsWPrJfxqxru.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190411/t6xcQyrVPL9h.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+</li>
+<li><p>按每条路由进行度量</p>
+<ul>
+<li>新的TCP实现<strong>在路由表项中维持许多我们在前面就提到过的指标</strong>。当一个TCP连接关闭时，如果已经发送了<strong>足够多的数据来</strong>获得有意义的统计资料，且<strong>目的结点的路由表项不是一个默认的表项，</strong>那么下列信息就保存在路由表项中以备下次使用：<strong>被平滑的RTT，被平滑的均值偏差以及慢启动门限</strong>。<strong>所谓“足够多的数据”是指16个窗口的数据，这样就可以得到16个RRT采样</strong></li>
+<li>当建立一个新的连接时，<strong>不论是主动还是被动，如果该连接将要使用的路由表项已经有这些度量的值，则用这些度量来对相应的变量进行初始化</strong>。</li>
+<li><img src="http://image.blissseven.top/blog/20190411/Qp5Nnyqlcjfo.png?imageslim" alt="mark"></li>
+<li>B C在同一子网，A有一条明细路由去往B C 所在的子网</li>
+</ul>
+</li>
+<li><p>ICMP的差错</p>
+<ul>
+<li>提供information \error message</li>
+<li><strong>TCP能够遇到的常见的ICMP差错就是源站抑制、主机不可达、和网络不可达</strong></li>
+<li>基于伯克利的实现对这些错误的处理<ul>
+<li>接收到的源站抑制ICMP差错报文：拥塞窗口cwnd被设置为1个报文段大小，开始慢启动，但是慢启动门限ssthresh没有变化，所以发送窗口将打开直至它或者充分利用收发双方的链路（受窗口大小和往返时间限制）或者发生了拥塞</li>
+<li><strong>接收到的主机不可达或网络不可达的ICMP错误都被忽略，因为这两个差错都被认为是短暂现象。</strong>这有可能是由于网络发生故障而收敛，需要一定的时间选择替换路径。在收敛过程中可能引起发送这两种ICMP差错中的一种，但是TCP连接并不必被关闭，相反，TCP试图发送引起该差错的数据，尽管最终有可能引起超时</li>
+</ul>
+</li>
+<li><img src="http://image.blissseven.top/blog/20190412/J4fdLWatUUlk.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li><p>TCP的重新分组    </p>
+<ul>
+<li>当TCP超时并重传时，他并不一定要重传同样的报文段。相反，TCP允许进行重新分组而发送一个较大的报文段，这将有助于提高性能（当然，这个较大的报文段不能够超过接收方声明的MSS）。在协议中这是允许的，因为TCP是使用字节序号而不是报文段编号来进行识别它所要发送的数据和进行确认。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-4-TCP的坚持定时器"><a href="#2-4-TCP的坚持定时器" class="headerlink" title="2.4 TCP的坚持定时器"></a>2.4 TCP的坚持定时器</h4><ul>
+<li>ACK的传输并不可靠，也就是说，TCP不对ACK报文段进行确认，TCP只确认那些含有数据的ACK报文段。如果报文段9丢失怎么办？</li>
+<li><img src="http://image.blissseven.top/blog/20190412/IeTFTIcL7sql.png?imageslim" alt="mark"></li>
+<li>问题：如果一个通告窗口更新的确认丢失了，则双方就有可能一直等待下去：接收方等待接收数据（因为它已经向发送方通告了一个非0的窗口），而发送方在等待允许它继续发送数据的窗口更新</li>
+<li>解决方法：<strong>为防止死锁情况发生，发送方使用一个坚持定时器（persist timer）来周期性的向接收方查询，</strong>以便发现窗口是否已经增大。这些从发送方发出的报文段成为<strong>窗口探查（window probe）</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190412/KJQSqDFkg7ic.png?imageslim" alt="mark"></li>
+<li>14 为窗口探查报文</li>
+<li>坚持定时器使用了普通的TCP指数退避，在收到一个大小为0的窗口通告后的第1个（报文段14）间隔为4.949秒，下一个（报文段16）间隔为4.996秒，之后间隔1 12 24 48秒和多个60秒</li>
+<li>窗口探查<strong>包含一个字节的数据</strong>（序号为9217）<strong>TCP总是允许在关闭连接前发送一个字节的数据</strong>。注意。尽管如此，<strong>所返回的窗口为0的ACK并不是确认该字节</strong>（<strong>它们确认了包括9216在内的所有数据</strong>）。<strong>因此这个字节被持续重传。被持续用来探测对端窗口的变化情况</strong>。</li>
+<li>糊涂窗口综合征<ul>
+<li>基于窗口的流量控制方案，如TCP使用的，会导致糊涂窗口综合征SWS（Silly Window Syndrome）的状况。如果发生这种情况，则少量的数据将通过连接进行交换，而不是满长度的报文段。导致传输效率低下</li>
+<li>现象：可发生在两端中的任何一端：<strong>接收方可以通告一个小的窗口（而不是一直等到有大的窗口时才通告），而发送方也可以发送少量的数据（而不是等待其他的数据以便发送一个大的报文段）</strong></li>
+<li>解决方案，可以在任何一端采取措施避免<ul>
+<li><strong>接收方不通告小窗口</strong>。通常的算法是接收方不通告这样的窗口，<strong>窗口小于1个报文段（也就是将要接收的MSS），或者窗口小于与接受方缓存空间的一半，不论实际有多少</strong>。</li>
+<li>发送方避免出现糊涂窗口综合症的措施是仅在满足下列条件时才发送数据<ul>
+<li>可以发送一个满长度的报文</li>
+<li><strong>可以发送至少是接收方通告最大窗口大小一半的报文</strong></li>
+<li><strong>没有还未被确认的数据时或者TCP连接上禁止使用Nagle算法</strong></li>
+</ul>
+</li>
+<li>在有尚未被确认数据的情况下，Nagle算法阻止我们发送小的报文段；禁止Nagle算法后，即便有未确认数据包，也可以发送数据包</li>
+</ul>
+</li>
+<li><img src="http://image.blissseven.top/blog/20190412/23g8KbMhhnek.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/pf8dRzPojGML.png?imageslim" alt="mark"></li>
+<li>6 窗口探测报文</li>
+<li>此时MSS=1460 接收方缓冲至少4096</li>
+<li>11 号大于MSS，1533 因为探测报文占了一个字节</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-5-TCP的保活定时器"><a href="#2-5-TCP的保活定时器" class="headerlink" title="2.5 TCP的保活定时器"></a>2.5 TCP的保活定时器</h4><ul>
+<li>如果TCP连接的双方都没有向对方发送数据，则在两个TCP模块之间不交换任何信息，意味着我们可以启动一个客户与服务器建立一个连接，然后离去数小是，数月后，连接依然保持</li>
+<li>许多时候一个服务器希望知道客户主机是否关机或者崩溃又重新启动。许多实现提供的保活定时器可以提供这种能力，但是保活定时器并不是TCP规范中的一部分</li>
+<li>Host Requirements RFC提供了3个不使用保活定时器的理由<ul>
+<li>在出现短暂差错的情况下，这可能使一个非常好的连接释放掉</li>
+<li>它们耗费不必要的带宽</li>
+<li>在按分组计费的情况下会在互联网上花掉更多的钱。并且，许多实现提供了保活定时器</li>
+</ul>
+</li>
+<li>许多人认为，保活定时器应由应用程序完成</li>
+<li><img src="http://image.blissseven.top/blog/20190412/rxQoHHDUVwsz.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/g253hsoDCkTC.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/1EIuuWfpntN5.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/A1nLKYeWwe1M.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="3-1-TCP的未来和性能"><a href="#3-1-TCP的未来和性能" class="headerlink" title="3.1 TCP的未来和性能"></a>3.1 TCP的未来和性能</h4><ul>
+<li><p>TCP的一些修改建议，长肥管道，基于事务的TCP（T-TCP）</p>
+</li>
+<li><p>路径MTU的发现</p>
+<ul>
+<li>路径MTU单向性</li>
+<li>TCP的路径MTU发现按如下方式进行：在连接建立时，TCP使用输出接口MTU或对端声明的MSS最小值作为起始的报文段大小。路径MTU发现不允许TCP超过对端声明的MSS。如果对端没有指定一个MSS，则默认为536。</li>
+<li>一旦选定了起始报文的报文段大小，在该连接上的所有被<strong>TCP发送的IP数据报都将被设置DF比特</strong>。如果某个中间路由器需要对一个设置了DF标志的数据报进行分片。它就丢弃这个数据报，并产生一个ICMP的不能分片的差错。如果收到这个差错，TCP就减少段大小并进行重传。<strong>如果路由器产生的是一个较新的该类ICMP差错，则报文携带为下一跳的MTU值</strong>。如果是一个较旧的该类ICMP差错，则必须尝试下一个可能的MTU。当由这个ICMP差错引起的重传发生时，拥塞窗口不需要变化，但要启动慢启动。</li>
+<li><img src="http://image.blissseven.top/blog/20190412/iisAnO2xGLX3.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/s4cqDYY9dkCr.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li><p>大分组好还是小分组好</p>
+<ul>
+<li>常规知识告诉我们较大的分组好，因为发送较少的大分组比发送较多的分组花费更少（假定分组的大小不足以引起分片，否则会引起其他方面的问题）。这些减少的花费和网络（分组首部负荷）、路由器（选路的决定）和主机（协议处理和设备中断）等有关。但并非所有的人都同意该观点</li>
+<li><img src="http://image.blissseven.top/blog/20190412/jVDGEj8k9Jhz.png?imageslim" alt="mark"></li>
+<li>时间片个数为 分组个数2+跳数3-1=4</li>
+<li>从R1发送到R4 需消耗21.4*4=85.6秒</li>
+<li><img src="http://image.blissseven.top/blog/20190412/EzdYpj7k3A0g.png?imageslim" alt="mark"></li>
+<li>时间片个数为 分组个数16+跳数3-1=18 </li>
+<li>18*2.9=52.2ms</li>
+<li>每个链路的空闲时间不一样</li>
+<li>尽管如此，发送还是大的好</li>
+</ul>
+</li>
+<li><p>长肥管道</p>
+<ul>
+<li>把一个连接的容量表示为 capacity(b)=bandwidth(b/s) * round-trip time(s) ,也称带宽时延乘积、两端的管道大小</li>
+<li><strong>当这个乘积变大时，TCP的某些局限性就会暴露出来</strong></li>
+<li><img src="http://image.blissseven.top/blog/20190412/LH0DsGJxw2s2.png?imageslim" alt="mark"></li>
+<li>具有大的带宽时延乘积的网络为长肥网络（long fat network），而另一个运行在LFN上的TCP连接为长肥管道</li>
+<li>局限性<ul>
+<li>TCP首部中窗口大小为16bit，从而将窗口限制在65535个字节内。（最优窗口=带宽时延乘积）然而现有的网络<strong>需要一个更大的窗口来提供最大的吞吐量</strong>。后面将介绍窗口扩大选项将解决这个问题</li>
+<li><strong>在一个长肥网络LFN内的分组丢失会使吞吐量急剧减少</strong>，丢包5%时，吞吐率50%，发生重传</li>
+<li>我们在前面看到许多TCP实现对每个窗口的RTT仅进行一次测量。它们并不对每个报文段进行RTT测量。<strong>在一个长肥网络LFN上需要更好的RTT测量机制</strong>，有一个更好的RTO值。我们将在后面介绍时间戳选项，允许更多的报文段被计时，包括重传</li>
+<li>TCP对每个字节数据使用一个32bit无符号的序号来进行标识。如果在网络中有一个被延迟一段时间的报文段，它所在的连接已经被释放，而一个新的连接在这两个主机之间又被建立了，怎么才能<strong>防止这样的报文段再次出现</strong>呢？首先会想起IP首部中的TTL为每个IP段规定了一个生存时间的上限-255跳或255秒，看哪一个上限先到达。我们还定义了最大的报文段生存时间MSL作为一个实现的参数来阻止这种情况的发生。推荐的MSL值为2分钟（给出一个240秒的2MSL），然而许多实现使用的MSL为30秒</li>
+</ul>
+</li>
+<li>TCP 序号回绕问题<ul>
+<li>在长肥网络LFN上，TCP的序号会碰到一个不同的问题。由于序号空间有限，在已经传输了4294967296个字节以后序号会被重用。如果一个包含序号N字节数据的报文在网络上被延迟并在连接依然有效时出现，会发生什么情况呢？</li>
+<li>在一个以太网上要发送如此多的数据大概需要60分钟，因此不会发生这种情况。但是在带宽增加时，这个时间会减少：一个T3的电话线（45Mb/s）在12分钟内会发生回绕，FDDI（100Mb/s）为5分钟，问题不在于带宽时延乘积，而在于带宽本身</li>
+<li>解决方案：使用TCP的时间戳选项的PAWS（Protection Against Wrapped Sequence numbers）保护回绕的序号</li>
+</ul>
+</li>
+<li>窗口扩大选项</li>
+<li><img src="http://image.blissseven.top/blog/20190412/HQ1EHLT3aKJY.png?imageslim" alt="mark"></li>
+<li>窗口扩大因子</li>
+<li><img src="http://image.blissseven.top/blog/20190412/JCEs3ODCwO2v.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190412/wCr9kqcWBwbA.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+<li><p>时间戳选项</p>
+<ul>
+<li><p><strong>用于更多的数据报参与RTT的计算，以及防止序号回绕</strong></p>
+</li>
+<li><p>时间戳选项使<strong>发送方在每个报文段中放置一个时间戳选项</strong>。接收方在确认中返回这个数值，从而允许发送方为每一个收到的ACK计算RTT。我们提到过目前许多实现为每一个窗口只计算一个RTT，对于包含8个报文段的窗口而言这是正确的。然而，较大的窗口大小则需要进行更好的RTT计算。</p>
+</li>
+<li><p><strong>发送方在第1个字段中放置一个32bit的值，接收方在应答字段中回显这个数值</strong>。<strong>包含这个选项的TCP首部长度将从正常的20字节增加到32字节</strong>，时间戳是要给单调递增的值。由于接收方只需要回显收到的内容，因此<strong>不需要关注时间戳单元是什么</strong>。这个选项不需要再两个主机之间进行任何形式的时间同步。</p>
+</li>
+<li><p>工作细节</p>
+<ul>
+<li><p>为了减少任一端所维持的状态数量，对于<strong>每个连接只保持一个时间戳的数值</strong>。选择何时更新这个数值的算法如下：</p>
+</li>
+<li><p>1 TCP跟踪下一个ACK中将要<strong>发送的时间戳的</strong>值（一个名为tsrecent的变量）以及最后发送的ACK中的确认序号（一个名为 lastack）的变量。这个序号就是接收方期待的序号</p>
+</li>
+<li><p>2 当一个包含有字节号lastack的报文段到达时，则该报文段中的时间戳被保存在tsrecent中</p>
+</li>
+<li><p>3 无论何时发送一个时间戳选项，tsrecent就作为时间戳回显应答字段被发送，而序号字段被保存在lastack中。</p>
+</li>
+<li><p>下面我们以一个例子理解timestamp和timestamp echo字段中存放的内容：假设a主机和b主机之间通信，a主机向b主机发送一个报文段，那么：</p>
+<p>1）timestamp字段中存放的内容：a主机向b主机发送报文s1，在s1报文中timestamp存储的是a主机发送s1时的内核时刻ta1。</p>
+<p>2）timestamp echo字段中存放的内容：b主机收到s1报文并向a主机发送含有确认ack的报文s2，在s2报文中，timestamp为b主机此时的内核时刻tb，而timestamp echo字段为从s1报文中解析出的ta1.</p>
+</li>
+</ul>
+</li>
+<li><p>我们已经看到<strong>接收方TCP不需要对每个包含数据的报文段进行确认</strong>，许多实现每两个报文段发送1个ACK。如果接收方发送1个确认了两个报文段的ACK，那么哪一个收到的时间戳应当放入回显应答字段中来发出去呢？</p>
+</li>
+<li><p>如果ACK被接收方延迟，则作为回显值的时间戳值应该对应于最早被确认的报文段。例如，如果两个包含1-1024和1025-2048字节的报文段到达，每一个都带有一个时间戳选项，接收方产生一个ACK 2049来对它们进行确认。此时ACK中的时间戳应该是包含字节1-1024的第1个报文段中的时间戳。这种处理正确。因为发送方在进行重传超时时间的计算时，必须将迟延的ACK也考虑在内</p>
+</li>
+<li><p>尽管时间戳选项能够更好的计算RTT，它还为发送方提供了一种方法，以避免接收到旧的报文段，并认为它们是现在数据的一部分。</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190412/nAVz4syOk8rC.png?imageslim" alt="mark"></p>
+</li>
+<li><p>使用时间戳可以避免这种情况。接收方将<strong>时间戳视为序列号的1个32bit的扩展</strong>。由于在时间E重新出现的报文段的时间戳为2，这比<strong>最近有效的时间戳</strong>小（5或6），因此PAWS算法将其丢弃</p>
+</li>
+<li><p><strong>PAWS算法不需要再发送方和接收方之间进行任何形式的时间同步</strong>。接收方所需要的就是时间戳的值应该单调递增，并且每个窗口至少增加1。</p>
+</li>
+</ul>
+</li>
+<li><p>T/TCP为事务用的TCP扩展</p>
+<ul>
+<li>TCP提供的是一种虚电路方式的运输服务。一个连接的生存时间包括三个不同的阶段：建立、数据传输和终止。这种虚电路服务非常适合诸如远程注册和文件传输之类的应用</li>
+<li>一个事务（transaction）就是符合下面这些特征的一个客户请求及其随后的服务器响应<ul>
+<li>1 应该<strong>避免连接建立和连接终止的开销</strong>，在可能的时候发送一个请求分组并接收一个应答分组即可</li>
+<li>2 <strong>等待时间应该减少到等于RTT和SPT之和</strong>。其中RTT(rount -trip-time)为往返时间，而SPT（service processing time）为服务器处理请求的时间</li>
+<li>3 <strong>服务器应当能够检测出重复的请求</strong>，并且当收到一个重复的请求时不重新处理事务（避免重新处理意味着不必再次处理请求，而是<strong>返回保存的与该请求对应的应答</strong>）</li>
+</ul>
+</li>
+<li><strong>TCP提供了过多的事务特征，而UDP提供的则不够</strong>。通常应用程序使用UDP来构造（避免TCP连接的开销），而许多需要的特征（如动态超时和重传、拥塞避免）被放置在应用层，一遍又一遍的重新设计和实现</li>
+<li>一个较好的解决方案是提供一个能够提供<strong>足够多的事务处理功能的运输层</strong>。我们称这样的事务协议为T/TCP。</li>
+<li>T/TCP<ul>
+<li>TCP为处理事务而需要进行的两个改动是<strong>避免三次握手和缩短WAIT_TIME状态</strong>。T/TCP使<strong>用加速打开来避免三次握手</strong></li>
+<li>1 它为打开的连接指定一个32bit的连接计数CC（connection count），<strong>无论主动打开还是被动打开</strong>。<strong>一个主机的CC值从一个全局计数器中获得</strong>，<strong>该计数器每次使用时加1</strong>。</li>
+<li>2 在两个使用T/TCP的主机之间的每一个报文段都包括一个新的TCP选项 CC</li>
+<li>3 <strong>一个服务器维护一个缓存，该缓存保留每个主机上一次的CC值</strong>，这些值从来自这个主机的一个可接受的SYN报文段中获得</li>
+<li>4 当在一个开<strong>始的SYN报文中收到一个CC选项</strong>时，接收方比较收到的值与缓存该发送方的CC值。<strong>如果接收到的CC比缓存的大，则该SYN是新的</strong>，报文中的任何数据被传递给接受应用进程（服务器）。<strong>这个链接被成为半同步</strong>。如果<strong>接收的CC比缓存的小</strong>，或者接受主机上没有对应的这个客户的缓存的CC，则执行正常的TCP三次握手**</li>
+<li>5 为响应一个开始的SYN，带有SYN和ACK的报文段在另一个被称为CCECHO的选项中回显所接收到的CC值 </li>
+<li><img src="http://image.blissseven.top/blog/20190412/xCPPeSANo6ll.png?imageslim" alt="mark"></li>
+<li>把很多东西融合到一个包中，客户的SYN，请求，</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TCP的性能</p>
+<ul>
+<li>TCP的吞吐率限制<ul>
+<li>不能比最慢的链路运行的更快</li>
+<li>不能比最慢的机器的内存运行的更快</li>
+<li>不能够比由由接收方提供的窗口处于往返时间所得结果运行的更快（这就是带宽时延乘积公式，使用窗口大小作为带宽时延乘积，就得到带宽值）。</li>
+</ul>
+</li>
+<li><strong>TCP的最高速率的真正上限是由TCP的窗口大小和光速决定的</strong></li>
+<li>1Mbps =10^6 bit 链路 1M数据=1024 x1024x8 bit</li>
+<li>time=1024x1024x8/ 10^6</li>
+<li><a href="http://osn.fx.net.nz/LFN/" target="_blank" rel="noopener">http://osn.fx.net.nz/LFN/</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="第六天-1"><a href="#第六天-1" class="headerlink" title="第六天"></a>第六天</h3><h4 id="6-1-FTP"><a href="#6-1-FTP" class="headerlink" title="6.1 FTP"></a>6.1 FTP</h4><ul>
+<li>数据传输的主流协议</li>
+<li><strong>两个信道</strong><ul>
+<li>控制信道：认证，罗列目录</li>
+<li>数据信道：传数据</li>
+</ul>
+</li>
+<li>FTP两个模式<ul>
+<li><strong>实际什么模式由客户端决定</strong>。</li>
+<li>Active Mode，第二信道是服务器主动发起的<ul>
+<li><img src="http://image.blissseven.top/blog/20190413/CPWyI9YNATus.png?imageslim" alt="mark"></li>
+<li>21 控制信号端口</li>
+<li>由服务器给客户端的数据都是由第二信道开始的，第一次建立第二信道是list，第二次建立第二信道是传输数据</li>
+<li>port a b c d e f 客户端IP地址a.b.c.d  第二信道客户端目的端口号e*256+f</li>
+<li>源端口20</li>
+<li>发送PORT 172，16，12,101,248,14之后会建立第二信道</li>
+<li>nc -n -l -p 63502 &gt;result.txt将List结果发送到result.txt</li>
+<li>如果要下载文件，需要再次发送port,且再换一个端口号</li>
+<li><img src="http://image.blissseven.top/blog/20190413/qW5RTK530738.png?imageslim" alt="mark"></li>
+<li></li>
+</ul>
+</li>
+<li>Passive Mode，第二信道服务器被动接收的<ul>
+<li><img src="http://image.blissseven.top/blog/20190413/0NJEcoIRgK8w.png?imageslim" alt="mark"></li>
+<li>服务器被动接受，</li>
+<li>PASV命令询问服务器能否支持Passive Mode，服务器会回一个227命令。</li>
+<li>服务器地址a,b,c,e 端口号e*256+f</li>
+<li>第二信道双方都是动态端口，更安全。</li>
+<li><img src="http://image.blissseven.top/blog/20190413/7PkuLmx8M3jv.png?imageslim" alt="mark"></li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>防火墙或NAT设备对FTP的影响<ul>
+<li><img src="http://image.blissseven.top/blog/20190413/eQ50ShPeTNpG.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190413/betkljkNnjq0.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190413/6nwBs0ImrQNr.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190413/NBxAbRp7Mdyu.png?imageslim" alt="mark"></li>
+<li></li>
+</ul>
+</li>
+<li>多信道协议</li>
+<li>应用层命令</li>
+<li>防火墙做了什么</li>
+</ul>
+<h4 id="6-2-Telnet-协议"><a href="#6-2-Telnet-协议" class="headerlink" title="6.2 Telnet 协议"></a>6.2 Telnet 协议</h4><ul>
+<li>特别不安全，交互式数据流，ftp成块式数据流</li>
+<li><strong>远程登陆服务的标准协议的主要方式</strong>。为用户提供了在本地计算机上完成远程主机工作的能力。在终端使用者的电脑上使用telnet程序，用它链接到服务器。终端使用者可以在telent程序中输入命令，这些命令会在服务器上运行，就像直接在服务器的控制台上输入一样。可以在本地就能控制服务器。要开始一个telent会话，必须输入用户名和密码来登陆服务器。<strong>telnet是常用的远程控制路由器的方法。</strong></li>
+<li>23号端口</li>
+<li>交互式TCP数据流的特点</li>
+<li>安全问题（替代协议SSH）</li>
+<li><img src="http://image.blissseven.top/blog/20190414/FUbXWOGNK6TI.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/i6IP4VyVX0DA.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="6-3-HTTP"><a href="#6-3-HTTP" class="headerlink" title="6.3 HTTP"></a>6.3 HTTP</h4><ul>
+<li>HTTP协议（Hypertext Transfer Protocol超文本传输协议）用于从WWW服务器传输超文本到本地浏览器的传送协议，是一个客户端和服务器端请求和应答的标准（TCP）。</li>
+<li>HTTP servers are pretty dumb servers 哑服务器</li>
+<li>除非主动打招呼，否则不会理你</li>
+<li><img src="http://image.blissseven.top/blog/20190414/XrsoSJs0oanv.png?imageslim" alt="mark"></li>
+<li>http (协议)+blog.sina.com.cn (HOST)+ ***.html URI=URL</li>
+<li><img src="http://image.blissseven.top/blog/20190414/OdK67WBlXgKK.png?imageslim" alt="mark"></li>
+<li>Cookie ：FTP Telnet 持续性协议，HTTP瞬时协议<ul>
+<li>让整个HTTP协议看似是连续性的，让应用持续提供服务</li>
+</ul>
+</li>
+<li>多连接</li>
+<li><img src="http://image.blissseven.top/blog/20190414/jefcTxJUqbd9.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/ktKdEeoL1NCY.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/NYVii4RTv4cc.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/2j8E3nXBgRLm.png?imageslim" alt="mark"></li>
+</ul>
+<h4 id="6-4-SMTP-POP3"><a href="#6-4-SMTP-POP3" class="headerlink" title="6.4 SMTP/POP3"></a>6.4 SMTP/POP3</h4><ul>
+<li><p>SMTP发邮件 POPE收邮件</p>
+</li>
+<li><p>SMTP TCP/25</p>
+</li>
+<li><p>SMTP（simple MailTransfer Protocol 简单邮件传输协议）一组用于由源地址到目的地址传送邮件的规则，由它来控制信件中的中转方式。SMTP属于TCP./IP协议簇，帮助每台计算机在发送或中转信件时找到下一个目的地</p>
+</li>
+<li><p>SMTP服务器基于DNS中的MX记录来路由电子邮件，MX记录注册域名相关的SMTP中继主机，属于该域的电子邮件都应向该主机发送。若SMTP服务器mail.abc.com收到一封信要发送到<a href="mailto:collinsctk@qytang.com.cn" target="_blank" rel="noopener">collinsctk@qytang.com.cn</a></p>
+<ul>
+<li><p>Sendmail请求DNS给出主机qytang.com的MX记录（邮件路由及记录）（如果有CNAME记录(别名)，则需要再解析CNAME，最终得到域名的A记录）</p>
+</li>
+<li><p>qytang.com的MX记录如下(nslookup,set q=mx)</p>
+<ul>
+<li>qytang.com MX preference=5,mail exchanger=mail1.qytang.com</li>
+<li>qytang.com MX preference=10,mail exchanger=mail2.qytang.com</li>
+</ul>
+</li>
+<li><p>Sendmail 请求DNS给出mail1.qytang.com和mail2.qytang.com的A记录（如若有CNAME记录，则需要解析CNMAE最终对应域名的A记录），即IP地址，若返回值为202.100.1.101 和202.100.102</p>
+</li>
+<li><p>Sendmail优先投递MX优先级小的服务器，因此与202.100.1.101连接，传送这封给<a href="mailto:collinsctk@qytang.com" target="_blank" rel="noopener">collinsctk@qytang.com</a>的信到202.100.1.101这台服务器的SMTP后台程序</p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/OlptRi21RS0b.png?imageslim" alt="mark"></p>
+</li>
+<li><p>PTR解析（IP-&gt;域名） A解析(域名-&gt;IP) MX解析（邮件服务器）</p>
+</li>
+<li><p>主机-CNAME-&gt;MX记录-&gt;A记录</p>
+</li>
+</ul>
+</li>
+<li><p>SMTP协议工作原理</p>
+<ul>
+<li>SMTP在两种情况下工作<ul>
+<li>电子邮件从客户机传输到服务器</li>
+<li>从某一个服务器传输到服务器</li>
+</ul>
+</li>
+<li>SMTP也是个请求/响应协议，命令和响应都是基于ASCII文本，并以CR/LF（回车换行）结束。响应包括一个表示返回状态的三位数字代码。SMTP在TCP协议25号端口监听持续请求</li>
+<li>连接和发送过程如下:<ul>
+<li>建立TCP连接</li>
+<li>客户端发送HELO命令以标识发件人自己的身份，然后客户端发送MAIL命令；服务器端正希望以OK作为响应，表明准备接受</li>
+<li>客户端发送PCRT命令，以标识该电子邮件的计划接受人，可以有多个RCPT行；服务器端则标识是否愿意为收件人接收邮件。</li>
+<li>协商结束，发送邮件，用命令DATA发送</li>
+<li>以“.”号表示结束输入内容一起发送过去，结束此次发送，用QUIT命令退出</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/EPvrmVJCCyLs.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/9lolhN7W8puo.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/i6qALcY9vXnt.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/rkIjROF4E5uN.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/WFC6uGFEqqBJ.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/Ok2VEVcYy81G.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/SNanmbVatWxu.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/yb1SLLsn0NK6.png?imageslim" alt="mark"></p>
+</li>
+<li></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/20190414/DqrGeehaSfkz.png?imageslim" alt="mark"></p>
+<ul>
+<li><p><img src="http://image.blissseven.top/blog/20190414/jrUHTXUYCSQK.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/Dpy0CmIfYy96.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/SIGdHS5NTzct.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/X7vR5QxOpniU.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/IxGPcmcoen5l.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/uYuEzcY6M2IS.png?imageslim" alt="mark"></p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">E:\tools\netcat-win32<span class="number">-1.12</span>&gt;nc smtp<span class="number">.163</span>.com <span class="number">25</span></span><br><span class="line"><span class="number">220</span> <span class="number">163.</span>com Anti-<span class="function">spam GT <span class="keyword">for</span> Coremail <span class="title">System</span> <span class="params">(<span class="number">163</span>com[<span class="number">20141201</span>])</span></span></span><br><span class="line">EHLO smtp.163.com</span><br><span class="line"><span class="number">250</span>-mail</span><br><span class="line"><span class="number">250</span>-PIPELINING</span><br><span class="line"><span class="number">250</span>-AUTH LOGIN PLAIN</span><br><span class="line"><span class="number">250</span>-AUTH=LOGIN PLAIN</span><br><span class="line"><span class="number">250</span>-coremail <span class="number">1U</span>xr2xKj7kG0xkI17xGrU7I0s8FY2U3Uj8Cz28x1UUUUU7Ic2I0Y2UFcv1ZcUCa0xDrUUUUj</span><br><span class="line"><span class="number">250</span>-STARTTLS</span><br><span class="line"><span class="number">250</span> <span class="number">8B</span>ITMIME</span><br><span class="line">AUTH LOGIN</span><br><span class="line"><span class="number">334</span> dXNlcm5hbWU6</span><br><span class="line">YTEyM2RlNw==</span><br><span class="line"><span class="number">334</span> UGFzc3dvcmQ6</span><br><span class="line">QWExNTczODUxMzg1MA==</span><br><span class="line"><span class="number">235</span> Authentication successful</span><br><span class="line">MAIL FROM:&lt;a123de7@<span class="number">163.</span>com&gt;</span><br><span class="line"><span class="number">250</span> Mail OK</span><br><span class="line">RCPT TO:&lt;a123de7@<span class="number">163.</span>com&gt;</span><br><span class="line"><span class="number">250</span> Mail OK</span><br><span class="line">DATA</span><br><span class="line"><span class="number">354</span> End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">test</span><br><span class="line">test</span><br><span class="line">test</span><br><span class="line">test</span><br><span class="line">mail use nc</span><br><span class="line">TO:a123de7@<span class="number">163.</span>com</span><br><span class="line">From:qweqwe@<span class="number">163.</span>com</span><br><span class="line">SUBJECT:testtest</span><br><span class="line">.</span><br><span class="line"><span class="number">250</span> Mail OK queued as smtp7,C8CowADXxVp7oLJcq0O1AA-<span class="number">-.46051</span>S2 <span class="number">1555210727</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/mIGsBdksemXy.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/APofJd3cXb03.png?imageslim" alt="mark"></p>
+</li>
+<li><p>POP3,(Post Office Protocol-Version3)即，邮局协议版本3.TCP/IP协议的一员。主要支持使用客户端远程管理在服务器上的电子邮件。提供了SSL加密的POP3成为POP3S</p>
+</li>
+<li><p>POP协议支持“离线”邮件处理。具体过程为：邮件发送到服务器上，电子邮件客户端调用邮件客户机程序以连接服务器，并下载所有未阅读的电子邮件。这种离线访问模式是一种存储转发服务，将邮件从邮件服务器端发送到个人终端。一旦邮件发送到PC上，邮件服务器上的邮件就会被删除。但目前的POP3邮件服务器大都可以只下载邮件并不删除，也就是改进的POP3协议</p>
+</li>
+<li><p><strong>TCP/110</strong></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/6AUw7ytrx6Y5.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/w1t1KYVYx3Fb.png?imageslim" alt="mark"></p>
+</li>
+<li><p><img src="http://image.blissseven.top/blog/20190414/KUhFkaT8u5Uj.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h4 id="6-5-SSL（secure-socket-layer）"><a href="#6-5-SSL（secure-socket-layer）" class="headerlink" title="6.5 SSL（secure socket layer）"></a>6.5 SSL（secure socket layer）</h4><ul>
+<li>安全套接层用于保障World Wide Web通讯的安全。 私有</li>
+<li>TLS Transport Layer Security 公有</li>
+<li>不依赖于平台和应用程序的协议，用于保障TCP-based运用安全，SSL在TCP层和运用层之间，就像运用层连接到TCP连接的一个插口</li>
+<li><img src="http://image.blissseven.top/blog/20190414/kXt0QJwR01n8.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/a4d606GNEzWz.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/sO7YGkdn10i4.png?imageslim" alt="mark"></li>
+<li><img src="http://image.blissseven.top/blog/20190414/n3UPG4G9RPpT.png?imageslim" alt="mark"></li>
+<li>PC说我支持很多算法，并发送给服务器，服务器选择一个算法并通知PC。服务器将服务器证书发送给PC（里有公钥），PC用那个算法加密这个公钥得到密钥包并发送给服务器，服务器的私钥去解这个</li>
+<li>多个功能可能在一个包中</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/04/04/tcp-ip-note/">TCP/IP网络协议</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
+        <p><span>发布时间:</span>2019-04-04, 00:00:00</p>
+        <p><span>最后更新:</span>2019-07-23, 13:41:34</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/04/04/tcp-ip-note/" title="TCP/IP网络协议">blissseven.top/2019/04/04/tcp-ip-note/</a>
+            <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/04/04/tcp-ip-note/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/07/13/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/01/17/concurrency-in-cpp11-2/">
+                    C++11 多线程编程2
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一天"><span class="toc-number">1.</span> <span class="toc-text">第一天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二天"><span class="toc-number">2.</span> <span class="toc-text">第二天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三天"><span class="toc-number">3.</span> <span class="toc-text">第三天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四天"><span class="toc-number">4.</span> <span class="toc-text">第四天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五天"><span class="toc-number">5.</span> <span class="toc-text">第五天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六天"><span class="toc-number">6.</span> <span class="toc-text">第六天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一天-1"><span class="toc-number">7.</span> <span class="toc-text">第一天</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-概述分层"><span class="toc-number">7.1.</span> <span class="toc-text">1.1 概述分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-运行FTP的两台主机"><span class="toc-number">7.2.</span> <span class="toc-text">1.2 运行FTP的两台主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-通过路由器链接的两个网络"><span class="toc-number">7.3.</span> <span class="toc-text">1.3 通过路由器链接的两个网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-TCP-IP协议簇中不同层次的协议"><span class="toc-number">7.4.</span> <span class="toc-text">1.4 TCP/IP协议簇中不同层次的协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-封装"><span class="toc-number">7.5.</span> <span class="toc-text">1.5 封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-分用"><span class="toc-number">7.6.</span> <span class="toc-text">1.6 分用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7-端口号"><span class="toc-number">7.7.</span> <span class="toc-text">1.7 端口号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-8-实现过程"><span class="toc-number">7.8.</span> <span class="toc-text">1.8 实现过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-链路层-以太网和IEEE802封装"><span class="toc-number">7.9.</span> <span class="toc-text">2.1 链路层 以太网和IEEE802封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-封装格式"><span class="toc-number">7.10.</span> <span class="toc-text">2.2 封装格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-环回口"><span class="toc-number">7.11.</span> <span class="toc-text">2.3 环回口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-MTU和路径MTU"><span class="toc-number">7.12.</span> <span class="toc-text">2.4 MTU和路径MTU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-网络层和数据链路层的关系"><span class="toc-number">7.13.</span> <span class="toc-text">3.1 网络层和数据链路层的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-IP介绍"><span class="toc-number">7.14.</span> <span class="toc-text">3.2 IP介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-IP首部"><span class="toc-number">7.15.</span> <span class="toc-text">3.3 IP首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-首部字段分析1"><span class="toc-number">7.16.</span> <span class="toc-text">3.4 首部字段分析1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-IP路由的选择"><span class="toc-number">7.17.</span> <span class="toc-text">3.5 IP路由的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-特殊情况的IP地址"><span class="toc-number">7.18.</span> <span class="toc-text">3.6 特殊情况的IP地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二天-1"><span class="toc-number">8.</span> <span class="toc-text">第二天</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-0-建立TCP连接与ARP的关系"><span class="toc-number">8.1.</span> <span class="toc-text">1.0 建立TCP连接与ARP的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-ARP介绍"><span class="toc-number">8.2.</span> <span class="toc-text">1.1 ARP介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2逻辑到物理地址的解析协议"><span class="toc-number">8.3.</span> <span class="toc-text">1.2逻辑到物理地址的解析协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-ARP高速缓存"><span class="toc-number">8.4.</span> <span class="toc-text">1.3 ARP高速缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-ARP的分组格式"><span class="toc-number">8.5.</span> <span class="toc-text">1.4 ARP的分组格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-交换机工作原理"><span class="toc-number">8.6.</span> <span class="toc-text">1.5 交换机工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-特殊的ARP-ARP代理"><span class="toc-number">8.7.</span> <span class="toc-text">1.6 特殊的ARP-ARP代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7-免费ARP"><span class="toc-number">8.8.</span> <span class="toc-text">1.7 免费ARP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-ICMP介绍"><span class="toc-number">8.9.</span> <span class="toc-text">2.1 ICMP介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-差错报文"><span class="toc-number">8.10.</span> <span class="toc-text">2.2 差错报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-ping介绍"><span class="toc-number">8.11.</span> <span class="toc-text">2.3 ping介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP选项"><span class="toc-number">8.12.</span> <span class="toc-text">IP选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-IP记录路由选项"><span class="toc-number">8.13.</span> <span class="toc-text">2.4 IP记录路由选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-IP时间戳选项"><span class="toc-number">8.14.</span> <span class="toc-text">2.5 IP时间戳选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Traceroute-VS-IP路径记录"><span class="toc-number">8.15.</span> <span class="toc-text">3.1 Traceroute VS IP路径记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Traceroute"><span class="toc-number">8.16.</span> <span class="toc-text">3.2 Traceroute</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-IP源站选路选项"><span class="toc-number">8.17.</span> <span class="toc-text">3.3 IP源站选路选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-IP源站选路的操作机制"><span class="toc-number">8.18.</span> <span class="toc-text">3.4 IP源站选路的操作机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-IP选路"><span class="toc-number">8.19.</span> <span class="toc-text">3.5 IP选路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三天-1"><span class="toc-number">8.20.</span> <span class="toc-text">第三天</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-UDP介绍"><span class="toc-number">8.21.</span> <span class="toc-text">1.1 UDP介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-UDP首部"><span class="toc-number">8.22.</span> <span class="toc-text">1.2 UDP首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-UDP校验和"><span class="toc-number">8.23.</span> <span class="toc-text">1.3 UDP校验和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-IP分片"><span class="toc-number">8.24.</span> <span class="toc-text">1.4 IP分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-ICMP不可达差错（需要分片）"><span class="toc-number">8.25.</span> <span class="toc-text">1.5 ICMP不可达差错（需要分片）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-最大UDP数据报长度"><span class="toc-number">8.26.</span> <span class="toc-text">1.6 最大UDP数据报长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-广播与多播"><span class="toc-number">8.27.</span> <span class="toc-text">2.1 广播与多播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-广播"><span class="toc-number">8.28.</span> <span class="toc-text">2.2 广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-组播"><span class="toc-number">8.29.</span> <span class="toc-text">2.3 组播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-DNS-介绍"><span class="toc-number">8.30.</span> <span class="toc-text">3.1 DNS 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-DNS服务器"><span class="toc-number">8.31.</span> <span class="toc-text">3.2 DNS服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-DNS报文"><span class="toc-number">8.32.</span> <span class="toc-text">3.3 DNS报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-TFTP简介"><span class="toc-number">8.33.</span> <span class="toc-text">4.1 TFTP简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四天-1"><span class="toc-number">8.34.</span> <span class="toc-text">第四天</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-TCP介绍"><span class="toc-number">8.35.</span> <span class="toc-text">1.1 TCP介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-TCP首部"><span class="toc-number">8.36.</span> <span class="toc-text">1.2 TCP首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-连接的管理"><span class="toc-number">8.37.</span> <span class="toc-text">1.2 连接的管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3连接的断开"><span class="toc-number">8.38.</span> <span class="toc-text">1.3连接的断开</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-连接建立的超时"><span class="toc-number">8.39.</span> <span class="toc-text">1.4 连接建立的超时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-最大报文长度"><span class="toc-number">8.40.</span> <span class="toc-text">1.5 最大报文长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-TCP的半关闭"><span class="toc-number">8.41.</span> <span class="toc-text">1.6 TCP的半关闭</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7-TCP状态变迁图"><span class="toc-number">8.42.</span> <span class="toc-text">1.7 TCP状态变迁图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-8-2MSL-等待状态"><span class="toc-number">8.43.</span> <span class="toc-text">1.8 2MSL 等待状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-9-平静时间"><span class="toc-number">8.44.</span> <span class="toc-text">1.9 平静时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-10-FIN-WAIT-2状态"><span class="toc-number">8.45.</span> <span class="toc-text">1.10 FIN_WAIT_2状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-11复位报文段"><span class="toc-number">8.46.</span> <span class="toc-text">1.11复位报文段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-12-同时打开、关闭"><span class="toc-number">8.47.</span> <span class="toc-text">1.12 同时打开、关闭</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-13-TCP选项"><span class="toc-number">8.48.</span> <span class="toc-text">1.13 TCP选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-TCP的交互数据流"><span class="toc-number">8.49.</span> <span class="toc-text">2.1 TCP的交互数据流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-TCP成块的数据流"><span class="toc-number">8.50.</span> <span class="toc-text">2.2 TCP成块的数据流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-TCP的超时和重传"><span class="toc-number">8.51.</span> <span class="toc-text">2.3 TCP的超时和重传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-TCP的坚持定时器"><span class="toc-number">8.52.</span> <span class="toc-text">2.4 TCP的坚持定时器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-TCP的保活定时器"><span class="toc-number">8.53.</span> <span class="toc-text">2.5 TCP的保活定时器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-TCP的未来和性能"><span class="toc-number">8.54.</span> <span class="toc-text">3.1 TCP的未来和性能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六天-1"><span class="toc-number">9.</span> <span class="toc-text">第六天</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-FTP"><span class="toc-number">9.1.</span> <span class="toc-text">6.1 FTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-Telnet-协议"><span class="toc-number">9.2.</span> <span class="toc-text">6.2 Telnet 协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-HTTP"><span class="toc-number">9.3.</span> <span class="toc-text">6.3 HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-SMTP-POP3"><span class="toc-number">9.4.</span> <span class="toc-text">6.4 SMTP/POP3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-SSL（secure-socket-layer）"><span class="toc-number">9.5.</span> <span class="toc-text">6.5 SSL（secure socket layer）</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"TCP/IP网络协议　| bliss7's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/07/13/hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/01/17/concurrency-in-cpp11-2/" title="下一篇: C++11 多线程编程2">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/数据结构补全计划/">数据结构补全计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/object-model/">object_model</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-hexo-blog/">hello-hexo-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/04/tcp-ip-note/">TCP/IP网络协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/concurrency-in-cpp11-2/">C++11 多线程编程2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/03/concurrency-in-cpp11/">C++11 多线程编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/17/C-11-note/">C++ 11 新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/design-pattern-note/">Design Pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/STL-note/">STL_note</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 bliss7
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 7;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

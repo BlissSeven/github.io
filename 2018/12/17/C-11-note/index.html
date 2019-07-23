@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="bliss7">
+
+
+
+<meta name="description" content="C++11的新特性">
+<meta name="keywords" content="C++,C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 11 新特性">
+<meta property="og:url" content="blissseven.top/2018/12/17/C-11-note/index.html">
+<meta property="og:site_name" content="bliss7&#39;s blog">
+<meta property="og:description" content="C++11的新特性">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/99522903.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/95979155.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/59957138.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/81350278.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/18608235.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/44712992.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-17/93471630.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/42559007.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/26520176.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/9063914.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/92432434.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/64877977.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/96378552.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/86000089.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/23496788.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/83177817.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/27737713.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/67430854.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/4696917.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/33145663.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/70884867.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/82586264.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/84101100.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/38841947.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/15130395.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/85035912.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/21514718.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/58558981.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/80036854.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/874430.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/93156572.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/95476411.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/61788914.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/28514407.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/10089767.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/72755879.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/35227147.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/47759986.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/28788629.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/75845034.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/25708406.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-18/84919365.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/88675160.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/15323510.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/42719432.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/52539449.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/43478859.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/66701973.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/18141607.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/9432650.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/1725090.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/13532597.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/39768130.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/48820499.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/21598130.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/57034216.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/71051750.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/65888629.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/31107713.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/41901434.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/76335039.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/17909963.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/54372120.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/55930927.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/22929065.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/91125939.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-19/82153303.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/15402265.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/25414608.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/87212468.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/40999277.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/67668885.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/82424866.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/51472569.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/93896354.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/47067778.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/57867032.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/44361296.jpg">
+<meta property="og:image" content="http://image.blissseven.top/18-12-20/17798566.jpg">
+<meta property="og:updated_time" content="2019-07-23T05:25:28.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ 11 新特性">
+<meta name="twitter:description" content="C++11的新特性">
+<meta name="twitter:image" content="http://image.blissseven.top/18-12-17/99522903.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="bliss7&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>C++ 11 新特性 | bliss7&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">bliss7</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-11/">C++11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-model/">object_model</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">bliss7</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">bliss7</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-C-11-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/17/C-11-note/" class="article-date">
+      <time datetime="2018-12-16T16:00:00.000Z" itemprop="datePublished">2018-12-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++ 11 新特性
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/">C++11</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>C++11的新特性</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="C-2-0新特性"><a href="#C-2-0新特性" class="headerlink" title="C++ 2.0新特性"></a>C++ 2.0新特性</h1><ul>
+<li>语言+标准库</li>
+</ul>
+<h2 id="1-演进、环境与资源"><a href="#1-演进、环境与资源" class="headerlink" title="1.演进、环境与资源"></a>1.演进、环境与资源</h2><ul>
+<li>Variadic template</li>
+<li>move semantics</li>
+<li>auto</li>
+<li>ininializer list</li>
+<li>lambdas</li>
+<li>type_traits</li>
+<li>forward_list</li>
+<li>array</li>
+<li>tuple</li>
+</ul>
+<h2 id="2-Variadic-Templates"><a href="#2-Variadic-Templates" class="headerlink" title="2.Variadic Templates"></a>2.Variadic Templates</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printx</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span>... Types&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printx</span><span class="params">(<span class="keyword">const</span> T&amp; first,<span class="keyword">const</span> Types&amp;... args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;first&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    printx(args...);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">sizeof</span>...(args) <span class="comment">//元素个数</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>sizeof…(args) //元素个数</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-17/99522903.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-17/95979155.jpg" alt></p>
+<h2 id="3-space-in-Template-Expression-nullptr-std–nullptr-t-auto"><a href="#3-space-in-Template-Expression-nullptr-std–nullptr-t-auto" class="headerlink" title="3. space in Template Expression,nullptr,std–nullptr_t,auto"></a>3. space in Template Expression,nullptr,std–nullptr_t,auto</h2><ul>
+<li>vector&lt;list<int> &gt;  —–&gt;   vector&lt;list<int>&gt;</int></int></li>
+<li>typedef decltype(nullptr)  nullptr_t;</li>
+<li><strong>自动类型推断只能用于单值初始化，不能用于初始化列表</strong></li>
+<li>统一初始化,变量名后加大括号<ul>
+<li>int values[]{1,2,3};</li>
+<li>vector<int> v{2,3,4};</int></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-17/59957138.jpg" alt></p>
+<ul>
+<li>所有容器都有initializer_list 为参数的构造函数</li>
+<li>complex 类没有Initializer_list为参数的构造函数，因此initializer_list逐个分解</li>
+</ul>
+<h2 id="4-initializer-list"><a href="#4-initializer-list" class="headerlink" title="4. initializer_list"></a>4. initializer_list</h2><ul>
+<li>int i;</li>
+<li>int j{};   //j=0</li>
+<li>int *p;</li>
+<li>int* q{};  q=nullptr;</li>
+<li>不允许缩窄变换<ul>
+<li>int x3{5.0}; // error</li>
+</ul>
+</li>
+<li>initializer_list元素类型一致</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-17/81350278.jpg" alt></p>
+<ul>
+<li>编译器看到{}，准备array,调用initializer_list的 private的构造函数</li>
+<li>initializer_list 没有内涵array,,copy initializer_list时，另一个Initializer_List中array只是array浅拷贝</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-17/18608235.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-17/44712992.jpg" alt></p>
+<h2 id="5-explicit-for-ctors-taking-more-than-one-argument"><a href="#5-explicit-for-ctors-taking-more-than-one-argument" class="headerlink" title="5.explicit for ctors taking more than one argument"></a>5.explicit for ctors taking more than one argument</h2><ul>
+<li>explicit for ctors taking one argument<ul>
+<li><img src="http://image.blissseven.top/18-12-17/93471630.jpg" alt></li>
+<li>禁止隐式自动类型转换</li>
+</ul>
+</li>
+<li>多个参数也可以禁止自动类型转换</li>
+</ul>
+<p>​     <img src="http://image.blissseven.top/18-12-18/42559007.jpg" alt></p>
+<h2 id="6-range-based-for-statement"><a href="#6-range-based-for-statement" class="headerlink" title="6 range-based for statement"></a>6 range-based for statement</h2><ul>
+<li><p><img src="http://image.blissseven.top/18-12-18/26520176.jpg" alt></p>
+</li>
+<li><p>编译器对其解释</p>
+<p><img src="http://image.blissseven.top/18-12-18/9063914.jpg" alt></p>
+</li>
+<li><p>对于有for loop 中类型不一样就要做转换，有explict则转换失败。</p>
+<p><img src="http://image.blissseven.top/18-12-18/92432434.jpg" alt></p>
+</li>
+</ul>
+<h2 id="7-default-delete"><a href="#7-default-delete" class="headerlink" title="7 =default =delete"></a>7 =default =delete</h2><ul>
+<li>默认构造函数 在其继承自父类时，调用父类的构造函数</li>
+<li>多用在big five上</li>
+</ul>
+<p>​       <img src="http://image.blissseven.top/18-12-18/64877977.jpg" alt></p>
+<p>​    <img src="http://image.blissseven.top/18-12-18/96378552.jpg" alt>                         </p>
+<p>​       <img src="http://image.blissseven.top/18-12-18/86000089.jpg" alt>         </p>
+<ul>
+<li><p>一个类只要有指针成员，需要写拷贝构造，拷贝复制 BIG_THREE</p>
+<p> <img src="http://image.blissseven.top/18-12-18/23496788.jpg" alt></p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-18/83177817.jpg" alt></p>
+<h2 id="8-Alias-Template-（template-typedef）"><a href="#8-Alias-Template-（template-typedef）" class="headerlink" title="8 Alias Template （template typedef）"></a>8 Alias Template （template typedef）</h2><ul>
+<li>alias template 无法特化，全特化，偏特化</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-18/27737713.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-18/67430854.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-18/4696917.jpg" alt></p>
+<ul>
+<li>容器-&gt;迭代器-&gt;经过萃取机-&gt;value_type</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-18/33145663.jpg" alt></p>
+<h2 id="9-template-template-parameter"><a href="#9-template-template-parameter" class="headerlink" title="9 template template parameter"></a>9 template template parameter</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>&gt; <span class="title">class</span> <span class="title">Container</span>&gt;</span></span><br><span class="line"><span class="class">  //<span class="title">Container</span> 是一个模板，且这个模板以<span class="title">T</span>为参数。</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vector 模板有两个参数。</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/18-12-18/70884867.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-18/82586264.jpg" alt></p>
+<h2 id="10-Type-Alias-noexcept-override-final"><a href="#10-Type-Alias-noexcept-override-final" class="headerlink" title="10 Type Alias,noexcept,override,final"></a>10 Type Alias,noexcept,override,final</h2><ul>
+<li><p>func 一个函数指针 typedef void(*func)(int,int);</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">CharT</span>&gt; <span class="title">using</span> <span class="title">mystring</span>=<span class="title">std</span>:</span>:basic_string&lt;CharT,<span class="built_in">std</span>::char_traits&lt;CharT&gt;&gt;;</span><br><span class="line"><span class="comment">//两个一致</span></span><br><span class="line"><span class="keyword">using</span> mystring= <span class="keyword">template</span> &lt;class CharT&gt; <span class="built_in">std</span>::basic_string&lt;CharT,<span class="built_in">std</span>::char_traits&lt;CharT&gt;&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/84101100.jpg" alt></p>
+</li>
+<li><p>using 使用总结：<img src="http://image.blissseven.top/18-12-18/38841947.jpg" alt></p>
+</li>
+<li><p>nonexcept</p>
+<ul>
+<li>保证该函数不会丢出异常， 在（）内的条件为真的情况下。</li>
+<li>异常最终默认处理程序std::terminate</li>
+<li><img src="http://image.blissseven.top/18-12-18/15130395.jpg" alt></li>
+<li><img src="http://image.blissseven.top/18-12-18/85035912.jpg" alt></li>
+</ul>
+</li>
+<li><p>override</p>
+<ul>
+<li>子类重载父类函数，帮助编译器，这个函数是override版本</li>
+<li><img src="http://image.blissseven.top/18-12-18/21514718.jpg" alt></li>
+</ul>
+</li>
+<li><p>final</p>
+<ul>
+<li>修饰class，final 禁止子类继承</li>
+<li>修饰virtual function，虚函数不可以被override。</li>
+</ul>
+</li>
+</ul>
+<h2 id="11-decltype"><a href="#11-decltype" class="headerlink" title="11 decltype"></a>11 decltype</h2><p><img src="http://image.blissseven.top/18-12-18/58558981.jpg" alt></p>
+<p><img src="http://image.blissseven.top/18-12-18/80036854.jpg" alt></p>
+<ul>
+<li><p>声明返回类型</p>
+<ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1,<span class="keyword">typename</span> T2&gt;</span><br><span class="line">  <span class="keyword">decltype</span>(x+y) add(T1 x,T2 y);</span><br><span class="line">  <span class="comment">//auto add(T1 x,T2 y) -&gt;decltype(x+y)</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/874430.jpg" alt></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>metaprogramming 元编程</p>
+<ul>
+<li>typename 帮助编译器确定是一个数据类型</li>
+<li><img src="http://image.blissseven.top/18-12-18/93156572.jpg" alt></li>
+</ul>
+</li>
+<li><p>传递到一个lamdba 表达式</p>
+<ul>
+<li><img src="http://image.blissseven.top/18-12-18/95476411.jpg" alt></li>
+</ul>
+</li>
+</ul>
+<h2 id="12-lambda"><a href="#12-lambda" class="headerlink" title="12 lambda"></a>12 lambda</h2><ul>
+<li><p><img src="http://image.blissseven.top/18-12-18/61788914.jpg" alt></p>
+</li>
+<li></li>
+<li><p>lambda 属于 inline 函数</p>
+</li>
+<li><p>在lambda后加小括号，直接调用</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/28514407.jpg" alt></p>
+</li>
+<li><p>[=,&amp;y] 允许通过值传递使用所有的object</p>
+</li>
+<li><p>mutable throwSpec -&gt;retTyppe 可选，但是只要有一个，就要写小括号</p>
+</li>
+<li><p>[]内 lambda中要用到的外部的数据</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/10089767.jpg" alt></p>
+</li>
+<li><p>没有mutable  id不能++</p>
+</li>
+<li><p>说明lambda []内参数类型为const </p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/72755879.jpg" alt></p>
+</li>
+<li><p>lambda 没有默认构造函数，没有赋值运算符</p>
+</li>
+<li><p>对排序准则来讲，一个仿函数，要比lambda更直观一点</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/35227147.jpg" alt></p>
+</li>
+<li><p>functor 不是inline函数</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-18/47759986.jpg" alt></p>
+</li>
+</ul>
+<h2 id="13-variadic-template"><a href="#13-variadic-template" class="headerlink" title="13 variadic template"></a>13 variadic template</h2><p><img src="http://image.blissseven.top/18-12-18/28788629.jpg" alt></p>
+<ul>
+<li><p>sizeof…(args) 获得参数个数</p>
+</li>
+<li><p>example1</p>
+<ul>
+<li><img src="http://image.blissseven.top/18-12-18/75845034.jpg" alt></li>
+</ul>
+</li>
+<li><p>example2</p>
+<ul>
+<li><img src="http://image.blissseven.top/18-12-18/25708406.jpg" alt></li>
+</ul>
+</li>
+<li><p>example3</p>
+<ul>
+<li>同一个类型 比大小 用initializer_list</li>
+<li>_iter_less_iter为一个函数</li>
+<li><img src="http://image.blissseven.top/18-12-18/84919365.jpg" alt></li>
+<li></li>
+</ul>
+</li>
+<li><p>example4</p>
+<ul>
+<li><img src="http://image.blissseven.top/18-12-19/88675160.jpg" alt></li>
+<li></li>
+</ul>
+</li>
+<li><p>example5</p>
+<ul>
+<li>采用类模板，对头和尾的操作方式不同</li>
+<li>第2步，递归停止时！！！</li>
+<li><img src="http://image.blissseven.top/18-12-19/15323510.jpg" alt></li>
+<li></li>
+</ul>
+</li>
+<li><p>example6</p>
+<ul>
+<li><p>奇葩的继承</p>
+</li>
+<li><p>private继承</p>
+</li>
+<li><p>protect成员</p>
+</li>
+<li><p>initializer_list中inherited(vtail…)调用基类的构造函数</p>
+</li>
+<li><p>Head::type 不能获得数据类型</p>
+</li>
+<li><p>auto decltype</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/42719432.jpg" alt></p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/52539449.jpg" alt></p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/43478859.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>example7</p>
+<ul>
+<li>composited&amp; tail() 返回 引用</li>
+<li>否则，可以读，不可以写</li>
+<li><img src="http://image.blissseven.top/18-12-19/66701973.jpg" alt></li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-标准库源代码分布"><a href="#1-标准库源代码分布" class="headerlink" title="1.标准库源代码分布"></a>1.标准库源代码分布</h2><ul>
+<li>VC++<ul>
+<li>\include</li>
+<li>\cliext</li>
+</ul>
+</li>
+<li>GNUC C++<ul>
+<li>\include</li>
+<li>\include\c++</li>
+<li>\include\c++\bits</li>
+<li>\include\c++\ext</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Rvalue-reference"><a href="#2-Rvalue-reference" class="headerlink" title="2.Rvalue reference"></a>2.Rvalue reference</h2><ul>
+<li>当复制的右手边是一个右值，左边可以偷右手边的东西</li>
+<li>左值 变量，可以出现在op=左边</li>
+<li>右值 变量，只能出现在op=右边，临时对象</li>
+<li><img src="http://image.blissseven.top/18-12-19/18141607.jpg" alt></li>
+<li>函数返回的是右值，不能取地址</li>
+<li><img src="http://image.blissseven.top/18-12-19/9432650.jpg" alt></li>
+<li>insert 调用move ctor，拷贝构造函数，</li>
+<li>noexcept确保不会发生异常</li>
+<li>被move之后，原来的指针就不能用了。</li>
+<li>临时对象，编译器自动调用move版本</li>
+<li>用std::move(c1)，强制调用move版本，相当于拿到了c1的Rvalue reference</li>
+<li>调用Move条件<ul>
+<li>inset 有move版本</li>
+<li>Mystring move constructor，且noexcept</li>
+<li>临时对象/或者move(c1) </li>
+<li><img src="http://image.blissseven.top/18-12-19/1725090.jpg" alt></li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Perfect-Forwarding"><a href="#3-Perfect-Forwarding" class="headerlink" title="3.Perfect Forwarding"></a>3.Perfect Forwarding</h2><ul>
+<li>MyString move ctor 需要自己写</li>
+<li><img src="http://image.blissseven.top/18-12-19/13532597.jpg" alt></li>
+<li></li>
+<li><img src="http://image.blissseven.top/18-12-19/39768130.jpg" alt></li>
+<li>forward 中间站怎么设计？？？</li>
+<li><img src="http://image.blissseven.top/18-12-19/48820499.jpg" alt></li>
+<li>借forward达到完美的转接</li>
+<li><img src="http://image.blissseven.top/18-12-19/21598130.jpg" alt></li>
+</ul>
+<h2 id="4-move-aware-class"><a href="#4-move-aware-class" class="headerlink" title="4.move-aware class"></a>4.move-aware class</h2><ul>
+<li><p>str.data=NULL 不应delete str.data,应该交给str的析构函数</p>
+</li>
+<li><p>str.data=NLL没有这句话时，析构函数调用，将delete指针所指的内容</p>
+</li>
+<li><p>析构函数判断是否是NULL</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/57034216.jpg" alt></p>
+</li>
+<li><p>关联式容器，检测元素大小，需要写operator&lt; operator==</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/71051750.jpg" alt></p>
+</li>
+</ul>
+<h2 id="4-对容器的效能测试"><a href="#4-对容器的效能测试" class="headerlink" title="4.对容器的效能测试"></a>4.对容器的效能测试</h2><ul>
+<li><p><img src="http://image.blissseven.top/18-12-19/65888629.jpg" alt></p>
+</li>
+<li><p>由于vector会成长，所以调用Mctor次数7194303</p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-19/31107713.jpg" alt></p>
+</li>
+<li><p>vector copy consructor 需要一个一个copy数据</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/41901434.jpg" alt></p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/76335039.jpg" alt></p>
+</li>
+<li></li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-19/17909963.jpg" alt></p>
+</li>
+<li><p>300000 放在尾巴，所有不会有扩充操作</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-19/54372120.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-19/55930927.jpg" alt></p>
+</li>
+</ul>
+<ul>
+<li>move版本对于vector 影响最大，其次deque</li>
+<li>只要容器以节点形式存在，Move版本影响不大</li>
+</ul>
+<h2 id="5-容器结构与分类"><a href="#5-容器结构与分类" class="headerlink" title="5.容器结构与分类"></a>5.容器结构与分类</h2><ul>
+<li><img src="http://image.blissseven.top/18-12-19/22929065.jpg" alt></li>
+<li><img src="http://image.blissseven.top/18-12-19/91125939.jpg" alt></li>
+<li></li>
+</ul>
+<h2 id="6-array"><a href="#6-array" class="headerlink" title="6.array"></a>6.array</h2><ul>
+<li><img src="http://image.blissseven.top/18-12-19/82153303.jpg" alt></li>
+<li>数组声明时 in a[100]；</li>
+<li>以下typedef int T[100];</li>
+<li>T c;</li>
+<li><img src="http://image.blissseven.top/18-12-20/15402265.jpg" alt></li>
+<li></li>
+</ul>
+<h2 id="7-hashtable"><a href="#7-hashtable" class="headerlink" title="7.hashtable"></a>7.hashtable</h2><ul>
+<li>bucket实现vector，可以增长，每个bucket是一个list</li>
+<li>元素个数&gt;bucket个数，则rehashing，之后，元素位置重新计算</li>
+<li>108 为元素的hashcode</li>
+<li><img src="http://image.blissseven.top/18-12-20/25414608.jpg" alt></li>
+</ul>
+<h2 id="8-hashfunction"><a href="#8-hashfunction" class="headerlink" title="8.hashfunction"></a>8.hashfunction</h2><ul>
+<li>hash<int>() 函数对象functor</int></li>
+<li><img src="http://image.blissseven.top/18-12-20/87212468.jpg" alt></li>
+</ul>
+<ul>
+<li><p><img src="http://image.blissseven.top/18-12-20/40999277.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-20/67668885.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-20/82424866.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-20/51472569.jpg" alt></p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-20/93896354.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-20/47067778.jpg" alt></p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/18-12-20/57867032.jpg" alt></p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-20/44361296.jpg" alt></p>
+</li>
+<li></li>
+</ul>
+<h2 id="9-tuple"><a href="#9-tuple" class="headerlink" title="9.tuple"></a>9.tuple</h2><ul>
+<li><p>meta programming</p>
+</li>
+<li><p>对类型做操作</p>
+</li>
+<li><p><img src="http://image.blissseven.top/18-12-20/17798566.jpg" alt></p>
+</li>
+<li></li>
+<li></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/12/17/C-11-note/">C++ 11 新特性</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
+        <p><span>发布时间:</span>2018-12-17, 00:00:00</p>
+        <p><span>最后更新:</span>2019-07-23, 13:25:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/12/17/C-11-note/" title="C++ 11 新特性">blissseven.top/2018/12/17/C-11-note/</a>
+            <span class="copy-path" data-clipboard-text="原文: blissseven.top/2018/12/17/C-11-note/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/01/03/concurrency-in-cpp11/">
+                    C++11 多线程编程
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/11/10/design-pattern-note/">
+                    Design Pattern
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-2-0新特性"><span class="toc-number">1.</span> <span class="toc-text">C++ 2.0新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-演进、环境与资源"><span class="toc-number">1.1.</span> <span class="toc-text">1.演进、环境与资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Variadic-Templates"><span class="toc-number">1.2.</span> <span class="toc-text">2.Variadic Templates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-space-in-Template-Expression-nullptr-std–nullptr-t-auto"><span class="toc-number">1.3.</span> <span class="toc-text">3. space in Template Expression,nullptr,std–nullptr_t,auto</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-initializer-list"><span class="toc-number">1.4.</span> <span class="toc-text">4. initializer_list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-explicit-for-ctors-taking-more-than-one-argument"><span class="toc-number">1.5.</span> <span class="toc-text">5.explicit for ctors taking more than one argument</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-range-based-for-statement"><span class="toc-number">1.6.</span> <span class="toc-text">6 range-based for statement</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-default-delete"><span class="toc-number">1.7.</span> <span class="toc-text">7 =default =delete</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Alias-Template-（template-typedef）"><span class="toc-number">1.8.</span> <span class="toc-text">8 Alias Template （template typedef）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-template-template-parameter"><span class="toc-number">1.9.</span> <span class="toc-text">9 template template parameter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Type-Alias-noexcept-override-final"><span class="toc-number">1.10.</span> <span class="toc-text">10 Type Alias,noexcept,override,final</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-decltype"><span class="toc-number">1.11.</span> <span class="toc-text">11 decltype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-lambda"><span class="toc-number">1.12.</span> <span class="toc-text">12 lambda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-variadic-template"><span class="toc-number">1.13.</span> <span class="toc-text">13 variadic template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-标准库源代码分布"><span class="toc-number">1.14.</span> <span class="toc-text">1.标准库源代码分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Rvalue-reference"><span class="toc-number">1.15.</span> <span class="toc-text">2.Rvalue reference</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Perfect-Forwarding"><span class="toc-number">1.16.</span> <span class="toc-text">3.Perfect Forwarding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-move-aware-class"><span class="toc-number">1.17.</span> <span class="toc-text">4.move-aware class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-对容器的效能测试"><span class="toc-number">1.18.</span> <span class="toc-text">4.对容器的效能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-容器结构与分类"><span class="toc-number">1.19.</span> <span class="toc-text">5.容器结构与分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-array"><span class="toc-number">1.20.</span> <span class="toc-text">6.array</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-hashtable"><span class="toc-number">1.21.</span> <span class="toc-text">7.hashtable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-hashfunction"><span class="toc-number">1.22.</span> <span class="toc-text">8.hashfunction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-tuple"><span class="toc-number">1.23.</span> <span class="toc-text">9.tuple</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"C++ 11 新特性　| bliss7's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/01/03/concurrency-in-cpp11/" title="上一篇: C++11 多线程编程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/11/10/design-pattern-note/" title="下一篇: Design Pattern">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/数据结构补全计划/">数据结构补全计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/object-model/">object_model</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-hexo-blog/">hello-hexo-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/04/tcp-ip-note/">TCP/IP网络协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/concurrency-in-cpp11-2/">C++11 多线程编程2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/03/concurrency-in-cpp11/">C++11 多线程编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/17/C-11-note/">C++ 11 新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/design-pattern-note/">Design Pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/STL-note/">STL_note</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 bliss7
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 7;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="bliss7">
+
+
+
+<meta name="description" content="STL中容器、分配器、算法、仿函数、适配器、迭代器底层实现 STL源码剖析">
+<meta name="keywords" content="C++,STL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL_note">
+<meta property="og:url" content="blissseven.top/2018/11/08/STL-note/index.html">
+<meta property="og:site_name" content="bliss7&#39;s blog">
+<meta property="og:description" content="STL中容器、分配器、算法、仿函数、适配器、迭代器底层实现 STL源码剖析">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnu4q6r85j20ez0axq6x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnuqk9wmxj20ax07zq5g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnvkxs7yvj20ny0cjaco.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwo719ghfyj20g70a7782.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqdu624gmj20oo0eb14g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqf1fgjoej20f608n0x0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqjbm3sc5j20jd0bftga.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqjc5esztj21hc0uae81.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqh4v46fnj21hc0uae81.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqh4v46fnj21hc0uae81.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqhghtts3j20n60cwgv1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqhwm1pxaj20pe0eiamf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqj25un7lj20jc0b2agr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqjgr4g1sj20jc0ap0zg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr5kp4ebzj20pg0foqhg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr62r0jcjj20ug0iqtol.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6hboaxtj20mt0giwoz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6o29yh8j20rr0hgaok.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6t1l9ntj20k00i614h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr7nwegucj20mu0e2dot.jpg">
+<meta property="og:image" content="http://image.blissseven.top/blog/181109/kHF2CI33d6.png?imageslim">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr80e0xvcj20ro0hik76.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr86nndljj20n00ebk2q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8ai0a1sj20fi0fkjwk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8g6unnmj20td0iltpr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8knn3nfj20qi0gh7ih.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrcp12sguj20si0hqtl9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrcuem4ijj20ty0hwk7j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrd7ojykij20r30h8qdk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrdwtljt2j20jd0c67af.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwre5kzgnoj20pq0eun8c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwredhpzh7j20pd0fotix.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwreq72l3tj20ip0d5agy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwreth8fczj20ll0d6jzs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrhvkgo4ij20o00dngug.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrknxzp0tj20k60cajz7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrkw2yey0j20q30eywoh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrl6r1py3j20l90daagj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrl6r1py3j20l90daagj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlhsf9rqj20gw0alaco.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlgsjx5oj20p70fnn8s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlpu1s62j20ow0edn3w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlwjedl8j20ny0e97dq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrly43x63j20oq0el7di.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrm5rnlhaj20p40f3gxf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrm7karlgj20ow0dpk10.jpg">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/mh0gFHd2GG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/KgcAF30ajc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/020Cl56Dff.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/1ChEkEF42C.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/AEieGlk7b4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/K3FKLkbjb0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181102/m9lhIKEBhI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/jbkcjdlC5a.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/aJH9jei7le.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/G50JAHJHik.png">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/8GF0LJ9Dc0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/5IJfC113ik.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/EDEGH8aFCE.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/ghBlKHJ0hg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/7eE4Am1lIj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/mH77k8cGfg.png">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/0hDlIILkF7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/iFAEBlD0aG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/C628J2ll2c.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/107HKmj92a.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/g8hc58cFeI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/kDKHf0LB3h.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/eEIbaIdGj2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/0ka0932H1C.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/FhD2d2l0hA.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/92738DBaa1.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/djj7K6k1gd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/b3k2gKKeF3.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/32EB0L97ie.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/f7LAlD16AL.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/cjFljHjD72.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/kJLeK745dI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/99edH784Kg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/C84mkDBbad.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/26d0Hc18d1.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/B7G1f0f1eD.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/j76eAAAfL0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/8GClkf7GL0.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/hL6Ljfiiai.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/9fHb929bJ7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/3a6bE5B1lb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/28EIHcJDBG.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/8Aki6g45cc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/9aKi4eEbj9.png?imageslim">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541332986486.png">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/36D20Gi739.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/fhlc2Gijmd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181104/blemm62CCE.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/Ggm1BBlHbk.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/04AFmB7Ja4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/aiaB5I36bd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/akKHLkg0IF.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/dJCe8L0BI1.png?imageslim">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541415116929.png">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/aGGAGlaHb7.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/hKB7flm60F.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/fe7fmb539I.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/d34201dcCg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181105/f3FCg969EJ.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/2dJH7LHa4l.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/06aLE3k6mF.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/bJe9d130aB.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/CJbEl1Dmdc.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/dEKIaKH52k.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/cK7FBc7HgH.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181106/h9CGH7a7fb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/DJCA82j1j9.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/dig8IJfB70.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/K8kHkagHHb.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/hfEF7fC9F4.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/99840eamHd.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/JLmlJHeHG1.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/fh24cJkC2e.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/e6I70bc4Kj.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/AK43lBhhjH.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/7FgFJGBG2h.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/E97C4keFIg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/CeL8hledac.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/Ke9dLlkb5I.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/cekhBL283F.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/JFl1DCA0gI.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/g09c294CGg.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/jFc4IAB8B2.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/ekEahLf8Ke.png?imageslim">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/9cim0ID8dg.png?imageslim">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541593229584.png">
+<meta property="og:image" content="http://image.blissseven.top/blog/181107/k3cbb3JkiE.png?imageslim">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541594490059.png">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541636127973.png">
+<meta property="og:image" content="c:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541636621199.png">
+<meta property="og:updated_time" content="2019-07-23T03:14:11.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL_note">
+<meta name="twitter:description" content="STL中容器、分配器、算法、仿函数、适配器、迭代器底层实现 STL源码剖析">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnu4q6r85j20ez0axq6x.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="bliss7&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>STL_note | bliss7&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">bliss7</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-11/">C++11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-model/">object_model</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">bliss7</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">bliss7</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-STL-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/08/STL-note/" class="article-date">
+      <time datetime="2018-11-07T16:00:00.000Z" itemprop="datePublished">2018-11-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STL_note
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>STL中容器、分配器、算法、仿函数、适配器、迭代器底层实现</li>
+<li>STL源码剖析</li>
+</ul>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h1 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h1><h2 id="headers-版本，资源"><a href="#headers-版本，资源" class="headerlink" title="headers,版本，资源"></a>headers,版本，资源</h2><ul>
+<li><p>c++ standard library</p>
+<ul>
+<li>以header 文件实现</li>
+<li>包括standard template library</li>
+</ul>
+</li>
+<li><p>standard template library</p>
+<ul>
+<li>六大部件</li>
+</ul>
+</li>
+<li><p>cplusplus.com</p>
+</li>
+<li><p>cppreference.com</p>
+</li>
+<li><p>gcc.gnu.org</p>
+</li>
+<li><p>《The C++ STANDARD LIBRARY》 &amp; 《STL 源码剖析》</p>
+</li>
+</ul>
+<h2 id="STL-体系结构"><a href="#STL-体系结构" class="headerlink" title="STL 体系结构"></a>STL 体系结构</h2><ul>
+<li><p>容器</p>
+</li>
+<li><p>分配器</p>
+</li>
+<li><p>算法</p>
+</li>
+<li><p>迭代器</p>
+</li>
+<li><p>适配器</p>
+</li>
+<li><p>仿函数</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnu4q6r85j20ez0axq6x.jpg" alt></p>
+<p>vector 放东西，分配器提供内存支持，算法提供函数支持，迭代器提供算法的输入，仿函数一种函数，适配器对容器，仿函数，迭代器做转换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;<span class="comment">//allocator</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ia[<span class="number">6</span>]=&#123;<span class="number">27</span>,<span class="number">210</span>&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>,allocator&lt;<span class="keyword">int</span>&gt;&gt; vi(ia,ia+<span class="number">6</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;count_if(vi.begin(),vi.end(),not1(bind2nd(less&lt;<span class="keyword">int</span>&gt;(),<span class="number">40</span>)));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复杂度：n 要很大,查网站</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnuqk9wmxj20ax07zq5g.jpg" alt></p>
+</li>
+</ul>
+<h3 id="前闭后开区间"><a href="#前闭后开区间" class="headerlink" title="前闭后开区间"></a>前闭后开区间</h3><p>c.end最后一个元素的下一个位置</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//container 遍历</span></span><br><span class="line">Container &lt;T&gt; c;</span><br><span class="line">....</span><br><span class="line">Container&lt;T&gt;::iterator ite=c.begin();</span><br><span class="line"><span class="keyword">for</span>(;ite!=c.end();++ite)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p><strong>c++11 range based for statement</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i:&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> elem: vec)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;elem;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; elem: vec)</span><br><span class="line">&#123;</span><br><span class="line">  elem*=<span class="number">3</span>;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line"><span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt;::iterator ite;</span><br><span class="line">ite=::find(c.begin(),c.end(),target);</span><br><span class="line"><span class="comment">////</span></span><br><span class="line"><span class="keyword">auto</span> ite=::find(c.begin(),c.end(),target);</span><br></pre></td></tr></table></figure>
+
+<h2 id="容器分类和测试"><a href="#容器分类和测试" class="headerlink" title="容器分类和测试"></a>容器分类和测试</h2><h3 id="容器结构与分类"><a href="#容器结构与分类" class="headerlink" title="容器结构与分类"></a>容器结构与分类</h3><table>
+<thead>
+<tr>
+<th>vector</th>
+<th>push_back</th>
+<th>尾部 插入元素</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>pop_back</td>
+<td>弹出最后一个元素</td>
+</tr>
+<tr>
+<td></td>
+<td>begin</td>
+<td>指向第一个元素的迭代器</td>
+</tr>
+<tr>
+<td></td>
+<td>end</td>
+<td>指向最后一个元素下一个的迭代器</td>
+</tr>
+<tr>
+<td></td>
+<td>size</td>
+<td>元素个数</td>
+</tr>
+<tr>
+<td></td>
+<td>max_size</td>
+<td>最大容量</td>
+</tr>
+<tr>
+<td></td>
+<td>capacity</td>
+<td>当前开辟空间大小</td>
+</tr>
+<tr>
+<td></td>
+<td>empty</td>
+<td>是否为空</td>
+</tr>
+<tr>
+<td></td>
+<td>front</td>
+<td>第一个元素的引用</td>
+</tr>
+<tr>
+<td></td>
+<td>back</td>
+<td>最后一个元素的引用</td>
+</tr>
+<tr>
+<td></td>
+<td>data</td>
+<td>容器元素首地址，为指针</td>
+</tr>
+<tr>
+<td></td>
+<td>clear</td>
+<td>清空容器</td>
+</tr>
+<tr>
+<td></td>
+<td>at</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>list</th>
+<th>push_back</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>pop_back</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>push_front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>pop_front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>begin</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>end</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>max_size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>back</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>c.sort</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>deque</th>
+<th>push_back</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>push_front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>pop_back</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>pop_front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>begin</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>end</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>max_size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>front</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>back</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>at</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>operator[]</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>set</th>
+<th>insert</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>clear</td>
+<td>清空set</td>
+</tr>
+<tr>
+<td></td>
+<td>erase</td>
+<td>删除某一迭代器指定元素，两个迭代器之间的元素，和key值相等的元素</td>
+</tr>
+<tr>
+<td></td>
+<td>c.find</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>count</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>lower_bound</td>
+<td>Returns an iterator pointing to the first element that is not less than key</td>
+</tr>
+<tr>
+<td></td>
+<td>upper_bound</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>contains</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>map</th>
+<th>insert</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>at</td>
+<td>access specified element with bounds checking</td>
+</tr>
+<tr>
+<td></td>
+<td>operator[]</td>
+<td>access or insert specified element</td>
+</tr>
+<tr>
+<td></td>
+<td>empty</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>max_size</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>clear</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>erase</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>c.find</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwnvkxs7yvj20ny0cjaco.jpg" alt></p>
+<ul>
+<li>Sequence container<ul>
+<li>Array,固定size</li>
+<li>Vector可以自动增长，分配器设置</li>
+<li>Deque两端可进可出</li>
+<li>List</li>
+<li>Forward-List</li>
+</ul>
+</li>
+<li>Associative container(大量查找)<ul>
+<li>Set,底层红黑树，Multiset,值可重复</li>
+<li>Map，底层红黑树，Multimap，值可重复</li>
+</ul>
+</li>
+<li>Unordered containers (<strong>c++11</strong>)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bliss_test_array&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_array</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;"test array start ...."&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">array</span> &lt;<span class="keyword">long</span>,ASIZE&gt; c;</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        srand(time(<span class="literal">NULL</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;ASIZE;i++)</span><br><span class="line">            c[i]=rand()%ASIZE;<span class="comment">//0-(ASIZE-1)</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"clock-timestart "</span>&lt;&lt;(clock()-timestart)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"size: "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"front "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"back "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"data "</span>&lt;&lt;c.data()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">long</span> target=get_a_target_long();</span><br><span class="line">        timestart=clock();</span><br><span class="line">        qsort(c.data(),ASIZE,<span class="keyword">sizeof</span>(<span class="keyword">long</span>),compareLongs);</span><br><span class="line">        <span class="keyword">long</span>* pitem=(<span class="keyword">long</span>*)bsearch(&amp;target,(c.data()),ASIZE,<span class="keyword">sizeof</span>(<span class="keyword">long</span>),compareLongs);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="string">" ms"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(pitem!=<span class="literal">NULL</span>)</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"found, "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found \n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="vector-test"><a href="#vector-test" class="headerlink" title="vector test"></a>vector test</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//vector</span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_vector</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_vector</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test vector start ,,,\n"</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%ASIZE);</span><br><span class="line">                c.push_back(buf);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"i: "</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"size: "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"front: "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"back: "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"data: "</span>&lt;&lt;c.data()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"capacity: "</span>&lt;&lt;c.capacity()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"find cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            sort(c.begin(),c.end());</span><br><span class="line">            <span class="built_in">string</span>* pitem=(<span class="built_in">string</span>*)bsearch(&amp;target,c.data(),c.size(),<span class="keyword">sizeof</span>(<span class="built_in">string</span>),compareStrings);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"sort+bsearch cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=<span class="literal">NULL</span>)</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vector 内存增长方式为两倍增长,</p>
+<p>假如c1已有2个元素，插入第三个时，vector扩展为4个，找到4个连续的空间，把前两个复制过去，把第三个填进去。</p>
+<p>list 一个萝卜一个坑</p>
+<h3 id="list-test"><a href="#list-test" class="headerlink" title="list  test"></a>list  test</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//list test</span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_list</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_list</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test list start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">list</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.push_back(<span class="built_in">string</span>(buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"list cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"list size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"list max_size "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"list front "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"list back "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"list find cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"list found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"list not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            c.sort();</span><br><span class="line">            <span class="comment">//qsort(c.data(),value,sizeof(string),compareStrings);</span></span><br><span class="line">            <span class="keyword">clock_t</span> timestart2=clock();</span><br><span class="line">            <span class="comment">//string* pitem=(string*)bsearch(&amp;target,c.data(),c.size(),sizeof(string),compareStrings);</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"list c.sort+bsearch cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;"c.sot cost time : "&lt;&lt;timestart2-timestart&lt;&lt;"\n ratio: "&lt;&lt;(timestart2-timestart)*1.0/(clock()-timestart)&lt;&lt;endl;</span></span><br><span class="line">           <span class="comment">// if(pitem!=NULL)</span></span><br><span class="line">            <span class="comment">//    cout&lt;&lt;"found, is "&lt;&lt;*pitem&lt;&lt;endl;</span></span><br><span class="line">           <span class="comment">// else</span></span><br><span class="line">            <span class="comment">//    cout&lt;&lt;"not found "&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="deque-test"><a href="#deque-test" class="headerlink" title="deque test"></a>deque test</h3><p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwo719ghfyj20g70a7782.jpg" alt></p>
+<p>一行一个buffer，分段连续，每一个buffer连续，不同buff虚连续，每次扩充一个buffer，如果往右插，插满，右扩一个buffer，左边类似。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//deque</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_deque</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_deque</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test deque start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">deque</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.push_back(<span class="built_in">string</span>(buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque max_size "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque front "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque back "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque find cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            ::sort(c.begin(),c.end());</span><br><span class="line">            <span class="comment">//qsort(c.data(),value,sizeof(string),compareStrings);</span></span><br><span class="line">            <span class="keyword">clock_t</span> timestart2=clock();</span><br><span class="line">            <span class="comment">//string* pitem=(string*)bsearch(&amp;target,c.data(),c.size(),sizeof(string),compareStrings);</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"deque c.sort+bsearch cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;"c.sot cost time : "&lt;&lt;timestart2-timestart&lt;&lt;"\n ratio: "&lt;&lt;(timestart2-timestart)*1.0/(clock()-timestart)&lt;&lt;endl;</span></span><br><span class="line">           <span class="comment">// if(pitem!=NULL)</span></span><br><span class="line">            <span class="comment">//    cout&lt;&lt;"found, is "&lt;&lt;*pitem&lt;&lt;endl;</span></span><br><span class="line">           <span class="comment">// else</span></span><br><span class="line">            <span class="comment">//    cout&lt;&lt;"not found "&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="stack-test"><a href="#stack-test" class="headerlink" title="stack test"></a>stack test</h3><p>stack 先进后出</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bliss_test_stack</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_stack</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test stack start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">stack</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.push(<span class="built_in">string</span>(buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack top "</span>&lt;&lt;c.top()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack pop "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        c.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"stack top "</span>&lt;&lt;c.top()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque max_size "&lt;&lt;c.max_size()&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque front "&lt;&lt;c.front()&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque back "&lt;&lt;c.back()&lt;&lt;endl;</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>stack 和queue 不提供 iterator 函数。</p>
+<p>没有讲find函数？？,找到后返回一个iterator</p>
+<h3 id="queue-test"><a href="#queue-test" class="headerlink" title="queue test"></a>queue test</h3><ul>
+<li>先进先出</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bliss_test_queue</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_queue</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test queue start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">queue</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.push(<span class="built_in">string</span>(buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue front "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue back "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue pop "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        c.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue front "</span>&lt;&lt;c.front()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"queue back "</span>&lt;&lt;c.back()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque max_size "&lt;&lt;c.max_size()&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque front "&lt;&lt;c.front()&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">//cout&lt;&lt;"deque back "&lt;&lt;c.back()&lt;&lt;endl;</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="multiset-test"><a href="#multiset-test" class="headerlink" title="multiset test"></a>multiset test</h3><ul>
+<li>insert时，已排好序</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bliss_test_multiset</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_multiset</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test multiset start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">multiset</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.insert(<span class="built_in">string</span>(buf));   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset max_size "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">         <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset find cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"multiset not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"find cost time :"</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            timestart=clock();</span><br><span class="line">           </span><br><span class="line">            <span class="keyword">auto</span> pitem=c.find(target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"c.find cost time :"</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem != c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"found "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="multimap-test"><a href="#multimap-test" class="headerlink" title="multimap test"></a>multimap test</h3><p>multiset，multimap底层红黑树，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt; //abort()</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;  //snprintf()</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_multimap</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_multimap</span><span class="params">(<span class="keyword">long</span> &amp;value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"test multimap start..."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">multimap</span>&lt;<span class="keyword">long</span>,<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">                c.insert(pair&lt;<span class="keyword">long</span>,<span class="built_in">string</span>&gt; (i,buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"i: "</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"inset cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"multimap size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"multimap maxsize "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">long</span> target=get_a_target_long();</span><br><span class="line">        timestart=clock();</span><br><span class="line">        <span class="keyword">auto</span> pitem=c.find(target);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"c.find cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"find "</span>&lt;&lt;(*pitem).first&lt;&lt;<span class="string">" : "</span> &lt;&lt;(*pitem).second&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found !"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="unordered-multiset-test"><a href="#unordered-multiset-test" class="headerlink" title="unordered_multiset test"></a>unordered_multiset test</h3><p>seperated chaining  底层hashtable</p>
+<p>bucket 一定比数据多</p>
+<p>每一个bucket一定不太长，如果元素个数&gt;=bucket个数，这个bucket拆开。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_umultiset</span><br><span class="line">&#123;</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">test_umultiset</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n test unordered multiset start"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">unordered_multiset</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.insert(<span class="built_in">string</span>(buf));   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"i "</span>&lt;&lt;i&lt;&lt;<span class="string">"  "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                    <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset cost time: "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unorderedmultiset size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset max_size "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset c.bucket_count "</span>&lt;&lt;c.bucket_count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset c.max_bucket_count "</span>&lt;&lt;c.max_bucket_count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset c.load_factor "</span>&lt;&lt;c.load_factor()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset c.max_load_factor "</span>&lt;&lt;c.max_load_factor()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> i=<span class="number">0</span>;i&lt;<span class="number">20</span>;i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"bucket "</span>&lt;&lt;i&lt;&lt;<span class="string">" has "</span>&lt;&lt;c.bucket_size(i)&lt;&lt;<span class="string">" elements!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">          <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset find cost time ms "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset found, is "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset not found "</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">           <span class="comment">// cout&lt;&lt;"find cost time :"&lt;&lt;clock()-timestart&lt;&lt;endl;</span></span><br><span class="line">            timestart=clock();</span><br><span class="line">           </span><br><span class="line">            <span class="keyword">auto</span> pitem=c.find(target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multiset c.find cost time :"</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem != c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"found "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not found!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="unordered-multimap-test"><a href="#unordered-multimap-test" class="headerlink" title="unordered_multimap test"></a>unordered_multimap test</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt; //abort()</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;  //snprintf()</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_umultimap</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_umultimap</span><span class="params">(<span class="keyword">long</span> &amp;value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"test unordered multimap start..."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">unordered_multimap</span>&lt;<span class="keyword">long</span>,<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">                c.insert(pair&lt;<span class="keyword">long</span>,<span class="built_in">string</span>&gt; (i,buf));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception&amp; p)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"i: "</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="built_in">abort</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap inset cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap maxsize "</span>&lt;&lt;c.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">long</span> target=get_a_target_long();</span><br><span class="line">        timestart=clock();</span><br><span class="line">        <span class="keyword">auto</span> pitem=c.find(target);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap c.find cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap find "</span>&lt;&lt;(*pitem).first&lt;&lt;<span class="string">" : "</span> &lt;&lt;(*pitem).second&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"unordered multimap not found !"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="set-test"><a href="#set-test" class="headerlink" title="set test"></a>set test</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bliss_test_set&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_set</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"test set start .."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">set</span> &lt;<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;value;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">            c.insert(buf);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(exception &amp; p)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"i: "</span>&lt;&lt;i&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"set insert cost time : "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"set size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">string</span> target=get_a_target_string();</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=::find(c.begin(),c.end(),target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">".find cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!=c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"set find "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span>    </span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not find !"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#123;</span><br><span class="line">            timestart=clock();</span><br><span class="line">            <span class="keyword">auto</span> pitem=c.find(target);</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"set c.find cost time "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">if</span>(pitem!= c.end())</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">" find "</span>&lt;&lt;*pitem&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span>    </span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"not find !"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="map-test"><a href="#map-test" class="headerlink" title="map test"></a>map test</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> bliss_test_map</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test_map</span><span class="params">(<span class="keyword">long</span>&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"test map start .."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">long</span>,<span class="built_in">string</span>&gt; c;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">clock_t</span> timestart=clock();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt; value;i++)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="built_in">snprintf</span>(buf,<span class="number">10</span>,<span class="string">"%d"</span>,rand()%value);</span><br><span class="line">                c[i]=<span class="built_in">string</span>(buf);<span class="comment">// key=,value= string(buf);</span></span><br><span class="line">            &#125;</span><br><span class="line">             <span class="keyword">catch</span>(exception &amp; p)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"i: "</span>&lt;&lt;i&lt;&lt;p.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"map insert cost time : "</span>&lt;&lt;clock()-timestart&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"map size "</span>&lt;&lt;c.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">long</span> target = get_a_target_long();		</span><br><span class="line">        timestart = clock();		</span><br><span class="line">        <span class="keyword">auto</span> pItem = c.find(target);								</span><br><span class="line">	    <span class="built_in">cout</span> &lt;&lt; <span class="string">"c.find(), milli-seconds : "</span> &lt;&lt; (clock()-timestart) &lt;&lt; <span class="built_in">endl</span>;		 </span><br><span class="line">	    <span class="keyword">if</span> (pItem != c.end())</span><br><span class="line">    	    <span class="built_in">cout</span> &lt;&lt; <span class="string">"found, value="</span> &lt;&lt; (*pItem).second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  	    <span class="keyword">else</span></span><br><span class="line">    	    <span class="built_in">cout</span> &lt;&lt; <span class="string">"not found! "</span> &lt;&lt; <span class="built_in">endl</span>;			</span><br><span class="line">    	</span><br><span class="line">        c.clear();	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hash_set -&gt; unordered set</p>
+<p>hash_map -&gt; unordered map</p>
+<p>hash_multiset -&gt; unordered multiset</p>
+<p>hash_multimap -&gt; unordered multimap</p>
+<h2 id="分配器测试"><a href="#分配器测试" class="headerlink" title="分配器测试"></a>分配器测试</h2><p>gnuc c 编译器</p>
+<p>对vector 支持对内存的使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过容器使用分配器</span></span><br><span class="line"><span class="comment">//不能在 switch case 中宣告，只好下面這樣. 				//1000000次 </span></span><br><span class="line">    <span class="built_in">list</span>&lt;<span class="built_in">string</span>, allocator&lt;<span class="built_in">string</span>&gt;&gt; c1;						<span class="comment">//3140</span></span><br><span class="line">	<span class="built_in">list</span>&lt;<span class="built_in">string</span>, __gnu_cxx::malloc_allocator&lt;<span class="built_in">string</span>&gt;&gt; c2;  	<span class="comment">//3110</span></span><br><span class="line">    <span class="built_in">list</span>&lt;<span class="built_in">string</span>, __gnu_cxx::new_allocator&lt;<span class="built_in">string</span>&gt;&gt; c3; 		<span class="comment">//3156</span></span><br><span class="line">	<span class="built_in">list</span>&lt;<span class="built_in">string</span>, __gnu_cxx::__pool_alloc&lt;<span class="built_in">string</span>&gt;&gt; c4;  		<span class="comment">//4922</span></span><br><span class="line">	<span class="built_in">list</span>&lt;<span class="built_in">string</span>, __gnu_cxx::__mt_alloc&lt;<span class="built_in">string</span>&gt;&gt; c5; 		<span class="comment">//3297</span></span><br><span class="line">    <span class="built_in">list</span>&lt;<span class="built_in">string</span>, __gnu_cxx::bitmap_allocator&lt;<span class="built_in">string</span>&gt;&gt; c6;  	<span class="comment">//4781 														</span></span><br><span class="line">	 </span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span> : 	c1.push_back(<span class="built_in">string</span>(buf)); 	</span><br><span class="line">		 					<span class="keyword">break</span>;</span><br><span class="line">		        <span class="keyword">case</span> <span class="number">2</span> : 	c2.push_back(<span class="built_in">string</span>(buf)); 	</span><br><span class="line">		 					<span class="keyword">break</span>;		</span><br><span class="line">		        <span class="keyword">case</span> <span class="number">3</span> : 	c3.push_back(<span class="built_in">string</span>(buf)); </span><br><span class="line">		 					<span class="keyword">break</span>;		</span><br><span class="line">		        <span class="keyword">case</span> <span class="number">4</span> : 	c4.push_back(<span class="built_in">string</span>(buf)); 	</span><br><span class="line">		 					<span class="keyword">break</span>;		</span><br><span class="line">		        <span class="keyword">case</span> <span class="number">5</span> : 	c5.push_back(<span class="built_in">string</span>(buf)); 		</span><br><span class="line">		 					<span class="keyword">break</span>;		</span><br><span class="line">		        <span class="keyword">case</span> <span class="number">6</span> : 	c6.push_back(<span class="built_in">string</span>(buf)); 	</span><br><span class="line">		 					<span class="keyword">break</span>;		</span><br><span class="line"><span class="comment">//直接使用 分配器</span></span><br><span class="line"><span class="keyword">int</span>* p; 	</span><br><span class="line">    allocator&lt;<span class="keyword">int</span>&gt; alloc1;	</span><br><span class="line">	p = alloc1.allocate(<span class="number">1</span>);  <span class="comment">//要 1个</span></span><br><span class="line">	alloc1.deallocate(p,<span class="number">1</span>); 	<span class="comment">//还1个</span></span><br><span class="line">						</span><br><span class="line">	__gnu_cxx::malloc_allocator&lt;<span class="keyword">int</span>&gt; alloc2;  </span><br><span class="line">	p = alloc2.allocate(<span class="number">1</span>);  </span><br><span class="line">	alloc2.deallocate(p,<span class="number">1</span>);  	</span><br><span class="line">		</span><br><span class="line">    __gnu_cxx::new_allocator&lt;<span class="keyword">int</span>&gt; alloc3; 	</span><br><span class="line">	p = alloc3.allocate(<span class="number">1</span>);  </span><br><span class="line">	alloc3.deallocate(p,<span class="number">1</span>); 	</span><br><span class="line">		</span><br><span class="line">	__gnu_cxx::__pool_alloc&lt;<span class="keyword">int</span>&gt; alloc4;  	</span><br><span class="line">	p = alloc4.allocate(<span class="number">2</span>);  </span><br><span class="line">	alloc4.deallocate(p,<span class="number">2</span>); 	<span class="comment">//我刻意令參數為 2, 但這有何意義!! 一次要 2 個 ints? </span></span><br><span class="line">		</span><br><span class="line">	__gnu_cxx::__mt_alloc&lt;<span class="keyword">int</span>&gt; alloc5; 	</span><br><span class="line">	p = alloc5.allocate(<span class="number">1</span>);  </span><br><span class="line">	alloc5.deallocate(p,<span class="number">1</span>);  	</span><br><span class="line">			</span><br><span class="line">    __gnu_cxx::bitmap_allocator&lt;<span class="keyword">int</span>&gt; alloc6;  	</span><br><span class="line">	p = alloc6.allocate(<span class="number">3</span>);  </span><br><span class="line">	alloc6.deallocate(p,<span class="number">3</span>);  	<span class="comment">//我刻意令參數為 3, 但這有何意義!! 一次要 3 個 ints?</span></span><br></pre></td></tr></table></figure>
+
+<p>malloc  free</p>
+<ul>
+<li><p>不建议直接分配器，</p>
+</li>
+<li><p>直接用容器，小内存用malloc free</p>
+</li>
+</ul>
+<hr>
+<h2 id="源代码分布-vc-gcc"><a href="#源代码分布-vc-gcc" class="headerlink" title="源代码分布(vc gcc)"></a>源代码分布(vc gcc)</h2><p>////gnuc 2.91</p>
+<p>visiual studio 2013/include </p>
+<p>dev-c++ 5.11 with gnu 4.92//4.9.2 include /c++</p>
+<h2 id="OOP-VS-GP"><a href="#OOP-VS-GP" class="headerlink" title="OOP VS GP"></a>OOP VS GP</h2><ul>
+<li>OOP 将datas 和methods 关联在一起</li>
+<li>GP 将datas和methods分开<ul>
+<li>容器和algorithm可以分开来独立开发，以Iterator沟通即可</li>
+<li>Algorithms 通过Iterator确定操作范围，通过iterator获取container、元素</li>
+</ul>
+</li>
+<li>list 不能直接调用全局sort,自己类内定义有sort，全局sort 需要有randomaccess iterator,list iterator 迭代器指向上一个，下一个，不能随便跳。</li>
+<li>所有algorithms, 最终涉及的元素本身的操作，就是比大小</li>
+</ul>
+<h2 id="操作符重载和模板"><a href="#操作符重载和模板" class="headerlink" title="操作符重载和模板"></a>操作符重载和模板</h2><ul>
+<li>：：    ，. ,* ,?:,不能被重载</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="keyword">complex</span>(T r=<span class="number">0</span>,T i=<span class="number">0</span>)</span><br><span class="line">            :re(r),im(i)&#123;&#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	T re,im;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; c1(<span class="number">2.5</span>,<span class="number">1.5</span>);</span><br><span class="line">    <span class="keyword">complex</span>&lt;<span class="keyword">int</span>&gt;c2(<span class="number">2</span>,<span class="number">6</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在声明模板的时候使用typename而不是class</strong> –effectve stl</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> </span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">T</span>&amp; <span class="title">min</span>(<span class="title">const</span> <span class="title">T</span>&amp; <span class="title">A</span>, <span class="title">const</span> <span class="title">T</span>&amp; <span class="title">B</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">return</span> b&lt;a?b:a;    </span><br><span class="line">&#125;</span><br><span class="line">stone s1,s2;</span><br><span class="line">min(s1,s2)<span class="comment">//实参推导 到 stone类内的 操作符重载 stone::operator&lt;</span></span><br></pre></td></tr></table></figure>
+
+<p>成员模板。。。。。</p>
+<p>模板特化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//泛化</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">type_traits</span>&#123;</span></span><br><span class="line">	<span class="keyword">typedef</span> __true_type this_dummy_member_must_be_first;</span><br><span class="line">	<span class="keyword">typedef</span> __false_type has_trivial_default_constructor;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//int 特化</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; </span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">type_traits</span>&lt;int&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;；</span><br><span class="line"><span class="comment">//double 特化</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; </span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">type_traits</span>&lt;double&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;；</span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">__type_traits&lt;Foo&gt;::this_dumy;</span><br><span class="line">__type_traits&lt;<span class="keyword">int</span>&gt;::</span><br><span class="line">__type_traits&lt;<span class="keyword">double</span>&gt;::</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//偏特化</span></span><br><span class="line"><span class="comment">//个数偏特化</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>,<span class="title">class</span> <span class="title">Alloc</span>=<span class="title">alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">vector</span>&#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">vector</span>&lt;bool,Alloc&gt;</span></span><br><span class="line"><span class="class">&#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">///////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">//范围偏特化</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Iterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;T*&gt;&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;const T*&gt;&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分配器-Allocator"><a href="#分配器-Allocator" class="headerlink" title="分配器 Allocator"></a>分配器 Allocator</h2><p>operator new() 和malloc()</p>
+<h3 id="VC6-allocator使用"><a href="#VC6-allocator使用" class="headerlink" title="VC6 allocator使用"></a>VC6 allocator使用</h3><p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqdu624gmj20oo0eb14g.jpg" alt></p>
+<p>debug 模式下=debug内存+内存+pad+cookie</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p=allocator&lt;<span class="keyword">int</span>&gt;().allocate(<span class="number">512</span>,(<span class="keyword">int</span>* )<span class="number">0</span>);</span><br><span class="line">allocator&lt;<span class="keyword">int</span>&gt;().deallocate(p,<span class="number">512</span>);</span><br></pre></td></tr></table></figure>
+
+<p>VC6* 的allocator 只是以::operator new 和::operator delete 完成allocat() 和deallocate()，没有任何特殊设计。</p>
+<h3 id="BC5-STL-对allocator-使用"><a href="#BC5-STL-对allocator-使用" class="headerlink" title="BC5 STL 对allocator 使用"></a>BC5 STL 对allocator 使用</h3><p>BC++ 的allocator 只是以::operator new 和::operator delete 完成allocat() 和deallocate()，没有任何特殊设计。</p>
+<h3 id="G2-9-对allocator使用"><a href="#G2-9-对allocator使用" class="headerlink" title="G2.9  对allocator使用"></a>G2.9  对allocator使用</h3><p>GCC2.9 的allocator 只是以::operator new 和::operator delete 完成allocat() 和deallocate()，没有任何特殊设计。</p>
+<p>GCC2.9 实际使用 SGI版本的allocator。</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqf1fgjoej20f608n0x0.jpg" alt></p>
+<ul>
+<li><p>尽量减少调用malloc次数，调用malloc有额外开销。</p>
+</li>
+<li><p>cookie记录整块大小，容器每个元素大小相同，不必对每个元素都记录大小</p>
+</li>
+<li><p>设计16条链表，每一条负责特定大小的区块，用链表串起来。</p>
+</li>
+<li><p>第7个负责7*8=56个字节大小，第一个负责8个byte，第二个16个。</p>
+</li>
+<li><p>容器需要内存时，向这个分配器要内存，容器的元素大小被调整到8的倍数，50-&gt;56，第七个负责，看这个链表有没有挂内存块，如果没有向操作系统要内存(malloc),切出来的内存用单向链表存，整块内存还是带cookie，整块中每个小块不带cookie，1个cookie 8个字节。</p>
+</li>
+<li><p>一个容器有1百万个元素，可以省去开销8百万个字节（最多），alloc分配器。</p>
+</li>
+<li><p>GCC2.91 allocator 采用上述分配器 alloc。</p>
+</li>
+</ul>
+<h3 id="GCC4-9-allocator"><a href="#GCC4-9-allocator" class="headerlink" title="GCC4.9 allocator"></a>GCC4.9 allocator</h3><p>GCC4.9 allocator回到从前allocator，extension allocators中 __poool_allloc 极为G2.9中 alloc。</p>
+<p>GCC4.9使用较好版本alloctor.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="built_in">string</span>,__gnu_cxx::__pool_alloc&lt;<span class="built_in">string</span>&gt;&gt; vec;</span><br></pre></td></tr></table></figure>
+
+<h2 id="容器之间的实现关系和分类"><a href="#容器之间的实现关系和分类" class="headerlink" title="容器之间的实现关系和分类"></a>容器之间的实现关系和分类</h2><p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqjbm3sc5j20jd0bftga.jpg" alt></p>
+<p>heap 里有一个vector。</p>
+<p>左右蓝色区域，为创建一个object需要内存，指的是需要控制所有元素所需的内存，那个对象本身。</p>
+<h2 id="list-深度探索"><a href="#list-深度探索" class="headerlink" title="list 深度探索"></a>list 深度探索</h2><p>GCC2.9 list 只需一个Link_type node 4 个字节。</p>
+<p><img src="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqjc5esztj21hc0uae81.jpg" alt></p>
+<ul>
+<li><p>灰色，环状，双向，实现所有容器在表现起begin end时，前闭后开。</p>
+</li>
+<li><p>end指向灰色。</p>
+</li>
+<li><p><strong>除vector array外所有容器，iterator 都必须class</strong>。</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqh4v46fnj21hc0uae81.jpg" alt></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个node</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">list_node</span>&#123;</span></span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">void</span> * void_pointer;</span><br><span class="line">        void_pointer prev;</span><br><span class="line">        void_pointer next;</span><br><span class="line">        T data;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>,<span class="title">class</span> <span class="title">Alloc</span>=<span class="title">alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">list</span>&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="keyword">typedef</span> __list_node&lt;T&gt; list_node;</span><br><span class="line">	<span class="keyword">typedef</span> __list_iterator&lt;T,T&amp;,T*&gt; iterator;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	link_type node;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>,<span class="title">class</span> <span class="title">Ref</span>,<span class="title">class</span> <span class="title">Ptr</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">list_iterator</span>&#123;</span></span><br><span class="line">	<span class="keyword">typedef</span> T value_type;</span><br><span class="line">	<span class="keyword">typedef</span> Ptr pointer;</span><br><span class="line">	<span class="keyword">typedef</span> Ref reference;</span><br><span class="line">	<span class="keyword">typedef</span> __list_node&lt;T&gt; * link_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">ptrdiff_t</span> difference_type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="built_in">list</span>&lt;Foo&gt;::iterator it;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/bmiddle/b4e58cf1ly1fwqh4v46fnj21hc0uae81.jpg" alt></p>
+<ul>
+<li><p>每一个容器的iterator一定有 5个typedef。</p>
+</li>
+<li><p>一堆操作符重载</p>
+</li>
+<li><p>iterator++,应找到next指针。</p>
+</li>
+<li><p>两个版本,++i前置型,i++ 后置型;</p>
+</li>
+<li><p>为区分，前++没有参数，i已经变为调用这个函数的object本身。</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqhghtts3j20n60cwgv1.jpg" alt></p>
+<p><strong>self tmp=*this,编译器首先遇到=,进行拷贝构造，</strong></p>
+<ul>
+<li>operator-&gt;() ？？？？？</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqhwm1pxaj20pe0eiamf.jpg" alt></p>
+<p>新旧版本区别</p>
+<ul>
+<li>__list_node 链表指针指向自己</li>
+<li>_list_iterator 一个参数</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqj25un7lj20jc0b2agr.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwqjgr4g1sj20jc0ap0zg.jpg" alt></p>
+<p>​    G4.9 list大小为8，看base多大，看_list_impt多大，看_list_node_base，两个指针，八个字节。</p>
+<p>list没有数据，继承自父类_list_base，_list_base 有数据 <em>m</em>impl，数据类型为_list_impl。</p>
+<p>list_impl有数据<em>m</em>mode,数据类型为_list_node_base,而list_node_base 包含两个指针。</p>
+<pre><code>## 迭代器的设计原则和iterator traits 的作用和设计</code></pre><ul>
+<li><p>traits 萃取机，提取特征</p>
+</li>
+<li><p>pointer traits，character traits，等</p>
+<p> <img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr5kp4ebzj20pg0foqhg.jpg" alt></p>
+<p>iterator 算法和容器之间桥梁。</p>
+<p>iterator associated types:</p>
+</li>
+<li><p>iterator_category: iterator 分类，移动性质，++,– ，+=5；</p>
+</li>
+<li><p>value_type: iterator 指向的object的元素的类型</p>
+</li>
+<li><p>difference_type: 两个iterator 之间距离用什么type表示。e.g uint</p>
+</li>
+<li><p>reference type   未使用</p>
+</li>
+<li><p>pointer type    未使用</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr62r0jcjj20ug0iqtol.jpg" alt></p>
+</li>
+<li><p><code>std::ptrdiff_t</code> is the signed integer type of the result of subtracting two pointers.</p>
+</li>
+<li><p>A <strong>BidirectionalIterator</strong> is a <a href="./ForwardIterator.html">ForwardIterator</a> that can be moved in both directions (i.e. incremented and decremented).      </p>
+</li>
+<li><p>只有class 才能做 typedef</p>
+</li>
+<li><p>当算法收到的是指针而不是iterator（class）时。</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6hboaxtj20mt0giwoz.jpg" alt></p>
+<p>加上一层traits中间层，通过偏特化，分类。</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6o29yh8j20rr0hgaok.jpg" alt></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type value_type;</span><br><span class="line"><span class="comment">// I能也包含模板时，必须这样用</span></span><br><span class="line"><span class="comment">// 显然，iterator 本身是一个class，肯定带模板参数</span></span><br><span class="line"><span class="comment">//typedef  I::value_type value_type; xxxx</span></span><br><span class="line"><span class="keyword">typedef</span> 定义一个新的名字（同一个数据类型）</span><br><span class="line"><span class="keyword">typename</span> 把一个特殊的名字解释成一个类型</span><br></pre></td></tr></table></figure>
+
+<p>  <img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr6t1l9ntj20k00i614h.jpg" alt></p>
+<ul>
+<li><p>A <strong>RandomAccessIterator</strong> is a <a href="./BidirectionalIterator.html">BidirectionalIterator</a> that can be moved to point to any element in constant time.</p>
+<p>A pointer to an element of an array satisfies all requirements of RandomAccessIterator</p>
+</li>
+</ul>
+  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  各种traits:</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>type traits &lt;.../c++/type_traits&gt;</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>iterator traits  &lt;.../c++/bits/stl_traits.h&gt;</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>char traits   &lt;.../c++/bits/char_traits.h&gt;</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>allocator traits &lt;.../c++/bits/allocator_traits.h&gt;</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>pointer traits   &lt;.../c++/bits/ptr_traits.h&gt;</span><br><span class="line">  </span><br><span class="line"><span class="bullet">* </span>array traits     &lt;.../c++/array&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vector-深度探索"><a href="#vector-深度探索" class="headerlink" title="vector 深度探索"></a>vector 深度探索</h2><ul>
+<li><p>一个vector三个变量记录，八个空间，目前已放6个元素，start,finish,end_of_storage</p>
+</li>
+<li><p>sizeof(vector<int>())=12; protected 3个 数据。</int></p>
+</li>
+</ul>
+<ul>
+<li>所有连续空间容器需要提供[]操作符重载,deque号称连续空间</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr7nwegucj20mu0e2dot.jpg" alt></p>
+<p><img src="http://image.blissseven.top/blog/181109/kHF2CI33d6.png?imageslim" alt="mark"></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr80e0xvcj20ro0hik76.jpg" alt></p>
+<p>大量元素拷贝，引发拷贝构造函数，析构函数，成本很大。</p>
+<ul>
+<li><p>链表迭代器节点分离,iterator设计为class</p>
+</li>
+<li><p>vector 连续空间，iterator 指针</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr86nndljj20n00ebk2q.jpg" alt></p>
+<p>新版本大小</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8ai0a1sj20fi0fkjwk.jpg" alt></p>
+<p>​         </p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8g6unnmj20td0iltpr.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwr8knn3nfj20qi0gh7ih.jpg" alt></p>
+<h2 id="array-forward-list-深度探索"><a href="#array-forward-list-深度探索" class="headerlink" title="array forward_list 深度探索"></a>array forward_list 深度探索</h2><ul>
+<li><p>c++1.0 1998</p>
+</li>
+<li><p>c++2.0 2011</p>
+</li>
+<li><p>TR1版本</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrcp12sguj20si0hqtl9.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrcuem4ijj20ty0hwk7j.jpg" alt></p>
+<p>iterator作为算法和容器之间的桥梁，需要给算法提供5个typedef，(value_type,reference_type,pointer,distance,category)iterator本身可以为class或者指针，这时就需要traitor萃取器，以偏特化的方式获取5个typedef。</p>
+<h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward list"></a>forward list</h2><p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrd7ojykij20r30h8qdk.jpg" alt></p>
+<h2 id="deque-queue-stack-深度探索"><a href="#deque-queue-stack-深度探索" class="headerlink" title="deque queue stack 深度探索"></a>deque queue stack 深度探索</h2><p>deque:</p>
+<ul>
+<li>5个buffer(横条)</li>
+<li>vector 将buffer串起来，vector元素为指针，指向buffer</li>
+<li>pushback 将缓冲区填满时，右建一个buffer，右挂到vector上</li>
+<li>pushfront将缓冲区填满时，左建一个buffer，左挂到vector上</li>
+<li>迭代器 为clas，内部有四个元素,cur,first,last,node<ul>
+<li>node 指向vector 中控制区</li>
+<li>first last 指定buffer大小</li>
+</ul>
+</li>
+<li>几乎所有容器都提供两个函数 begin end,。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrdwtljt2j20jd0c67af.jpg" alt></p>
+<pre><code>* sizeof(dque&lt;int&gt;) 16*2+4+4= 40
+* 一个iterator 16 4个指针</code></pre><p>  <img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwre5kzgnoj20pq0eun8c.jpg" alt></p>
+<p>deque iterator 4个元素:</p>
+<ul>
+<li><strong>cur</strong></li>
+<li><strong>first</strong></li>
+<li><strong>last</strong></li>
+<li><strong>node</strong></li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwredhpzh7j20pd0fotix.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwreq72l3tj20ip0d5agy.jpg" alt></p>
+<p>​     </p>
+<p>​      <img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwreth8fczj20ll0d6jzs.jpg" alt></p>
+<p>size()函数：</p>
+<ul>
+<li>start 指向的buffer有多少个元素+finish指向的buffer有多少个元素</li>
+<li>以及start和finish之间有多少个buffer，每个buffer</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrhvkgo4ij20o00dngug.jpg" alt></p>
+<p>operator -，两个迭代器之间有多少个元素</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrknxzp0tj20k60cajz7.jpg" alt></p>
+<ul>
+<li><p>i++(self operator++(int))，调用++i(self&amp; operator++())；</p>
+</li>
+<li><p>i–,调用–i;</p>
+</li>
+<li><p>set_node()  移动到下一个缓冲区时，first,last需要重新设值。</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrkw2yey0j20q30eywoh.jpg" alt></p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrl6r1py3j20l90daagj.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrl6r1py3j20l90daagj.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlhsf9rqj20gw0alaco.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlgsjx5oj20p70fnn8s.jpg" alt></p>
+<p>一个deque包含4个：</p>
+<ul>
+<li><em>m</em>map指向 控制中心</li>
+<li><em>m</em>map_size 指定控制中心大小，可以容纳多少个指针，控制中心copy时copy到中心。</li>
+<li><em>m</em>start 开始 迭代器</li>
+<li><em>m</em>finish 结束</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlpu1s62j20ow0edn3w.jpg" alt></p>
+<p>queue 也成为适配器</p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrlwjedl8j20ny0e97dq.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrly43x63j20oq0el7di.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrm5rnlhaj20p40f3gxf.jpg" alt></p>
+<ul>
+<li>vector 只能在尾部添加元素</li>
+<li>如果没有调用c.pop()，那么queue用vector做底层是没有问题的（至少编译器不报错）。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/b4e58cf1ly1fwrm7karlgj20ow0dpk10.jpg" alt></p>
+<p><strong>stack 和queue 都不可用set 和map做底部支撑，编译器不会做全面检查，用到哪个，才会检查哪个。</strong></p>
+<h2 id="rb-tree深度探索"><a href="#rb-tree深度探索" class="headerlink" title="rb tree深度探索"></a>rb tree深度探索</h2><ul>
+<li>小型数据库</li>
+<li>key -&gt;value</li>
+<li>插入快，搜寻快</li>
+<li>红黑树<ul>
+<li>平衡二元搜寻树，排列有利于search和insert</li>
+<li>begin() 最左边的节点，end()最右边的节点</li>
+<li>提供遍历，++ite时，从左边走，5-&gt;6-&gt;7-&gt;6&gt;8-&gt;10-&gt;11-&gt;12-&gt;13-&gt;15</li>
+<li><strong>不应该</strong>使用iterators改变元素值。map中key不可以改，但是value可以改变</li>
+<li>提供两种insertion<ul>
+<li>insert_unique() key 独一无二,放重复值时不会崩溃，不会异常，只是放不进去</li>
+<li>insert_equal() 允许key重复，相同的值 相邻。</li>
+</ul>
+</li>
+<li>header 满足前闭后开</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181102/mh0gFHd2GG.png?imageslim" alt="mark"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Key</span>,</span></span><br><span class="line"><span class="class">          <span class="title">class</span> <span class="title">Value</span>,//(<span class="title">key</span>|<span class="title">data</span>)合起来 =<span class="title">value</span></span></span><br><span class="line"><span class="class">          <span class="title">class</span> <span class="title">KeyOfValue</span>,//在这个<span class="title">value</span>里，这个<span class="title">key</span>要怎么拿到</span></span><br><span class="line"><span class="class">          <span class="title">class</span> <span class="title">Compare</span>,// 两个元素比大小 函数</span></span><br><span class="line"><span class="class">          <span class="title">class</span> <span class="title">Alloc</span>=<span class="title">alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">rb_tree</span>&#123;</span></span><br><span class="line">  <span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">typedef</span> _rb_tree_node&lt;value&gt; rb_tree_node;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> rb_tree_node* link_type;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    size_type node_count;<span class="comment">//rb_tree 大小 节点数量</span></span><br><span class="line">    link_type header;</span><br><span class="line">    Compare key_compare;<span class="comment">//key 大小判定 函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>仿函数没有数据大小为0，对于大小为0的class，编译器实现出来大小为1；</p>
+<p>2+3+1=9 -&gt;12(4的倍数)</p>
+<p><img src="http://image.blissseven.top/blog/181102/KgcAF30ajc.png?imageslim" alt="mark"></p>
+<p>五个模板参数怎么用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Arg</span>,<span class="title">class</span> <span class="title">Result</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">unary_function</span>&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> Arg argument_type;</span><br><span class="line">    <span class="keyword">typedef</span> Result result_type;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;//仿函数</span></span><br><span class="line"><span class="class">    <span class="title">struct</span> <span class="title">identity</span>:</span><span class="keyword">public</span> unary_function&lt;T,T&gt;&#123;</span><br><span class="line">        <span class="function"><span class="keyword">const</span> T&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T&amp;x)</span></span>&#123;<span class="keyword">return</span> x;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// RB_TREE_HPP</span></span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Arg1</span>,<span class="title">class</span> <span class="title">Arg2</span>,<span class="title">class</span> <span class="title">Result</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">struct</span> <span class="title">binary_function</span>&#123;</span></span><br><span class="line">        <span class="keyword">typedef</span>  Arg1 first_argument_type;</span><br><span class="line">        <span class="keyword">typedef</span> Arg2 second_argument_type;</span><br><span class="line">        <span class="keyword">typedef</span> Result result_type;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">less</span>:</span><span class="keyword">public</span> binary_function&lt;T,T,<span class="keyword">bool</span>&gt;&#123;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T&amp; x,<span class="keyword">const</span> T&amp;y)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x&lt;y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">rb_tree&lt;<span class="keyword">int</span>,</span><br><span class="line">        <span class="keyword">int</span>,</span><br><span class="line">        identity&lt;<span class="keyword">int</span>&gt;,</span><br><span class="line">        less&lt;<span class="keyword">int</span>&gt;,</span><br><span class="line">        alloc&gt;</span><br><span class="line">mytree;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://image.blissseven.top/blog/181102/020Cl56Dff.png?imageslim" alt="mark"></p>
+<p>测试:</p>
+<p><img src="http://image.blissseven.top/blog/181102/1ChEkEF42C.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181102/AEieGlk7b4.png?imageslim" alt="mark"></p>
+<h2 id="set-multiset深度探索"><a href="#set-multiset深度探索" class="headerlink" title="set multiset深度探索"></a>set multiset深度探索</h2><ul>
+<li>以红黑树为底层，自动排序，排序依据为key</li>
+<li>key 即为value，value即为key</li>
+<li>提供遍历操作，++ite，获得排序状态</li>
+<li>无法使用iterators改变元素的值，底层时RB tree的 const iterator</li>
+<li>set key 独一无二  Insert ： rbtree insert_unique()</li>
+<li>multiset key可以重复 insert : rbtree insert_equal()</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181102/K3FKLkbjb0.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181102/m9lhIKEBhI.png?imageslim" alt="mark"></p>
+<h3 id="map-multimap-深度探索"><a href="#map-multimap-深度探索" class="headerlink" title="map multimap 深度探索"></a>map multimap 深度探索</h3><p><img src="http://image.blissseven.top/blog/181104/jbkcjdlC5a.png?imageslim" alt="mark"></p>
+<ul>
+<li>通过select1st获取key</li>
+<li>pair&lt;const key,T&gt;,不可以通过iterator修改key</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/aJH9jei7le.png?imageslim" alt="mark"></p>
+<ul>
+<li>select1st 仿函数 重载operator()</li>
+<li>multimap 不可用[] 做insertion</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/G50JAHJHik.png" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181104/8GF0LJ9Dc0.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>map.operator[]如果找到key，则返回，如果找不到插入这个key</p>
+</li>
+<li><p>假设有7个hello，且这七个放在一起</p>
+</li>
+<li><p>lower_bound找到第一个hello，如果value不存在找到最适合安插这个值的迭代器</p>
+</li>
+<li><p>c.insert(pair&lt;long,string&gt;(i,buf))</p>
+</li>
+<li><p>c[i]=string(buf)</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/5IJfC113ik.png?imageslim" alt="mark"></p>
+<h2 id="hashtable-深度探索"><a href="#hashtable-深度探索" class="headerlink" title="hashtable 深度探索"></a>hashtable 深度探索</h2><ul>
+<li><p>一个object对应一个数，数的范围0-2^32-1;需要N=sizeof(T)*2^32 个空间</p>
+</li>
+<li><p>N: 编号为T，将object放到第T个位置去</p>
+</li>
+<li><p>M&lt;N</p>
+</li>
+<li><p>M:编号为H，放到第H%M个位置去，有可能冲突，冲突就放在一起成为要给链表</p>
+</li>
+</ul>
+<p> <img src="http://image.blissseven.top/blog/181104/EDEGH8aFCE.png?imageslim" alt="mark"></p>
+<ul>
+<li>separate chainging 方法：<ul>
+<li>55%53=2</li>
+<li>2%53=2</li>
+</ul>
+</li>
+<li>链表很长？？链表长时打散。<ul>
+<li>bucket为位置，篮子，多为质数，素数53</li>
+<li>当链表元素个书大于bucket个数，链表打散rehashing，bucket变为大约两倍，变为素数53左右的素数97</li>
+<li>53 97 193 389</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/ghBlKHJ0hg.png?imageslim" alt="mark"></p>
+<ul>
+<li>HashFcn  计算object编号 hashcode</li>
+<li>ExtractKey  获得key的function</li>
+<li>EqualKey   key相等的定义</li>
+<li>3（hasher+key_equal+extractKey 三个0 大小的class）+3*4（vector）+4=19-&gt;20</li>
+<li>vC链表双向，GCC单向链表</li>
+<li>cur某一个结点，图错误！！</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/7eE4Am1lIj.png?imageslim" alt="mark"></p>
+<ul>
+<li>测试<ul>
+<li>元素为char* string</li>
+<li>hash 提供 hashcode</li>
+<li>identity 提供 key的方法</li>
+<li>eqstr  key相等的方法<ul>
+<li>判断两个字符串内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/mH77k8cGfg.png" alt="mark"></p>
+<ul>
+<li>模板偏特化</li>
+<li>仿函数</li>
+<li>如果是数值的话，就把该数值作为hashcode</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/0hDlIILkF7.png?imageslim" alt="mark"></p>
+<ul>
+<li>hash_code需要尽可能的不重复</li>
+<li>标准库没有提供针对c++字符串的hash<a href="std::string" target="_blank" rel="noopener">std::string</a></li>
+<li>Zeal——–There is no specialization for C strings. std::hash&lt;const char*&gt; produces a hash of the value of the pointer (the memory address), it does not examine the contents of any character array.</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/iFAEBlD0aG.png?imageslim" alt="mark"></p>
+<ul>
+<li>modulus 余数</li>
+<li>左边hash_table成员函数</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/C628J2ll2c.png?imageslim" alt="mark"></p>
+<h2 id="hash-set-hash-multiset-hash-map-hash-multimap-概念"><a href="#hash-set-hash-multiset-hash-map-hash-multimap-概念" class="headerlink" title="hash_set hash_multiset hash_map hash_multimap 概念"></a>hash_set hash_multiset hash_map hash_multimap 概念</h2><h2 id="unordered-容器概念"><a href="#unordered-容器概念" class="headerlink" title="unordered 容器概念"></a>unordered 容器概念</h2><p><img src="http://image.blissseven.top/blog/181104/107HKmj92a.png?imageslim" alt="mark"></p>
+<ul>
+<li>bucket 个数大于元素个数</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/g8hc58cFeI.png?imageslim" alt="mark"></p>
+<h2 id="算法的形式"><a href="#算法的形式" class="headerlink" title="算法的形式"></a>算法的形式</h2><ul>
+<li>算法是个函数模板，两个版本<ul>
+<li>带compare</li>
+<li>不带compare</li>
+<li>算法如果知道容器，也许能够找到一些最优的方法，</li>
+<li>算法提问，迭代器回答，如果迭代器回答不了，则编译失败</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/kDKHf0LB3h.png?imageslim" alt="mark"></p>
+<p>迭代器的分类</p>
+<ul>
+<li>5个typedef</li>
+<li>迭代器是由容器提供的</li>
+<li>array /vector/ deque <ul>
+<li>random_access</li>
+</ul>
+</li>
+<li>list/ rb_tree（set/ map/ multiset /multimap）<ul>
+<li>bidirectional</li>
+</ul>
+</li>
+<li>forward-list<ul>
+<li>farward</li>
+</ul>
+</li>
+<li>hashtable <ul>
+<li>根据底层的链表 实现</li>
+</ul>
+</li>
+<li>以5个strut表示iterator的类别，而不是enum，或者5个数</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/eEIbaIdGj2.png?imageslim" alt="mark"></p>
+<ul>
+<li>typename（） 创建一个临时对象</li>
+<li>istream_iterator<int>() input_iterator</int></li>
+<li>ostream_iterator<int>(cout,””) output_iterator</int></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/0ka0932H1C.png?imageslim" alt="mark"></p>
+<ul>
+<li>类型名称 typeid（iterator）.name</li>
+<li>一个class 命名abc ，编译器编译后增加东西</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/FhD2d2l0hA.png?imageslim" alt="mark"></p>
+<ul>
+<li>父类只有typedef ，子类相当于继承了这几个typedef</li>
+<li>不同版本接口一定一样，可以通过默认参数设置</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/92738DBaa1.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181104/djj7K6k1gd.png?imageslim" alt="mark"></p>
+<h2 id="迭代器分类对算法的影响"><a href="#迭代器分类对算法的影响" class="headerlink" title="迭代器分类对算法的影响"></a>迭代器分类对算法的影响</h2><ul>
+<li><p>distance 得到两根指针的距离</p>
+</li>
+<li><p>输入参数</p>
+<ul>
+<li>iterator_traits<inputiterator>::iterator_category category;</inputiterator></li>
+<li>把itertor 丢给iterator_traits 然后问<ul>
+<li>random_access<ul>
+<li>last-begin</li>
+</ul>
+</li>
+<li>input_iterator //// 慢<ul>
+<li>++first, count(++)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回类型</p>
+<ul>
+<li><p>inline iterator_traits<inputerator>::difference_type;</inputerator></p>
+</li>
+<li><p>把itertor 丢给iterator_traits 然后问</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//qt msvc</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">typename</span> <span class="title">iterator_traits</span>&lt;InputIterator&gt;:</span>:difference_type</span><br><span class="line">_distance(InputIterator first,InputIterator last,input_iterator_tag)&#123;</span><br><span class="line">    <span class="keyword">typename</span> iterator_traits&lt;InputIterator&gt;::difference_type n=<span class="number">0</span>;<span class="comment">//不一样！！！！</span></span><br><span class="line">    <span class="keyword">while</span>(first!=last)</span><br><span class="line">    &#123;</span><br><span class="line">        ++first;</span><br><span class="line">        ++n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">typename</span> <span class="title">iterator_traits</span>&lt;InputIterator&gt;:</span>:difference_type</span><br><span class="line">_distance(InputIterator first,InputIterator last,random_access_iterator_tag)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> last-first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">typename</span> <span class="title">iterator_traits</span> &lt;InputIterator&gt;:</span>:difference_type</span><br><span class="line">distance(InputIterator first,InputIterator last)&#123;</span><br><span class="line">    <span class="keyword">typename</span> iterator_traits&lt;InputIterator&gt;::iterator_category category;<span class="comment">/////!!!!!!!!不一样</span></span><br><span class="line">    <span class="keyword">return</span> _distance(first,last,category);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://image.blissseven.top/blog/181104/b3k2gKKeF3.png?imageslim" alt="mark"></p>
+<ul>
+<li>将迭代器i，丢给iterator_category（）函数，</li>
+<li>在iterator_category()函数里，通过traits函数获得category,返回一个category（）对象</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/32EB0L97ie.png?imageslim" alt="mark"></p>
+<ul>
+<li>左侧为想法，不是最终实现</li>
+<li>引发拷贝复制函数<ul>
+<li>has trival op=() 如果 op= 不重要</li>
+<li>has non-trivial op=[] 如果op=重要</li>
+</ul>
+</li>
+<li>type traits 问iterator 你的op=是否重要<ul>
+<li>eg. complex 拷贝构造函数不重要</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/f7LAlD16AL.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181104/cjFljHjD72.png?imageslim" alt="mark"></p>
+<ul>
+<li>算法的效率和它能不能判断迭代器的分类有很大关系</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/kJLeK745dI.png?imageslim" alt="mark"></p>
+<ul>
+<li>unique_copy 如果重复的就不copy</li>
+<li></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/99edH784Kg.png?imageslim" alt="mark"></p>
+<ul>
+<li>算法可以接受任意type的iterator</li>
+<li>但是算法的参数class name可以暗示，需要的参数</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/C84mkDBbad.png?imageslim" alt="mark"></p>
+<h2 id="算法源代码剖析"><a href="#算法源代码剖析" class="headerlink" title="算法源代码剖析"></a>算法源代码剖析</h2><ul>
+<li>c++ 算法，符合右侧定义</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/26d0Hc18d1.png?imageslim" alt="mark"></p>
+<ul>
+<li>accumulate 累计，不一定是+</li>
+<li>iterator符合前闭后开区间</li>
+<li>一个函数对象，像函数的object，或者仿函数 重载opertor()</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/B7G1f0f1eD.png?imageslim" alt="mark"></p>
+<ul>
+<li>在一段区间，在一段范围，对每一个元素做一件事情</li>
+<li></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/j76eAAAfL0.png?imageslim" alt="mark"></p>
+<ul>
+<li>replace  将旧值替换为新值</li>
+<li>replace_if 根据条件， 条件为真，将该元素替换为value</li>
+<li>replace_copy</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/8GClkf7GL0.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>左边全局函数，右边容器成员函数</p>
+</li>
+<li><p>count 相等 则加1</p>
+</li>
+<li><p>count_if  条件满足，则加1</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/hL6Ljfiiai.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181104/9fHb929bJ7.png?imageslim" alt="mark"></p>
+<ul>
+<li>myvec.rbegin() reverse iterator</li>
+<li>myvec.rend()</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/3a6bE5B1lb.png?imageslim" alt="mark"></p>
+<ul>
+<li>不能违反前闭后开规则</li>
+<li>rbegin 通过end() 套结一个适配器</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/28EIHcJDBG.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>binary_search 必须之前先排序</p>
+</li>
+<li><p>lower_bound: 在不违反排序的情况下，20 能够安插进去的最低位置</p>
+</li>
+<li><p>upper_bound:在不违反排序的情况下，20 能够安插进去的最高位置</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/8Aki6g45cc.png?imageslim" alt="mark"></p>
+<h2 id="仿函数和函数对象"><a href="#仿函数和函数对象" class="headerlink" title="仿函数和函数对象"></a>仿函数和函数对象</h2><p><img src="http://image.blissseven.top/blog/181104/9aKi4eEbj9.png?imageslim" alt="mark"></p>
+<ul>
+<li>重载operator()的class</li>
+<li>算术类</li>
+<li>逻辑运算类</li>
+<li>相对关系类</li>
+</ul>
+<p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541332986486.png" alt="1541332986486"></p>
+<p><img src="http://image.blissseven.top/blog/181104/36D20Gi739.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>less<int>() 用默认的比较方式。()创建一个对象</int></p>
+</li>
+<li><p>黄色binary_function</p>
+</li>
+<li><p>myclass 没有继承binary_function就没有融入STL<br><img src="http://image.blissseven.top/blog/181104/fhlc2Gijmd.png?imageslim" alt="mark"></p>
+</li>
+<li><p>unary 一个操作数</p>
+</li>
+<li><p>binary 两个操作数</p>
+</li>
+<li><p>如果有子类继承者两个0 class，这两个class的大小就真的为0</p>
+</li>
+<li><p>adapter 问functor问题，functor继承unary,binary 才能回答问题</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//public std::binary_function  c++11中被废弃 c++17被删除</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181104/blemm62CCE.png?imageslim" alt="mark"></p>
+<h2 id="多种adapter"><a href="#多种adapter" class="headerlink" title="多种adapter"></a>多种adapter</h2><ul>
+<li>根据所要改造的object，命名相应的名字</li>
+<li>functor adapter / iterator adapter/container adapter</li>
+<li>A 改造B，A做主要的事由B做，B为幕后<ul>
+<li>A继承B</li>
+<li>A内涵B composition  <strong>主要！！</strong>！</li>
+<li>A 作为一个函数模板 里有B一个functor，</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/Ggm1BBlHbk.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181105/04AFmB7Ja4.png?imageslim" alt="mark"></p>
+<h2 id="函数适配器"><a href="#函数适配器" class="headerlink" title="函数适配器"></a>函数适配器</h2><h3 id="binder2nd"><a href="#binder2nd" class="headerlink" title="binder2nd"></a>binder2nd</h3><ul>
+<li><p>绑定第二个参数</p>
+</li>
+<li><p>less<int>()一个object</int></p>
+</li>
+<li><p>修饰functor后，也要变成functor的样子，重载operator()</p>
+<ul>
+<li>修饰容器后，也要变成容器的样子</li>
+</ul>
+</li>
+<li><p>模板类不能实参推导</p>
+</li>
+<li><p>函数模板可以做实参推导，东西放到函数模板后，是什么类型type</p>
+<ul>
+<li>函数模板bind2nd里有个functor binder2nd</li>
+</ul>
+</li>
+<li><p>bind2nd 返回一个binder2nd<operation> object;</operation></p>
+</li>
+<li><p>binder2nd<opertion>(op,arg2_type(x)) 构造函数一个Object,记录到op,value</opertion></p>
+</li>
+<li><p>binder2nd重载 operator() 因为最终还是要通过operation()调用less<int> 函数</int></p>
+</li>
+<li><p>执行(pred(*first) 调用op(x,value))</p>
+</li>
+<li><p>typename Operation::second_argument_type  一个类型</p>
+<ul>
+<li>帮助编译器通过这个代码，编译时，不知道opertion::second_argument_type，</li>
+</ul>
+</li>
+<li><p>typedef   typename Operation::second_argument_type arg2_type 将这个类型 重新起个名字</p>
+</li>
+<li><p><strong>binder2nd 如果也要继续被adapter时，也要继承unary_function</strong></p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/aiaB5I36bd.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181105/akKHLkg0IF.png?imageslim" alt="mark"></p>
+<ul>
+<li>左边现在，右边过时</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/dJCe8L0BI1.png?imageslim" alt="mark"></p>
+<h3 id="not1"><a href="#not1" class="headerlink" title="not1"></a>not1</h3><p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541415116929.png" alt="1541415116929"></p>
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><ul>
+<li><p>_1 _2 _3占位符号 using namespace std::placeholders</p>
+<ul>
+<li>保留参数</li>
+</ul>
+</li>
+<li><p>my_divide ===function</p>
+</li>
+<li><p>std::divide<double>mydivide ====function objects</double></p>
+</li>
+<li><p>bind<int> 绑定返回类型</int></p>
+<ul>
+<li>如果没有返回类型就是它所绑定的 object的返回类型</li>
+</ul>
+</li>
+</ul>
+<p>member :</p>
+<ul>
+<li>membe function—- &amp;MyPair::multiply  隐藏argument this</li>
+<li>cbegin const begin，不能改内容</li>
+</ul>
+<p>bind(less<int>,_1,50) //第一个参数不能给，是v.cbegin 到v.cend()之间的元素</int></p>
+<p><img src="http://image.blissseven.top/blog/181105/aGGAGlaHb7.png?imageslim" alt="mark"></p>
+<h3 id="reverse-iterator"><a href="#reverse-iterator" class="headerlink" title="reverse_iterator"></a>reverse_iterator</h3><ul>
+<li>iterator adapter</li>
+<li>逆向取值= 正向-1 再取值</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/hKB7flm60F.png?imageslim" alt="mark"></p>
+<h3 id="ostream-iterator"><a href="#ostream-iterator" class="headerlink" title="ostream_iterator"></a>ostream_iterator</h3><ul>
+<li><p>x 未知 适配器</p>
+</li>
+<li><p>不属于 container/functor/iterator/ adapter</p>
+</li>
+<li><p>“,” 作为分隔符</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/fe7fmb539I.png?imageslim" alt="mark"></p>
+<h3 id="istream-iterator"><a href="#istream-iterator" class="headerlink" title="istream_iterator"></a>istream_iterator</h3><ul>
+<li>创建一个对象时，就已经在读了。</li>
+<li>operator++ 时在等待输入</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181105/d34201dcCg.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181105/f3FCg969EJ.png?imageslim" alt="mark"></p>
+<h2 id="万用的hash-function"><a href="#万用的hash-function" class="headerlink" title="万用的hash-function"></a>万用的hash-function</h2><ul>
+<li><p>将customer 作为元素放入容器，设计hash_cunction</p>
+</li>
+<li><p>一个class 重载operator()</p>
+<ul>
+<li>Unordered_set&lt;Customer,CustomerHash&gt;</li>
+</ul>
+</li>
+<li><p>一个函数 size_t(*)(const Customer&amp;) 函数类型</p>
+<ul>
+<li>unordered_set&lt;Customer, size_t(*)(const Customer&amp;)&gt;</li>
+<li>cutset(20,customer_hash_func)使用时，传递函数地址</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181106/2dJH7LHa4l.png?imageslim" alt="mark"></p>
+<ul>
+<li>hash<string>()(c.fname) 一个class对象调用operator()</string></li>
+<li>TR1版本 1 2 3 4 .</li>
+<li>template&lt;typename… Types&gt; 1 接收任意个数的模板参数</li>
+<li>seed pass by reference</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181106/06aLE3k6mF.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181106/bJe9d130aB.png?imageslim" alt="mark"></p>
+<p> <img src="http://image.blissseven.top/blog/181106/CJbEl1Dmdc.png?imageslim" alt="mark"></p>
+<ul>
+<li>hh()%11 得到元素应该放到第几个bucket</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181106/dEKIaKH52k.png?imageslim" alt="mark"></p>
+<ul>
+<li>写一个hash<customer>版本</customer></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181106/cK7FBc7HgH.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181106/h9CGH7a7fb.png?imageslim" alt="mark"></p>
+<h2 id="tuple-用例"><a href="#tuple-用例" class="headerlink" title="tuple 用例"></a>tuple 用例</h2><ul>
+<li><p>允许在声明一个组合体时，可以任意个数，任意类型</p>
+</li>
+<li><p>tuple&lt;string,int,int,complex<double>&gt; t;</double></p>
+</li>
+<li><p>get&lt;0&gt;(t1)  </p>
+</li>
+<li><p>auto t2=make_tuple(22,44,”stacy”);</p>
+</li>
+<li><p>get&lt;1&gt;(t1)=get&lt;1&gt;(t2);</p>
+</li>
+<li><p>如果t1 t2 有相同成分，t1&lt;t2</p>
+</li>
+<li><p>t1=t2</p>
+</li>
+<li><p>tie(i1,f1,s1)=t3;// assigns values of t3 to i1,f1,s1</p>
+</li>
+<li><p>typedef tuple&lt;int,float,string&gt;TupleType…… tuple_size(TupleType)::value</p>
+</li>
+<li><p>tuple_element&lt;1,Tuple_Type&gt;</p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/DJCA82j1j9.png?imageslim" alt="mark"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//继承方式实现递归</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function">class <span class="title">tuple</span><span class="params">()</span></span>&#123;&#125;; <span class="comment">// 终止条件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">tuple</span> &lt;Head,Tail...&gt;：<span class="title">private</span> <span class="title">tuple</span>&lt;Tail...&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>typename Head::type head(){return m_head;} //</li>
+<li>inherited &amp; tail (){return *this;} //this 原来指三个元素，经inherited&amp; tail 转型后，指两个元素</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/dig8IJfB70.png?imageslim" alt="mark"></p>
+<h2 id="type-traits"><a href="#type-traits" class="headerlink" title="type traits"></a>type traits</h2><ul>
+<li>G2.9版假设默认构造，复制构造，析构，拷贝赋值都重要</li>
+<li>特别class 带有指针。或者析构函数要关掉一个窗口，一个文件，一个锁</li>
+<li>算法 去问： _type_traits<foo>::has_trivial_destructor</foo></li>
+<li></li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/K8kHkagHHb.png?imageslim" alt="mark"></p>
+<ul>
+<li>POD plain old data 没有function，只有数据，c版本的struct</li>
+<li>新版本 不需要对自己的class，不需要自己写偏特化</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/hfEF7fC9F4.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/99840eamHd.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/JLmlJHeHG1.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/fh24cJkC2e.png?imageslim" alt="mark"></p>
+<ul>
+<li>丢进去一个string</li>
+<li>字符串不会当做父类，没有vitual destructor</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/e6I70bc4Kj.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/AK43lBhhjH.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/7FgFJGBG2h.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>&amp;&amp; move contstructor</p>
+</li>
+<li><p>Zoo(const Zoo&amp;) =delete; 复制构造函数 没有</p>
+</li>
+<li><p>Zoo(Zoo&amp;&amp;) move constructor</p>
+</li>
+<li></li>
+<li><p><img src="http://image.blissseven.top/blog/181107/E97C4keFIg.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h2 id="type-traits-实现"><a href="#type-traits-实现" class="headerlink" title="type_traits 实现"></a>type_traits 实现</h2><ul>
+<li><p>模板+typedef</p>
+</li>
+<li><p>移除const volatile _is_void_helper&lt;typename remove_cv&lt;__TP&gt;::type&gt;::type;</p>
+</li>
+<li><p>template<typename></typename></p>
+<ul>
+<li>struct _is_void_helper: public false_type{};</li>
+</ul>
+</li>
+<li><p>template&lt;&gt;</p>
+<ul>
+<li>struct _is_void_helper<void>: public true_type{};</void></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/CeL8hledac.png?imageslim" alt="mark"></p>
+<p><img src="http://image.blissseven.top/blog/181107/Ke9dLlkb5I.png?imageslim" alt="mark"></p>
+<ul>
+<li>可能 编译器 实现</li>
+<li>grep 命令找</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/cekhBL283F.png?imageslim" alt="mark"></p>
+<h2 id="cout"><a href="#cout" class="headerlink" title="cout"></a>cout</h2><ul>
+<li>一个对象object不是class</li>
+<li>extern 这个东西可以被外界使用</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/JFl1DCA0gI.png?imageslim" alt="mark"></p>
+<h2 id="moveable-元素对容器速度效能影响"><a href="#moveable-元素对容器速度效能影响" class="headerlink" title="moveable 元素对容器速度效能影响"></a>moveable 元素对容器速度效能影响</h2><ul>
+<li>元素类型加不加move这个功能，影响很大</li>
+<li>元素有move功能，调用Mctor 否则调用CCtor</li>
+<li>MCtor move ctor  vector两倍增长</li>
+<li>CCtor</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/g09c294CGg.png?imageslim" alt="mark"></p>
+<ul>
+<li>list 一个萝卜一个坑</li>
+<li>CCtor Mctor =300000</li>
+<li>之后的容器会扩充的是一个一个结点</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/jFc4IAB8B2.png?imageslim" alt="mark">  </p>
+<p><img src="http://image.blissseven.top/blog/181107/ekEahLf8Ke.png?imageslim" alt="mark"></p>
+<ul>
+<li>浅拷贝 就是Move的动作</li>
+<li>把原来的指针销掉，建立一个新的指针指向对象</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/9cim0ID8dg.png?imageslim" alt="mark"></p>
+<p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541593229584.png" alt="1541593229584"></p>
+<h2 id="测试函数"><a href="#测试函数" class="headerlink" title="测试函数"></a>测试函数</h2><ul>
+<li><p>std::move(c1) 调用move版本</p>
+</li>
+<li><p>3百万个元素，3百万个指针，move版本</p>
+</li>
+<li><p>Move copy后，之前的那个指针就不能用了</p>
+<ul>
+<li>比如 临时对象temp</li>
+<li><strong>见到临时对象，自动调用move版本 如果有的话</strong></li>
+<li><strong>c1.insert(ite,V1type(buf))</strong></li>
+</ul>
+</li>
+<li><p>M c11(c1) c1 不是临时对象，编译器不调用move版本</p>
+</li>
+<li><p>M c12(std::move(c1)) 强制调用move版本 </p>
+</li>
+</ul>
+<p><img src="http://image.blissseven.top/blog/181107/k3cbb3JkiE.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>vector 深拷贝</p>
+<p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541594490059.png" alt></p>
+</li>
+<li><p>vector 本身浅拷贝</p>
+</li>
+<li><p>M c12(std::move(c1) )</p>
+<ul>
+<li>把三根指针交换</li>
+<li>unspecified   未指明的，未加规定的;未特别指定（规定）的;未详细说明的</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541636127973.png" alt="1541636127973"></p>
+<p><img src="C:%5CUsers%5Cbliss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1541636621199.png" alt="1541636621199"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/11/08/STL-note/">STL_note</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
+        <p><span>发布时间:</span>2018-11-08, 00:00:00</p>
+        <p><span>最后更新:</span>2019-07-23, 11:14:11</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/08/STL-note/" title="STL_note">blissseven.top/2018/11/08/STL-note/</a>
+            <span class="copy-path" data-clipboard-text="原文: blissseven.top/2018/11/08/STL-note/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/11/10/design-pattern-note/">
+                    Design Pattern
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#STL"><span class="toc-number">1.</span> <span class="toc-text">STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#headers-版本，资源"><span class="toc-number">1.1.</span> <span class="toc-text">headers,版本，资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL-体系结构"><span class="toc-number">1.2.</span> <span class="toc-text">STL 体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前闭后开区间"><span class="toc-number">1.2.1.</span> <span class="toc-text">前闭后开区间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器分类和测试"><span class="toc-number">1.3.</span> <span class="toc-text">容器分类和测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#容器结构与分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">容器结构与分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector-test"><span class="toc-number">1.3.2.</span> <span class="toc-text">vector test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list-test"><span class="toc-number">1.3.3.</span> <span class="toc-text">list  test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deque-test"><span class="toc-number">1.3.4.</span> <span class="toc-text">deque test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stack-test"><span class="toc-number">1.3.5.</span> <span class="toc-text">stack test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#queue-test"><span class="toc-number">1.3.6.</span> <span class="toc-text">queue test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multiset-test"><span class="toc-number">1.3.7.</span> <span class="toc-text">multiset test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multimap-test"><span class="toc-number">1.3.8.</span> <span class="toc-text">multimap test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unordered-multiset-test"><span class="toc-number">1.3.9.</span> <span class="toc-text">unordered_multiset test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unordered-multimap-test"><span class="toc-number">1.3.10.</span> <span class="toc-text">unordered_multimap test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set-test"><span class="toc-number">1.3.11.</span> <span class="toc-text">set test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map-test"><span class="toc-number">1.3.12.</span> <span class="toc-text">map test</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分配器测试"><span class="toc-number">1.4.</span> <span class="toc-text">分配器测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源代码分布-vc-gcc"><span class="toc-number">1.5.</span> <span class="toc-text">源代码分布(vc gcc)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOP-VS-GP"><span class="toc-number">1.6.</span> <span class="toc-text">OOP VS GP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符重载和模板"><span class="toc-number">1.7.</span> <span class="toc-text">操作符重载和模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分配器-Allocator"><span class="toc-number">1.8.</span> <span class="toc-text">分配器 Allocator</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VC6-allocator使用"><span class="toc-number">1.8.1.</span> <span class="toc-text">VC6 allocator使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BC5-STL-对allocator-使用"><span class="toc-number">1.8.2.</span> <span class="toc-text">BC5 STL 对allocator 使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G2-9-对allocator使用"><span class="toc-number">1.8.3.</span> <span class="toc-text">G2.9  对allocator使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCC4-9-allocator"><span class="toc-number">1.8.4.</span> <span class="toc-text">GCC4.9 allocator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器之间的实现关系和分类"><span class="toc-number">1.9.</span> <span class="toc-text">容器之间的实现关系和分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list-深度探索"><span class="toc-number">1.10.</span> <span class="toc-text">list 深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-深度探索"><span class="toc-number">1.11.</span> <span class="toc-text">vector 深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#array-forward-list-深度探索"><span class="toc-number">1.12.</span> <span class="toc-text">array forward_list 深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#forward-list"><span class="toc-number">1.13.</span> <span class="toc-text">forward list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque-queue-stack-深度探索"><span class="toc-number">1.14.</span> <span class="toc-text">deque queue stack 深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rb-tree深度探索"><span class="toc-number">1.15.</span> <span class="toc-text">rb tree深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set-multiset深度探索"><span class="toc-number">1.16.</span> <span class="toc-text">set multiset深度探索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map-multimap-深度探索"><span class="toc-number">1.16.1.</span> <span class="toc-text">map multimap 深度探索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashtable-深度探索"><span class="toc-number">1.17.</span> <span class="toc-text">hashtable 深度探索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hash-set-hash-multiset-hash-map-hash-multimap-概念"><span class="toc-number">1.18.</span> <span class="toc-text">hash_set hash_multiset hash_map hash_multimap 概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered-容器概念"><span class="toc-number">1.19.</span> <span class="toc-text">unordered 容器概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法的形式"><span class="toc-number">1.20.</span> <span class="toc-text">算法的形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代器分类对算法的影响"><span class="toc-number">1.21.</span> <span class="toc-text">迭代器分类对算法的影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法源代码剖析"><span class="toc-number">1.22.</span> <span class="toc-text">算法源代码剖析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仿函数和函数对象"><span class="toc-number">1.23.</span> <span class="toc-text">仿函数和函数对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多种adapter"><span class="toc-number">1.24.</span> <span class="toc-text">多种adapter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数适配器"><span class="toc-number">1.25.</span> <span class="toc-text">函数适配器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#binder2nd"><span class="toc-number">1.25.1.</span> <span class="toc-text">binder2nd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#not1"><span class="toc-number">1.25.2.</span> <span class="toc-text">not1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind"><span class="toc-number">1.25.3.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse-iterator"><span class="toc-number">1.25.4.</span> <span class="toc-text">reverse_iterator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ostream-iterator"><span class="toc-number">1.25.5.</span> <span class="toc-text">ostream_iterator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#istream-iterator"><span class="toc-number">1.25.6.</span> <span class="toc-text">istream_iterator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#万用的hash-function"><span class="toc-number">1.26.</span> <span class="toc-text">万用的hash-function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple-用例"><span class="toc-number">1.27.</span> <span class="toc-text">tuple 用例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#type-traits"><span class="toc-number">1.28.</span> <span class="toc-text">type traits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#type-traits-实现"><span class="toc-number">1.29.</span> <span class="toc-text">type_traits 实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cout"><span class="toc-number">1.30.</span> <span class="toc-text">cout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moveable-元素对容器速度效能影响"><span class="toc-number">1.31.</span> <span class="toc-text">moveable 元素对容器速度效能影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试函数"><span class="toc-number">1.32.</span> <span class="toc-text">测试函数</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"STL_note　| bliss7's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/11/10/design-pattern-note/" title="上一篇: Design Pattern">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/数据结构补全计划/">数据结构补全计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/object-model/">object_model</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-hexo-blog/">hello-hexo-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/04/tcp-ip-note/">TCP/IP网络协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/concurrency-in-cpp11-2/">C++11 多线程编程2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/03/concurrency-in-cpp11/">C++11 多线程编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/17/C-11-note/">C++ 11 新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/design-pattern-note/">Design Pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/STL-note/">STL_note</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 bliss7
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 7;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
