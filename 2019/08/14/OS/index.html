@@ -34,7 +34,32 @@
 <meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565868011092.png">
 <meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565868109153.png">
 <meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565868363151.png">
-<meta property="og:updated_time" content="2019-08-16T12:19:01.604Z">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565958543201.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565958580926.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565959094794.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565959345501.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565959558732.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565959803214.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565960709561.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565960955892.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565961151494.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565961336997.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1565961472640.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566037574800.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566037947219.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566038414169.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566038572573.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566038726005.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566039074863.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566039402092.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566039614637.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566039789986.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566115924486.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566116698043.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566117197837.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566117305134.png">
+<meta property="og:image" content="blissseven.top/2019/08/14/OS/OS/1566117749363.png">
+<meta property="og:updated_time" content="2019-08-18T08:42:30.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS">
 <meta name="twitter:description" content="操作系统补全计划">
@@ -422,6 +447,90 @@
 <li><p>地址映射</p>
 </li>
 </ul>
+<h1 id="2-线程的引出和实现"><a href="#2-线程的引出和实现" class="headerlink" title="2 线程的引出和实现"></a>2 线程的引出和实现</h1><p>进程切换</p>
+<h2 id="2-1用户级线程"><a href="#2-1用户级线程" class="headerlink" title="2.1用户级线程"></a>2.1用户级线程</h2><ul>
+<li><p>一个进程就是执行一堆指令</p>
+</li>
+<li><p><img src="OS/1565958543201.png" alt="1565958543201"></p>
+</li>
+<li><p>只切指令不切映射表（内存），速度快</p>
+</li>
+<li><p><img src="OS/1565958580926.png" alt="1565958580926"></p>
+</li>
+<li><p><strong>线程保留了并发的特点，又避免了进程切换的代价</strong></p>
+</li>
+<li><p><strong>线程切换实质就是映射表不变，PC指针变</strong></p>
+</li>
+<li><p><img src="OS/1565959094794.png" alt="1565959094794"></p>
+</li>
+<li><p><img src="OS/1565959345501.png" alt="1565959345501"></p>
+</li>
+<li><p><img src="OS/1565959558732.png" alt="1565959558732"></p>
+</li>
+<li><p><img src="OS/1565959803214.png" alt="1565959803214"></p>
+<ul>
+<li>B执行完之后404出栈，跳转到D执行出错，一个栈不够用</li>
+</ul>
+</li>
+<li><p><img src="OS/1565960709561.png" alt="1565960709561"></p>
+<ul>
+<li>TCB thread control block</li>
+<li>TCB和栈</li>
+<li>不需要jmp 204，yield下一句为204；</li>
+<li><strong>yield只需要切换栈即可</strong></li>
+</ul>
+</li>
+<li><p><img src="OS/1565960955892.png" alt="1565960955892"></p>
+<ul>
+<li>把起始地址放在栈中，把tcb和栈进行关联</li>
+</ul>
+</li>
+<li><p><img src="OS/1565961151494.png" alt="1565961151494"></p>
+</li>
+<li><p>用户级线程在用户态切来切去，操作系统感知不到</p>
+<ul>
+<li><img src="OS/1565961336997.png" alt="1565961336997"></li>
+<li>在内核中阻塞时，操作系统感知不到用户线程，切换不到show线程</li>
+</ul>
+</li>
+<li><p><img src="OS/1565961472640.png" alt="1565961472640"></p>
+<ul>
+<li>内核级线程并发性好</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-内核级线程"><a href="#2-2-内核级线程" class="headerlink" title="2.2 内核级线程"></a>2.2 内核级线程</h2><p>用户级线程切换的核心就<strong>是一个栈变为两个栈，每个线程有自己的栈和TCB</strong>，在切换的时候，首先切换TCB，再切换栈。创建的时候将要切换的PC指针放到自己的栈中，再创建好TCB,将来切换的时候，首先通过TCB切换到相应的栈，从栈中弹出PC执行</p>
+<ul>
+<li><strong>没有用户级进程，进程必须在内核中，进程需要分配资源，必要到内核态才能访问这些资源</strong>，切换进程真正是切换内核级线程</li>
+<li>多核处理器 –核心级线程</li>
+<li>MMU 内存映射，多核用的一个MMU,一个映射，多线程在核里，才能充分应用CPU</li>
+<li>核是由操作系统控制，操作系统看不到用户级线程，不能分配核</li>
+<li><strong>多进程，用户级线程都不能充分发挥多核价值</strong></li>
+<li><img src="OS/1566037574800.png" alt="1566037574800"></li>
+<li>核心级线程需要进入内核态，在用户态执行的时候用户栈，在内核态跑用内核栈</li>
+<li>一个TCB关联两套栈，根据TCB切换两套栈，用户栈和内核栈都要切</li>
+<li><img src="OS/1566037947219.png" alt="1566037947219"></li>
+<li>进入内核的唯一方法就是中断</li>
+<li><img src="OS/1566038414169.png" alt="1566038414169"></li>
+<li><img src="OS/1566038572573.png" alt="1566038572573"></li>
+<li>cur next 为TCB</li>
+<li><img src="OS/1566038726005.png" alt="1566038726005"></li>
+<li>中断进入内核，找到TCB,完成TCB切换，并根据TCB切换内核栈，IRET，切换到用户栈</li>
+<li><img src="OS/1566039074863.png" alt="1566039074863"></li>
+<li><img src="OS/1566039402092.png" alt="1566039402092"></li>
+<li><img src="OS/1566039614637.png" alt="1566039614637"></li>
+<li><img src="OS/1566039789986.png" alt="1566039789986"></li>
+</ul>
+<h2 id="2-3-内核级线程的实现"><a href="#2-3-内核级线程的实现" class="headerlink" title="2.3 内核级线程的实现"></a>2.3 内核级线程的实现</h2><ul>
+<li><img src="OS/1566115924486.png" alt="1566115924486"></li>
+<li>每取一条指令PC自动+1</li>
+<li><img src="OS/1566116698043.png" alt="1566116698043"></li>
+<li>state 非零 意味着阻塞</li>
+<li><img src="OS/1566117197837.png" alt="1566117197837"></li>
+<li><img src="OS/1566117305134.png" alt="1566117305134"></li>
+<li><img src="OS/1566117749363.png" alt="1566117749363"></li>
+<li></li>
+</ul>
 
       
     </div>
@@ -433,7 +542,7 @@
         <p><span>本文标题:</span><a href="/2019/08/14/OS/">OS</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
         <p><span>发布时间:</span>2019-08-14, 16:31:42</p>
-        <p><span>最后更新:</span>2019-08-16, 20:19:01</p>
+        <p><span>最后更新:</span>2019-08-18, 16:42:30</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/14/OS/" title="OS">blissseven.top/2019/08/14/OS/</a>
             <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/08/14/OS/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -463,7 +572,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-多进程图像引出"><span class="toc-number">1.</span> <span class="toc-text">1.多进程图像引出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-CPU管理"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 CPU管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2多进程图像"><span class="toc-number">1.2.</span> <span class="toc-text">1.2多进程图像</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-多进程图像引出"><span class="toc-number">1.</span> <span class="toc-text">1.多进程图像引出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-CPU管理"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 CPU管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2多进程图像"><span class="toc-number">1.2.</span> <span class="toc-text">1.2多进程图像</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-线程的引出和实现"><span class="toc-number">2.</span> <span class="toc-text">2 线程的引出和实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1用户级线程"><span class="toc-number">2.1.</span> <span class="toc-text">2.1用户级线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-内核级线程"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 内核级线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-内核级线程的实现"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 内核级线程的实现</span></a></li></ol></li></ol>
         
     </div>
     <style>
