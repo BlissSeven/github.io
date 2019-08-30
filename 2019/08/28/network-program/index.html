@@ -14,17 +14,19 @@
 <meta name="author" content="bliss7">
 
 
-    
-    
 
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="bliss7&#39;s blog">
-<meta property="og:url" content="blissseven.top/index.html">
+<meta name="description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
+<meta name="keywords" content="TCP-IP,linux,network-program">
+<meta property="og:type" content="article">
+<meta property="og:title" content="network-program">
+<meta property="og:url" content="blissseven.top/2019/08/28/network-program/index.html">
 <meta property="og:site_name" content="bliss7&#39;s blog">
+<meta property="og:description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-29T12:20:19.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bliss7&#39;s blog">
+<meta name="twitter:title" content="network-program">
+<meta name="twitter:description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -52,13 +54,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>bliss7&#39;s blog</title>
+<title>network-program | bliss7&#39;s blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,8 +67,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -265,64 +265,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-cpp-review" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/30/cpp-review/" class="article-date">
-      <time datetime="2019-08-30T00:30:52.000Z" itemprop="datePublished">2019-08-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/30/cpp-review/">cpp-review</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-network-program" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-network-program" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2019/08/28/network-program/" class="article-date">
@@ -340,12 +283,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/28/network-program/">network-program</a>
+    <h1 class="article-title" itemprop="name">
+      network-program
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/">TCP-IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network-program/">network-program</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -480,572 +434,127 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/">TCP-IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network-program/">network-program</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-cpp11-singleton" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/27/cpp11-singleton/" class="article-date">
-      <time datetime="2019-08-27T02:49:00.000Z" itemprop="datePublished">2019-08-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/cpp11-singleton/">cpp11-singleton</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>c++11 下的单例模式</li>
-<li><a href="https://blog.csdn.net/q_l_s/article/details/52369065" target="_blank" rel="noopener">https://blog.csdn.net/q_l_s/article/details/52369065</a></li>
-<li><a href="https://blog.csdn.net/Hackbuteer1/article/details/7460019" target="_blank" rel="noopener">https://blog.csdn.net/Hackbuteer1/article/details/7460019</a></li>
-<li><a href="https://blog.csdn.net/janeqi1987/article/details/74295920" target="_blank" rel="noopener">https://blog.csdn.net/janeqi1987/article/details/74295920</a></li>
-<li><a href="https://blog.csdn.net/qiuchenl/article/details/8658567" target="_blank" rel="noopener">https://blog.csdn.net/qiuchenl/article/details/8658567</a></li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp11/">cpp11</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/singleton/">singleton</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/08/27/cpp11-singleton/#more">more >></a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/28/network-program/">network-program</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
+        <p><span>发布时间:</span>2019-08-28, 10:28:45</p>
+        <p><span>最后更新:</span>2019-08-29, 20:20:19</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/28/network-program/" title="network-program">blissseven.top/2019/08/28/network-program/</a>
+            <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/08/28/network-program/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-object-model3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/22/object-model3/" class="article-date">
-      <time datetime="2019-08-22T06:47:06.000Z" itemprop="datePublished">2019-08-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/22/object-model3/">object-model3</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>C++对象模型系列之3</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object-model/">object-model</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/08/22/object-model3/#more">more >></a>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
 
 
-
-
-
-
-
-
-  
-    <article id="post-muduo-note" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/21/muduo-note/" class="article-date">
-      <time datetime="2019-08-21T10:21:12.000Z" itemprop="datePublished">2019-08-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/21/muduo-note/">muduo_note</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>muduo 源代码</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/muduo/">muduo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程服务器/">多线程服务器</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/08/21/muduo-note/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-OS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/14/OS/" class="article-date">
-      <time datetime="2019-08-14T08:31:42.000Z" itemprop="datePublished">2019-08-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/30/cpp-review/">
+                    cpp-review
+                </a>
+            </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/14/OS/">OS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>操作系统补全计划</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/08/14/OS/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-object-model2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/01/object-model2/" class="article-date">
-      <time datetime="2019-08-01T07:27:20.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/01/object-model2/">C++对象模型探索-2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>C++对象模型探索2</li>
-<li>补充C++对象模型探索1</li>
-</ul>
-<p>​
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object-model/">object model</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/08/01/object-model2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-cpp-trivial" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/07/30/cpp-trivial/" class="article-date">
-      <time datetime="2019-07-30T05:39:47.000Z" itemprop="datePublished">2019-07-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/27/cpp11-singleton/">
+                    cpp11-singleton
+                </a>
+            </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/30/cpp-trivial/">cpp_trivial</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>C++中的零碎</li>
-<li>比较有意思的</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11，trivial/">C++11，trivial</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/零碎/">零碎</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/07/30/cpp-trivial/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构补全计划" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/07/17/数据结构补全计划/" class="article-date">
-      <time datetime="2019-07-17T00:46:32.000Z" itemprop="datePublished">2019-07-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/17/数据结构补全计划/">数据结构补全计划</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>数据结构补全计划</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/data-structure/">data structure</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/07/17/数据结构补全计划/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-object-model" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/07/13/object-model/" class="article-date">
-      <time datetime="2019-07-13T08:19:08.000Z" itemprop="datePublished">2019-07-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/13/object-model/">C++对象模型探索-1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>底层实现</li>
-<li>深度探索C++对象模型
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object-model/">object_model</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/07/13/object-model/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
+
   
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-epoll"><span class="toc-number">1.</span> <span class="toc-text">1. epoll</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix"><span class="toc-number">2.</span> <span class="toc-text">Appendix</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"network-program　| bliss7's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/30/cpp-review/" title="上一篇: cpp-review">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/27/cpp11-singleton/" title="下一篇: cpp11-singleton">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/30/cpp-review/">cpp-review</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/network-program/">network-program</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/cpp11-singleton/">cpp11-singleton</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/object-model3/">object-model3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/muduo-note/">muduo_note</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/14/OS/">OS</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/object-model2/">C++对象模型探索-2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/cpp-trivial/">cpp_trivial</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/数据结构补全计划/">数据结构补全计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/object-model/">C++对象模型探索-1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-hexo-blog/">hello-hexo-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/04/tcp-ip-note/">TCP/IP网络协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/concurrency-in-cpp11-2/">C++11 多线程编程2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/03/concurrency-in-cpp11/">C++11 多线程编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/17/C-11-note/">C++ 11 新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/design-pattern-note/">Design Pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/STL-note/">STL_note</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
