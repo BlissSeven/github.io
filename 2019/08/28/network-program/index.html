@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
+<meta name="description" content="0.socketTCP 12345678910int socket(int domain,int type,int protocol);/*domain 协议簇 PF_INET IPV4PF_INET6 IPV6PF_LOCAL 本地通信Type 套接字类型SOCK_STREAM 面向连接的套接字SOCK_DGRAM 面向消息的套接字*/  端口号用于区分同一操作系统不同套接字，最大（0-65">
 <meta name="keywords" content="TCP-IP,linux,network-program">
 <meta property="og:type" content="article">
 <meta property="og:title" content="network-program">
 <meta property="og:url" content="blissseven.top/2019/08/28/network-program/index.html">
 <meta property="og:site_name" content="bliss7&#39;s blog">
-<meta property="og:description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
+<meta property="og:description" content="0.socketTCP 12345678910int socket(int domain,int type,int protocol);/*domain 协议簇 PF_INET IPV4PF_INET6 IPV6PF_LOCAL 本地通信Type 套接字类型SOCK_STREAM 面向连接的套接字SOCK_DGRAM 面向消息的套接字*/  端口号用于区分同一操作系统不同套接字，最大（0-65">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-29T12:20:19.978Z">
+<meta property="og:updated_time" content="2019-09-12T13:28:14.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="network-program">
-<meta name="twitter:description" content="1. epoll epoll_create  123456int epoll_create(int size)/*select 中为了存放监视对象文件描述符，声明了一个fd_set变量。epoll类似，由操作系统负责保存监视对象文件描述符，需要向操作系统请求创建保存文件描述符的空间。linux2.6.8之后忽略，内核根据情况调整epoll 一个实例的大小成功时返回epoll实例文件描述符，失败">
+<meta name="twitter:description" content="0.socketTCP 12345678910int socket(int domain,int type,int protocol);/*domain 协议簇 PF_INET IPV4PF_INET6 IPV6PF_LOCAL 本地通信Type 套接字类型SOCK_STREAM 面向连接的套接字SOCK_DGRAM 面向消息的套接字*/  端口号用于区分同一操作系统不同套接字，最大（0-65">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -307,6 +307,208 @@
           
         <a id="more"></a>
 
+<h1 id="0-socket"><a href="#0-socket" class="headerlink" title="0.socket"></a>0.socket</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain,<span class="keyword">int</span> type,<span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">domain 协议簇 </span></span><br><span class="line"><span class="comment">PF_INET IPV4</span></span><br><span class="line"><span class="comment">PF_INET6 IPV6</span></span><br><span class="line"><span class="comment">PF_LOCAL 本地通信</span></span><br><span class="line"><span class="comment">Type 套接字类型</span></span><br><span class="line"><span class="comment">SOCK_STREAM 面向连接的套接字</span></span><br><span class="line"><span class="comment">SOCK_DGRAM 面向消息的套接字</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>端口号用于区分同一操作系统不同套接字，最大（0-65535），0-1023为知名端口。TCP套接字和UDP套接字不会共用端口号，允许重复。</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Ip地址表示</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin_family;</span><br><span class="line">    <span class="keyword">uint16_t</span> sin_port;<span class="comment">//16 端口</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_adr</span>;</span><span class="comment">//32bitIp地址</span></span><br><span class="line">    <span class="keyword">char</span> sin_zero[<span class="number">8</span>];<span class="comment">//dumy</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span>&#123;</span></span><br><span class="line">    In_addr_t s_addr;<span class="comment">//32 bit IPV4地址</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="title">htons</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span>)</span><span class="comment">//short 2字节 端口转换 主机字节序-&gt;网络字节序</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="title">ntohs</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span>)</span><span class="comment">//</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">htonl</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)</span><span class="comment">//long 4字节 IP地址转换 主机字节序-&gt;网络字节序</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">ntohl</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">char* arr1="1234"</span></span></span><br><span class="line"><span class="function"><span class="comment">主机字节序 小端--0x007EAC58  31 32 33 34</span></span></span><br><span class="line"><span class="function"><span class="comment">网络字节序 大端--0x4030201(Ip地址)</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function">in_addr_t <span class="title">inet_addr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span><span class="comment">//将字符串返回32大端整数 IP地址，失败返回INADDR_NONE</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">inet_ntoa</span><span class="params">(struct in_addr ar)</span></span>;<span class="comment">//32bitIp地址 网络字节序 转为字符串IP</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd,struct sockaddr* myaddr,<span class="keyword">socklen_t</span> addrlen)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">sockfd 套接字fd</span></span></span><br><span class="line"><span class="function"><span class="comment">addrlen 第二个结构体变量长度</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sock,<span class="keyword">int</span> backlog)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">sock希望进入到等待连接请求状态的套接字文件描述符</span></span></span><br><span class="line"><span class="function"><span class="comment">backlog 连接请求等待队列的长度，=5时，最多使5个连接请求进入到队列</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sock,struct sockaddr* addr,<span class="keyword">socklen_t</span>* addr_len)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">sock 服务器套接字fd</span></span></span><br><span class="line"><span class="function"><span class="comment">addr 保存 请求连接的客户端地址信息的结构体</span></span></span><br><span class="line"><span class="function"><span class="comment">addrlen 第二个addr结构体长度</span></span></span><br><span class="line"><span class="function"><span class="comment">返回用于数据IO的套接字的fd，失败返回-1</span></span></span><br><span class="line"><span class="function"><span class="comment">若等待队列为空，accept不会返回，直等到等待队列有新的客户端连接</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sock,struct sockaddr* servaddr,<span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">sock 客户端套接字fd</span></span><br><span class="line"><span class="comment">servaddr 保存目标服务器地址信息的变量结构体</span></span><br><span class="line"><span class="comment">addrlen 以字节为单位传递给第二个结构体参数servaddr地址变量长度</span></span><br><span class="line"><span class="comment">出现如下情况返回：</span></span><br><span class="line"><span class="comment">服务器收到连接请求</span></span><br><span class="line"><span class="comment">发生断网等异常而中断请求</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">客户端在调用connect函数时，在内核中，给客户端套接字分配IP和随机端口</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户端在调用connect函数时，在内核中，给客户端套接字分配IP和随机端口</p>
+</li>
+<li><p>TCP服务器</p>
+<ul>
+<li>socket()-&gt;bind()-&gt;listen()-&gt;accept()-&gt;read()/write()-&gt;close()</li>
+</ul>
+</li>
+<li><p>TCP 客户端</p>
+<ul>
+<li>socket()-&gt;connect()-&gt;read()/write()-&gt;close()</li>
+</ul>
+</li>
+<li><p>TCP IO缓冲</p>
+<ul>
+<li><p>write 调用瞬间，数据将移至输出缓冲，read函数调用瞬间，从输入缓冲读取数据</p>
+</li>
+<li><p>IO缓冲在每个套接字中单独存在</p>
+</li>
+<li><p>IO缓冲在创建套接字时自动生成</p>
+</li>
+<li><p>即使关闭套接字也会继续输出缓冲中遗留的数据</p>
+</li>
+<li><p>关闭套接字将丢失输入缓冲中的数据</p>
+</li>
+<li><p>write函数 send函数不会在完成向对方主机的数据传输时返回，而是在数据移出到输出缓冲时 。TCP保证对输出缓冲数据的传输。所以，write在数据传输完成时返回</p>
+</li>
+</ul>
+</li>
+<li><p>TCP套接字</p>
+<ul>
+<li>向10个客户端提供服务，守门的服务器套接字+10个服务器端套接字</li>
+</ul>
+</li>
+<li><p>TCP半关闭</p>
+<ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(itn sock,<span class="keyword">int</span> howto)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">SHUT_RD 断开输入流</span></span><br><span class="line"><span class="comment">SHUT_WR 断开 输出流</span></span><br><span class="line"><span class="comment">SHUT_RDWR 同时断开I/O流，分两次调用shudown</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>close 函数同时断开IO流，同时发送EOF信息</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> sendto(<span class="keyword">int</span> sock,<span class="keyword">void</span> * buff,<span class="keyword">size_t</span> nbytes,<span class="keyword">int</span> flags, struct sockaddr* to,<span class="keyword">socklen_t</span> addrlen);<span class="comment">//</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">sock 传输数据的UDP套接字fd</span></span><br><span class="line"><span class="comment">buff 发送数据缓冲地址</span></span><br><span class="line"><span class="comment">nbytes 发送的数据长度/bytes</span></span><br><span class="line"><span class="comment">flags </span></span><br><span class="line"><span class="comment">to 目标地址信息</span></span><br><span class="line"><span class="comment">addrlen sockaddr 结构体长度</span></span><br><span class="line"><span class="comment">返回值 返回传输的字节数 否则失败 -1</span></span><br><span class="line"><span class="comment">需要向它传送目标地址信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">ssize_t</span> recvfrom (<span class="keyword">int</span> sock,<span class="keyword">void</span> * buff,<span class="keyword">size_t</span> nbytes,<span class="keyword">int</span> flags,struct sockaddr* from,<span class="keyword">socklen_t</span> * addrlen)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">sock 接受数据fd</span></span><br><span class="line"><span class="comment">buff 接受数据缓冲地址</span></span><br><span class="line"><span class="comment">nbytes 可接受的最大字节数</span></span><br><span class="line"><span class="comment">flags</span></span><br><span class="line"><span class="comment">from 保存 发送端地址信息</span></span><br><span class="line"><span class="comment">addrlen 结构体长度</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UDP服务器</p>
+<ul>
+<li>sock()-&gt;bind()-&gt;recvfrom()-&gt;sendto()</li>
+</ul>
+</li>
+<li><p>UDP客户端</p>
+<ul>
+<li>sock()-&gt;sendto()-&gt;recvfrom()</li>
+<li>在调用sendto函数时检测到还未分配IP和端口，自动分配IP和端口号，IP主机IP，端口尚未使用的任意端口</li>
+</ul>
+</li>
+<li><p>未连接UDP套接字VS已连接UDP套接字</p>
+<ul>
+<li>未连接套接字 sendto作用<ul>
+<li>向UDP套接字注册目标IP和端口号</li>
+<li>传输数据</li>
+<li>删除UDP套接字中注册的目标地址信息</li>
+</ul>
+</li>
+<li>每次调用都变更目标地址，可以重复利用同一UDP套接字向不同目标传输数据</li>
+<li>已连接UDP套接字<ul>
+<li>通过connect注册目标IP和地址信息</li>
+<li>sock()-&gt;connect()-&gt;sendto()-&gt;recvfrom()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="套接字选项"><a href="#套接字选项" class="headerlink" title="套接字选项"></a>套接字选项</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsockopt</span><span class="params">(<span class="keyword">int</span> sock,<span class="keyword">int</span> level,<span class="keyword">int</span> optname,<span class="keyword">void</span> * optval,<span class="keyword">socklen_t</span>* optlen)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">sock </span></span></span><br><span class="line"><span class="function"><span class="comment">level 查看可选项的协议层</span></span></span><br><span class="line"><span class="function"><span class="comment">optname 可选项名</span></span></span><br><span class="line"><span class="function"><span class="comment">optval 保存查看结果的缓冲地址值</span></span></span><br><span class="line"><span class="function"><span class="comment">optlen 向optval传递的缓冲大小 </span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setsockopt</span><span class="params">(<span class="keyword">int</span> sock,<span class="keyword">int</span> level,itn optname,<span class="keyword">const</span> <span class="keyword">void</span>* optval,<span class="keyword">socklen_t</span>* optlen)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TIEM_WAIT状态，服务器发送FIN后，客户端发送ACK，进入到TIME_WAIT状态，防止此ACK丢失，可以重发</p>
+</li>
+<li><p>客户端每次动态分配端口号，不必担心TIME_WAIT状态，但是不管服务器、客户端只要先断开套接字都会有TIME_WAIT状态。</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">option=TRUE;</span><br><span class="line">optlen=<span class="keyword">sizeof</span>(option)</span><br><span class="line">setopt(serv_sock,SOL_SOCKET,SO_REUSEADDR,(<span class="keyword">void</span>*)&amp;option,optlen);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁用NAGLE算法–TCP</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> opt_val=<span class="number">1</span>;</span><br><span class="line">setopt(sock,IPPROTO_TCP,TCP_NODELAY,(<span class="keyword">void</span>*)&amp;opt_val,<span class="keyword">sizeof</span>(opt_val));</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="多进程服务器"><a href="#多进程服务器" class="headerlink" title="多进程服务器"></a>多进程服务器</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> fork();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">父进程返回子进程ID</span></span><br><span class="line"><span class="comment">子进程 返回0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用fork之后，复制文件描述符，一个套接字对应多个文件描述符，需要关闭无关的套接字文件描述符</p>
+</li>
+<li><p>僵尸进程</p>
+<ul>
+<li><p>子进程退出后，父进程没有调用wait函数或者wait_pid函数等待子进程结束，又没有显示忽略SIGCHLD信号</p>
+</li>
+<li><p>占用资源和进程号</p>
+</li>
+<li><p>销毁–向创建子进程的父进程传递子进程的exit参数值或return语句的返回值</p>
+<ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> wait(<span class="keyword">int</span> * statloc);<span class="comment">//函数</span></span><br><span class="line"><span class="keyword">if</span>(WIFEXITED(status))<span class="comment">//判断是否正常结束进程</span></span><br><span class="line">&#123;</span><br><span class="line">    WEXITSTATUS(status);<span class="comment">//子进程结束返回值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用wait时，如果有子进程终止，那么子进程终止时传递的返回值将保存到statloc中，没有进程终止将阻塞</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> waitpid(<span class="keyword">pid_t</span> pid,<span class="keyword">int</span>* statloc,it options)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">pid 等待终止的目标子进程id，-1时可以等待任意子进程</span></span><br><span class="line"><span class="comment">options 传递头文件sys/wait.h文件中常量WNOHANG，即使没有子进程终止也不会进入到阻塞</span></span><br><span class="line"><span class="comment">返回终止的子进程ID（或0），失败-1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">信号和signal函数</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><ul>
+<li><p>管道</p>
+<ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">成功时，返回0，失败-1</span></span><br><span class="line"><span class="comment">filedesc[0] 通过管道接受数据</span></span><br><span class="line"><span class="comment">filedesc[2] 通过管道发送数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//管道单工</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管道只允许有血缘关系的进程间通信，内部保持同步机制，从而保证访问数据的一致性</p>
+</li>
+<li><p>管道随进程，进程在，管道在，进程消失，管道对应的端口也关闭，两个进程都消失，管道也消失</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="IO复用-select"><a href="#IO复用-select" class="headerlink" title="IO复用 select"></a>IO复用 select</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#define __FD_SETSIZE    1024 否则重新编译内核</span></span><br><span class="line">fd_set <span class="built_in">set</span>;<span class="comment">//bit为单位，保存需要监视的文件描述符[0-1024]</span></span><br><span class="line">FD_SET(<span class="number">1</span>,&amp;<span class="built_in">set</span>);<span class="comment">//设置1 bit为1</span></span><br><span class="line">FD_CLR(<span class="number">2</span>，&amp;<span class="built_in">set</span>);<span class="comment">//清空 第2bit</span></span><br><span class="line">FD_ZERO(&amp;<span class="built_in">set</span>); <span class="comment">//清空 set</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfd,fd_set* readset,fd_set* write_set,fd_set* exceptset,<span class="keyword">const</span> struct timeval* timeout)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">maxfd 监视对象文件描述符的数量  ---最大的描述符+1 （从0开始）</span></span></span><br><span class="line"><span class="function"><span class="comment">readset 将所有关注“是否存在待读取数据”的文件描述符注册到fd_set变量，并传递其地址</span></span></span><br><span class="line"><span class="function"><span class="comment">writeset         “是否可传输无阻塞数据”</span></span></span><br><span class="line"><span class="function"><span class="comment">exceptset         "是否发生异常"</span></span></span><br><span class="line"><span class="function"><span class="comment">timeout </span></span></span><br><span class="line"><span class="function"><span class="comment">返回 -1 -错误，0-超时，&gt;0 表示发生事件的文件描述符数量</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">* select每次调用后，fd_set中保存着发生事件的文件描述符，其余均为0，所以，每次都需要对fd_set重新赋值中。timeout变为超时前剩余时间，每次都需要对timeout重新赋值</span><br><span class="line"></span><br><span class="line">## 多种IO函数</span><br><span class="line"></span><br><span class="line">* ```c++</span><br><span class="line">  ssize_t send(int sockfd,const void* buf,size_t nbytes,int flags);</span><br><span class="line">  ssize_t recv(int sockfd,void* buf,size_t nbytes,int flags);</span><br><span class="line">  /*</span><br><span class="line">  可选项</span><br><span class="line">  MSG_OOB 传输带外数据</span><br><span class="line">  MSG_PEEK 验证输入缓冲中是否存在接收的数据</span><br><span class="line">  MSG_DNOTWAIT 调用IO函数时不阻塞，用于非阻塞I/O</span><br><span class="line">  MSG_WAITTAIL 防止函数返回，直到接收全部请求的字节数</span><br><span class="line">  */</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>MSG_OOB并不能传输带外数据，督促消息处理</p>
+</li>
+<li><p>MSG_PEEK | MSG_DNOTWAIT 验证输入缓冲中是否存在接收的数据，读取到的数据并不会从输入缓冲中删除</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iovec</span>&#123;</span></span><br><span class="line">    <span class="keyword">void</span> * iov_base;<span class="comment">//缓冲地址</span></span><br><span class="line">    <span class="keyword">size_t</span> iov_len;<span class="comment">//缓冲大小</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将分散在多个缓冲中的数据一块发送，减少IO函数调用次数</span></span><br><span class="line"><span class="keyword">ssize_t</span> writev(<span class="keyword">int</span> filedesc,<span class="keyword">const</span> struct iovec* iov,<span class="keyword">int</span> iovcnt)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">filedesv 传输对象的fd</span></span><br><span class="line"><span class="comment">iov iovec 保存着待发送数据的位置和size</span></span><br><span class="line"><span class="comment">iovcnt 数据长度</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">返回发送的字节数 或者-1</span></span><br><span class="line"><span class="comment">*/</span>    </span><br><span class="line"><span class="keyword">ssize_t</span> readv(<span class="keyword">int</span> filedesc,cosnt struct iovec* iov,<span class="keyword">int</span> iovcnt);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">返回成功接收的字节数 或者 -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="套接字和标准IO"><a href="#套接字和标准IO" class="headerlink" title="套接字和标准IO"></a>套接字和标准IO</h2><ul>
+<li><p>创建套接字时操作系统会准备I/O缓冲，仅用于维持TCP协议存在。TCP丢失的数据。。。。套接字的删除缓冲</p>
+</li>
+<li><p>标准I/O提高性能</p>
+<ul>
+<li>传输的数据量—-多个小文件中包含的头信息多</li>
+<li>数据向输出缓冲移动的次数</li>
+<li>缺点<ul>
+<li>不容易双向通信</li>
+<li>有可能频繁调用flush函数</li>
+<li>需要以FILE结构体指针的形式返回文件描述符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE* <span class="title">fdopen</span><span class="params">(<span class="keyword">int</span> files,<span class="keyword">const</span> <span class="keyword">char</span>* mode)</span><span class="comment">//文件描述符转为FILE*</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">fildes 需要转换的文件描述符</span></span></span><br><span class="line"><span class="function"><span class="comment">mode “w”  "a"</span></span></span><br><span class="line"><span class="function"><span class="comment">r 打开只读文件，r+打开可读写文件，都要求文件必须存在</span></span></span><br><span class="line"><span class="function"><span class="comment">w 打开只写文件，w+打开可读写文件，都会将文件长度清零，文件不存在时会创建文件</span></span></span><br><span class="line"><span class="function"><span class="comment">a 打开只写文件，a+打开可读写文件，都会将写的内容加到文件后面，文件不存在时创建文件</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fileno</span><span class="params">(FILE* stream)</span><span class="comment">//FILE* 转为fd</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="关于IO分离的其他内容"><a href="#关于IO分离的其他内容" class="headerlink" title="关于IO分离的其他内容"></a>关于IO分离的其他内容</h2><ul>
+<li><p>针对于FILE指针的半关闭</p>
+<ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FILE* readfp=fdopen(clnt_sock,<span class="string">"r"</span>);</span><br><span class="line">FILE* writefp=fdopen(clnt_sock,<span class="string">"w"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>针对于任意一个FILE指针调用fclose函数时，文件描述符都会关闭（读+写）</p>
+</li>
+<li><p>销毁所有文件描述符后，套接字才销毁</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> fildes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> fildes,<span class="keyword">int</span> fildes2)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">fildes 需要复制的文件描述符</span></span><br><span class="line"><span class="comment">fildes2 明确指定文件描述符整数值</span></span><br><span class="line"><span class="comment">失败返回-1，成功返回复制的文件描述符</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无论复制多少文件描述符，都应调用shutdown函数发送EOF并进入半关闭状态</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="多线程服务器实现"><a href="#多线程服务器实现" class="headerlink" title="多线程服务器实现"></a>多线程服务器实现</h2><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span>* <span class="keyword">restrict</span> thread,<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span>* <span class="keyword">restrict</span> arrt,<span class="keyword">void</span> *(* start_routine)(<span class="keyword">void</span>*),<span class="keyword">void</span>* <span class="keyword">restrict</span> arg)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">thread 保存新创建线程ID的变量地址</span></span><br><span class="line"><span class="comment">attr 传递线程属性参数，null时，默认属性</span></span><br><span class="line"><span class="comment">start_rountine 线程处理函数 函数指针</span></span><br><span class="line"><span class="comment">arg 线程处理函数的参数地址</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">成功时返回0，失败时返回其他值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread,<span class="keyword">void</span>** status)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">thread 该参数值ID的线程终止后才会从该函数返回</span></span></span><br><span class="line"><span class="function"><span class="comment">status 保存线程的main函数返回值的指针变量地址值</span></span></span><br><span class="line"><span class="function"><span class="comment">*/</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">struct hostent* <span class="title">gethostbyname</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* hostname)</span></span>;<span class="comment">//线程非安全函数</span></span><br><span class="line"><span class="function">struct hostent* <span class="title">gethostbyname_r</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name,struct hostent* result,<span class="keyword">char</span>* buff,<span class="keyword">int</span> buflen,<span class="keyword">int</span>* h_errnop)</span><span class="comment">//线程安全函数</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>线程安全函数后缀_r</p>
+</li>
+<li><p>或者声明头文件前定义 _REENTRANT 宏（重入）</p>
+</li>
+<li><p>或者编译时 gcc -<strong>D_REENTRANT</strong> mythread.c -o mthread -lpthreadz</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex,<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span>* arrt)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destory</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">mutex创建互斥量时传递保存互斥量的变量地址值，销毁时传递需要销毁的互斥量地址值</span></span><br><span class="line"><span class="comment">attr 传递即将创建的互斥量属性值，没有特别需要指定的属性时null</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">等待线程终止，且引导线程销毁。线程终止前，调用该函数的线程进入到阻塞状态</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_init</span><span class="params">(<span class="keyword">sem_t</span>* sem,<span class="keyword">int</span> pshared,<span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_destory</span><span class="params">(<span class="keyword">sem_t</span>* sem)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">sem 创建信号量时传递保存信号量的变量地址值、销毁时传递需要销毁的信号量变量的地址值</span></span><br><span class="line"><span class="comment">pshared 传递其他值时，创建可由多个进程共享的信号量；0时，创建只允许一个进程内部使用的信号量</span></span><br><span class="line"><span class="comment">。同一进程内的线程同步=0</span></span><br><span class="line"><span class="comment">value 指定新创建的信号量的初始值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_post</span><span class="params">(<span class="keyword">sem_t</span>* sem)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_wait</span><span class="params">(<span class="keyword">sem_t</span>* sem)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">传递保存信号量读取值的变量地址值，传递给sem_post时信号量+1，sem_wait 信号量-1</span></span><br><span class="line"><span class="comment">信号量的值不能小于0。在信号量值为0的情况下，调用sem_wait函数时，调用函数的线程将进入阻塞状态（函数未返回）</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 <h1 id="1-epoll"><a href="#1-epoll" class="headerlink" title="1. epoll"></a>1. epoll</h1><ul>
 <li><p>epoll_create</p>
 </li>
@@ -441,7 +643,7 @@
         <p><span>本文标题:</span><a href="/2019/08/28/network-program/">network-program</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
         <p><span>发布时间:</span>2019-08-28, 10:28:45</p>
-        <p><span>最后更新:</span>2019-08-29, 20:20:19</p>
+        <p><span>最后更新:</span>2019-09-12, 21:28:14</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/28/network-program/" title="network-program">blissseven.top/2019/08/28/network-program/</a>
             <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/08/28/network-program/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -477,7 +679,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-epoll"><span class="toc-number">1.</span> <span class="toc-text">1. epoll</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix"><span class="toc-number">2.</span> <span class="toc-text">Appendix</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-socket"><span class="toc-number">1.</span> <span class="toc-text">0.socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.1.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套接字选项"><span class="toc-number">1.3.</span> <span class="toc-text">套接字选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程服务器"><span class="toc-number">1.4.</span> <span class="toc-text">多进程服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信"><span class="toc-number">1.5.</span> <span class="toc-text">进程间通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO复用-select"><span class="toc-number">1.6.</span> <span class="toc-text">IO复用 select</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套接字和标准IO"><span class="toc-number">1.7.</span> <span class="toc-text">套接字和标准IO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于IO分离的其他内容"><span class="toc-number">1.8.</span> <span class="toc-text">关于IO分离的其他内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程服务器实现"><span class="toc-number">1.9.</span> <span class="toc-text">多线程服务器实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-epoll"><span class="toc-number">2.</span> <span class="toc-text">1. epoll</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix"><span class="toc-number">3.</span> <span class="toc-text">Appendix</span></a></li></ol>
         
     </div>
     <style>
