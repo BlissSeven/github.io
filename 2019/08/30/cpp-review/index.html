@@ -37,7 +37,7 @@
 <meta property="og:image" content="blissseven.top/2019/08/30/cpp-review/cpp-review/Ou1Q34TIaU52.png">
 <meta property="og:image" content="blissseven.top/2019/08/30/cpp-review/cpp-review/1567386917332.png">
 <meta property="og:image" content="blissseven.top/2019/08/30/cpp-review/cpp-review/1567388045381.png">
-<meta property="og:updated_time" content="2019-09-16T05:26:10.728Z">
+<meta property="og:updated_time" content="2019-09-18T02:50:16.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cpp-review">
 <meta name="twitter:description" content="好吧，这是为了面试而准备的，顺便查漏补缺">
@@ -325,8 +325,7 @@
 </ul>
 <a id="more"></a>
 
-<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>C++/C的类型安全</p>
-<ul>
+<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="C-C的类型安全"><a href="#C-C的类型安全" class="headerlink" title="C++/C的类型安全"></a>C++/C的类型安全</h2><ul>
 <li>c的类型安全只在局部上下文中体现，例如试图将一种类型的指针转换成其他类型的指针时，编译器会报错，malloc和new相比也并不是类型安全的。</li>
 <li>c++类型安全：<ul>
 <li>操作符new返回的指针类型严格与对象匹配，而不是void*；</li>
@@ -338,7 +337,7 @@
 </li>
 </ul>
 <h2 id="auto-VS-decltype"><a href="#auto-VS-decltype" class="headerlink" title="auto VS decltype"></a>auto VS decltype</h2><ul>
-<li>auto auto关键字来让编译器帮助我们分析表达式或者函数所属的类型</li>
+<li>auto auto关键字来让编译器帮助我们分析表达式或者函数所属的类型，用一个对象的类型和值来初始化另一个对象。</li>
 <li>auto VS const<ul>
 <li>auto会忽略掉顶层const, 保留底层const.</li>
 </ul>
@@ -348,7 +347,7 @@
 <li>如果要声明一个引用, 就必须要加上&amp;, 如果要声明为一个指针, 既可以加上也可以不加</li>
 </ul>
 </li>
-<li>decltype  为了推断出表达式的类型而不用这个表达式的值来初始化对象.</li>
+<li>decltype  只是为了推断出表达式的类型而不用这个表达式的值来初始化对象..</li>
 <li>decltype vs const<ul>
 <li><strong>不论是顶层const还是底层const, decltype都会保留</strong></li>
 </ul>
@@ -381,7 +380,6 @@
 <li><strong>空间换时间</strong></li>
 <li><strong>提前计算</strong></li>
 <li><strong>字符数组的初始化</strong></li>
-<li></li>
 </ul>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
 <li><p>C++ 通过 throw 语句和 try…catch 语句实现对异常的处理</p>
@@ -391,11 +389,12 @@
 <li><p>try…catch 语句的执行过程是：</p>
 </li>
 <li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(异常类型)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(异常类型)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><ul>
+
+<ul>
 <li>执行 try 块中的语句，如果执行的过程中没有异常拋出，那么执行完后就执行最后一个 catch 块后面的语句，所有 catch 块中的语句都不会被执行；</li>
-<li>如果 try 块执行的过程中拋出了异常，那么拋出异常后立即跳转到第一个“异常类型”和拋出的异常类型匹配的 catch 块中执行（称作异常被该 catch 块“捕获”），执行完后再跳转到最后一个 catch 块后面继续执行。</li>
 </ul>
+</li>
+<li><p>如果 try 块执行的过程中拋出了异常，那么拋出异常后立即跳转到第一个“异常类型”和拋出的异常类型匹配的 catch 块中执行（称作异常被该 catch 块“捕获”），执行完后再跳转到最后一个 catch 块后面继续执行。</p>
 </li>
 </ul>
 </li>
@@ -422,7 +421,7 @@
 </ul>
 </li>
 <li>初始化顺序为申明顺序</li>
-<li>高效 少了依次拷贝构造过程<ul>
+<li>高效 少了1次默认构造过程<ul>
 <li>对象成员变量的初始化动作发生在进入构造函数之前。当然对于内置类型没什么影响，但如果有些成员是类，那么在进入构造函数之前，会先调用一次默认构造函数，进入构造函数后所做的事其实是一次赋值操作(对象已存在)，所以是一次默认构造加一次赋值</li>
 </ul>
 </li>
@@ -439,10 +438,10 @@
 <li><strong>解决内存泄漏最有效的办法就是使用智能指针（Smart Pointer）</strong></li>
 </ul>
 <h2 id="结构体内存对齐"><a href="#结构体内存对齐" class="headerlink" title="结构体内存对齐"></a>结构体内存对齐</h2><ul>
-<li>数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在３２位机为４字节,则要从４的整数倍地址开始存储。</li>
-<li>结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍和pack之间的最小值的整数倍)</li>
-<li>收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</li>
-<li>原因<ul>
+<li>数据成员对齐规则：数据成员对齐规则：结构（struct或联合union）的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置: min(#pragma pack()指定的数,这个数据成员的自身长度)的倍数</li>
+<li>结构体作为成员:如果一个结构里有某些结构体成员，则结构体成员要从min(#pragram pack() ,<br>内部长度最长的数据成员)的整数倍地址开始存储。（struct a里存有struct<br>b，b里有char，int，double等元素，那b应该从min(#pragram pack(), 8)的整数倍开始存储。）</li>
+<li>收尾工作:结构体的总大小,也就是sizeof的结果,.必须是 min(#pragram pack() , 长度最长的数据成员) 的整数倍</li>
+<li>#pragram pack() 默认为4(32位), 8(64位)<ul>
 <li>为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存访问仅需要一次访问。</li>
 <li>平台原因(移植原因)：不是所有的硬件平台都能访问任意地址上的任意数据的；某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。 </li>
 </ul>
@@ -482,7 +481,7 @@
 </li>
 </ul>
 </li>
-<li><p>类型转换和模板类型参数。将实参传递给带模板类型的函数形参时，能够自动应用类型转换的只有const转换及数组或函数到指针的转换。</p>
+<li><p>类型转换和模板类型参数。<strong>将实参传递给带模板类型的函数形参时，能够自动应用类型转换的只有const转换及数组或函数到指针的转换</strong>。</p>
 <ul>
 <li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">const转换：可以将一个非const对象的引用(或指针)传递给一个const的引用(或指针)形参。</span></span><br><span class="line"><span class="comment">数组或函数指针转换：如果函数形参不是引用类型，则可以对数组或函数类型的实参应用正常的指针转换。一个数组实参可以转化为一个指向其首元素的指针。类似，一个函数实参可以转化为一个指向该函数类型的指针。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function">T <span class="title">fobj</span><span class="params">(T, T)</span></span>; <span class="comment">//实参将被拷贝</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function">T <span class="title">fref</span><span class="params">(<span class="keyword">const</span> T&amp;, <span class="keyword">const</span> T&amp;)</span></span>;   <span class="comment">//引用</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">"a value"</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="string">"another value"</span>)</span></span>;</span><br><span class="line">fobj(s1, s2);   <span class="comment">//调用fobj(string, string)；const被忽略</span></span><br><span class="line">fref(s1, s2);   <span class="comment">//调用fref(const string&amp;, const string&amp;)；将s1转化为const是允许的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>], b[<span class="number">20</span>];</span><br><span class="line">fobj(a, b); <span class="comment">//调用fobj(int*, int*)</span></span><br><span class="line">fref(a, b); <span class="comment">//错误，对于一个引用形参参数来说，数组不会转化为指针。</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -496,7 +495,7 @@
 </li>
 <li><p>除了用户指定模板实参类型，可以选择通过尾置返回类型来判定。</p>
 <ul>
-<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用尾置来声明返回类型</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">auto fcn(T beg, T end) -&gt; decltyp(*beg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//处理序列</span></span><br><span class="line">    <span class="keyword">return</span> *beg;    <span class="comment">//返回一个元素的引用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用尾置来声明返回类型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">auto fcn(T beg, T end) -&gt; decltyp(*beg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//处理序列</span></span><br><span class="line">    <span class="keyword">return</span> *beg;    <span class="comment">//返回一个元素的引用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -564,16 +563,14 @@
 <li><p>“class”这个关键字还用于定义模板参数，就像“typename”。但关键字“struct”不用于定义模板参数</p>
 </li>
 <li><p><strong>关于使用大括号初始化</strong></p>
-<ul>
+</li>
 <li><p><strong>class和struct如果定义了构造函数的话，都不能用大括号进行初始化</strong></p>
-</li>
-<li><p><strong>如果没有定义构造函数，struct可以用大括号初始化。</strong></p>
-</li>
-<li><p><strong>如果没有定义构造函数，且所有成员变量全是public的话，class可以用大括号初始化。</strong></p>
+<ul>
+<li><strong>如果没有定义构造函数，struct可以用大括号初始化。</strong></li>
+<li><strong>如果没有定义构造函数，且所有成员变量全是public的话，class可以用大括号初始化。</strong></li>
+</ul>
 </li>
 <li><p>—–以{}的方式来赋初值，只是用一个初始化列表来对数据进行按顺序的初始化</p>
-</li>
-</ul>
 </li>
 </ul>
 <h2 id="指针和引用区别"><a href="#指针和引用区别" class="headerlink" title="指针和引用区别"></a>指针和引用区别</h2><ul>
@@ -590,7 +587,6 @@
 <li>设置栈指针</li>
 <li>初始化static静态和global全局变量，即data段内容</li>
 <li>将未初始化部分的全局变量赋值，数值型short，int，long等为0，bool为FALSE，指针为NULL，等等，即.bss段的内容</li>
-<li></li>
 </ul>
 </li>
 </ul>
@@ -601,7 +597,7 @@
 </ul>
 <h2 id="C-内存模型"><a href="#C-内存模型" class="headerlink" title="C++内存模型"></a>C++内存模型</h2><ul>
 <li><img src="cpp-review/20180805132942260.jpg" alt="20180805132942260"></li>
-<li>堆区-&gt;栈区-&gt;未初始化数据段(bss)，由exec是初始化为0-&gt;初始化的数据（全局变量、静态变量和常量数据）-&gt;正文</li>
+<li>栈区-&gt;堆区-&gt;未初始化数据段(bss)，由exec是初始化为0-&gt;初始化的数据（全局变量、静态变量和常量数据）-&gt;正文</li>
 <li>正文 CPU执行机器指令部分</li>
 <li>初始化数据段，程序中明确赋初值的变量（全局变量、静态变量、常量数据（虚函数表））</li>
 <li>未初始化数据。内核将此段中数据初始化为0或空指针</li>
@@ -612,7 +608,7 @@
 <li>抽象。将一些事物的共性和相似点剥离出来，并将这些属性归为一个类</li>
 <li>封装。为了隐藏内部实现细节。</li>
 <li>继承。继承是子类自动共享父类数据和方法的机制，这是类之间的一种关系，提高了软件的可重用性和可扩展性。</li>
-<li>多态。程序定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编译期并不确定，而是在程序运行期间才确定（称之为动态绑定），即一个引用变量指向的是哪个类的实例对象，在编译期间并不确定，在运行阶段才能决定，</li>
+<li>多态。程序定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编译期并不确定，而是在程序运行期间才确定（称之为动态绑定），即一个引用变量指向的是哪个类的实例对象，在编译期间并不确定，在运行阶段才能决定。</li>
 </ul>
 <h2 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h2><ul>
 <li>堆由低地址向高地址扩展；栈由高地址向低地址扩展。</li>
@@ -652,6 +648,7 @@
 <li>const/inline/template 代替宏常量</li>
 <li>namespace解决重名问题</li>
 <li>STL提供高效的数据结构和算法</li>
+<li>模板编程</li>
 </ul>
 <h2 id="static-assert"><a href="#static-assert" class="headerlink" title="static_assert"></a>static_assert</h2><ul>
 <li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(<span class="keyword">void</span> *) == <span class="number">4</span>, <span class="string">"64-bit code generation is not supported."</span>);</span><br></pre></td></tr></table></figure>
@@ -679,12 +676,14 @@
 <li>通过类对象的首地址+偏移！！！ ridiculous</li>
 </ul>
 <h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><ul>
-<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> aaa[<span class="number">2</span>][<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;<span class="comment">// aaa = 0x004ff850 &#123;0x004ff850 &#123;1, 2, 3&#125;, 0x004ff85c &#123;4, 5, 6&#125;&#125;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; aaa &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF850</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; aaa+<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//004FF85C 一维数组指针相加</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *aaa &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF850 数组中第一个元素的地址</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *aaa + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF854 一个元素的指针+1</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; **aaa  &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//1</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; **aaa +<span class="number">1</span>&lt;&lt; <span class="built_in">endl</span>;<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> aaa[<span class="number">2</span>][<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;<span class="comment">// aaa = 0x004ff850 &#123;0x004ff850 &#123;1, 2, 3&#125;, 0x004ff85c &#123;4, 5, 6&#125;&#125;</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; aaa &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF850</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; aaa+<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//004FF85C 一维数组指针相加</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *aaa &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF850 数组中第一个元素的地址</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *aaa + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//004FF854 一个元素的指针+1</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; **aaa  &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//1</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; **aaa +<span class="number">1</span>&lt;&lt; <span class="built_in">endl</span>;<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <h2 id="虚基类表"><a href="#虚基类表" class="headerlink" title="虚基类表"></a>虚基类表</h2><ul>
 <li><strong>在类中增加一个指针(VBPTR)指向一个VBTBL，这个VBTBL的第一项记载的是从VBPTR 与本类的偏移地址，如果本类有虚函数，内存中第一项为虚函数表指针，第二项才是虚基类表指针，所以虚基类表中第一项是FF FF FF FC(也就是-4)，如果没有则是零，第二项起是VBPTR与本类的虚基类的偏移值。</strong></li>
+<li>虚基类中第一项父亲1的虚函数表指针地址-父亲1对象的首地址</li>
+<li>虚基类中第二项为父亲1的对象的首地址-爷爷虚基类表指针的地址</li>
 </ul>
 <h2 id="extern-C"><a href="#extern-C" class="headerlink" title="extern C"></a>extern C</h2><ul>
 <li><p>c++ 中函数签名是函数名称+函数参数，以此实现函数重载</p>
@@ -715,8 +714,7 @@
 <li>动态类型语言，是指数据类型的检查是在运行时做的</li>
 <li>静态类型语言，是指数据类型的检查是在运行前（如编译阶段）做的。</li>
 </ul>
-<p>构造函数 VS析构函数</p>
-<ul>
+<h2 id="构造函数-VS析构函数"><a href="#构造函数-VS析构函数" class="headerlink" title="构造函数 VS析构函数"></a>构造函数 VS析构函数</h2><ul>
 <li>构造函数<strong>不可以</strong>通过对象、对象的指针、对象引用直接调用</li>
 <li>析构函数<strong>可以</strong>通过对象、对象的指针、对象引用直接调用</li>
 </ul>
@@ -755,7 +753,7 @@
 <li>参数不同（参数类型，参数长度）</li>
 </ul>
 </li>
-<li>override 覆盖 派生类函数覆盖基类函数<ul>
+<li>override 覆盖 派生类函数覆盖基类虚函数<ul>
 <li>不同范围（一个父类，一个子类）</li>
 <li>函数名字相同</li>
 <li>参数相同</li>
@@ -795,10 +793,10 @@
 <li><p>保持一块内存，反复构造析构，这样可以省略中间的多次分配内存。</p>
 </li>
 <li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* ptr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">sizeof</span>(T)]; <span class="comment">// allocate memory  </span></span><br><span class="line">T* tptr = <span class="keyword">new</span>(ptr) T;            <span class="comment">// construct in allocated storage ("place")  </span></span><br><span class="line">tptr-&gt;~T();                      <span class="comment">// destruct  </span></span><br><span class="line"><span class="keyword">delete</span>[] ptr;                    <span class="comment">// deallocate memory</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 </li>
-<li></li>
 </ul>
 <h2 id="特殊对象构建"><a href="#特殊对象构建" class="headerlink" title="特殊对象构建"></a>特殊对象构建</h2><ul>
 <li><p><a href="https://blog.csdn.net/hxz_qlh/article/details/13135433#" target="_blank" rel="noopener">https://blog.csdn.net/hxz_qlh/article/details/13135433#</a></p>
@@ -824,10 +822,10 @@
 </ul>
 </li>
 </ul>
-<pre><code>* <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="keyword">friend</span> T;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"base"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Base()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> Base&lt;B&gt;&#123;   <span class="comment">//一定注意 必须是虚继承</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>* <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="keyword">friend</span> T;  <span class="comment">//T为Base的友元 不需要class</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"base"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Base()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> Base&lt;B&gt;&#123;   <span class="comment">//一定注意 必须是虚继承</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-* </code></pre><h2 id="内存分配方式"><a href="#内存分配方式" class="headerlink" title="内存分配方式"></a>内存分配方式</h2><ul>
+* 某个继承B的类X，在构造的时候必须要构造Base，但是B虚继承至Base，X不能通过B的构造函数来构造Base，但是由于Base的构造是private的，所以X不能构造。</code></pre><h2 id="内存分配方式"><a href="#内存分配方式" class="headerlink" title="内存分配方式"></a>内存分配方式</h2><ul>
 <li><p>栈区，编译器自动分配释放，存放函数的参数，局部变量</p>
 </li>
 <li><p>堆区，由程序员分配释放，</p>
@@ -1086,6 +1084,7 @@
 <li>list merge 将两个list合并成一个，前提是必须经过递增排序</li>
 <li>list sort 排序<ul>
 <li>将前两个元素合并，再将后两个合并，然后合并这两个子序列为4个元素的子序列，重复，依次得到8,16，。。子序列，最后得到的就是排序后的序列 时间复杂度O（logN）</li>
+<li>归并排序</li>
 </ul>
 </li>
 </ul>
@@ -1185,7 +1184,15 @@
 <p>文件的三种时间（mtime, atime，ctime），分别在什么时候会改变</p>
 <p>Linux监控网络带宽的命令，查看特定进程的占用网络资源情况命令</p>
 <h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><ul>
-<li><h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2></li>
+<li>地址映射过程中，若在页面中发现所要访问的页面不在内存中，则产生缺页中断。当发生缺页中断时，如果操作系统内存中没有空闲页面，则操作系统必须在内存选择一个页面将其移出内存，以便为即将调入的页面让出空间。而用来选择淘汰哪一页的规则叫做页面置换算法</li>
+<li>最优页面置换</li>
+<li>LRU页面置换</li>
+<li>先进先出（FIFO）</li>
+<li>最近未使用（NRU）</li>
+<li>第二次机会算法</li>
+<li>时钟算法</li>
+</ul>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ul>
 <li><p>先来先服务算法 FCFA</p>
 <ul>
 <li>有利于长作业，而不利于短作业，有利于CPU繁忙的作业，而不利于I/O繁忙的作业。</li>
@@ -1627,10 +1634,10 @@
 <li><p>OSI 有哪几层，会画出来，知道主要几层的各自作用 </p>
 <p>​     1. 应用层（数据）：确定进程之间通信的性质以满足用户需要以及提供网络与用户应用</p>
 <ol start="2">
-<li>表示层（数据）：主要解决拥护信息的语法表示问题，如加密解密</li>
+<li>表示层（数据）：主要解决用户信息的语法表示问题，如加密解密</li>
 <li>会话层（数据）：提供包括访问验证和会话管理在内的建立和维护应用之间通信的机<br>制，如服务器验证用户登录便是由会话层完成的</li>
 <li>传输层（段）：实现网络不同主机上用户进程之间的数据通信，可靠<br>与不可靠的传输，传输层的错误检测，流量控制等</li>
-<li>网络层（包）：提供逻辑地址（IP）、选路，数据从源端到目的端的<br>传输</li>
+<li>网络层（包）：提供逻辑地址（IP）、选路，数据从源端到目的端的传输</li>
 <li>数据链路层（帧）：将上层数据封装成帧，用 MAC 地址访问媒介，错误检测与修正</li>
 <li>物理层（比特流）：设备之间比特流的传输，物理接口，电气特性等 </li>
 </ol>
@@ -1707,7 +1714,7 @@
 <li>标志，3bit，表示是否可分片，分片的情况下，是否是最后一片</li>
 <li>片位移：13bit，标识被分片的每一个片段相对于原始数据的位置，单位为8字节，是2^13=8192*8=65536，最多表示原始数据的65536字节的位置</li>
 <li>TTL生存时间：可以中转多少个路由器，每经过一个路由就减1，防止环形路由</li>
-<li>协议：8bit，表示IP首部的下一个是什么协议</li>
+<li>协议：8bit，表示IP首部的下一个是什么协议，ICMP<strong>:1  |  **TCP</strong>:6  |  <strong>UDP</strong>:17  |  GRE:47  |  ESP:50  |  AH:51**</li>
 <li>首部检验和：只校验IP首部，不校验数据部分</li>
 <li>可选项：最多40字节，</li>
 <li>填充pad，确保首部长度为32bit的整数倍</li>
@@ -1764,7 +1771,7 @@
 </li>
 <li><p>网络地址就是：把IP地址转成二进制和子网掩码进行与运算</p>
 </li>
-<li><p>主机的数量=2^二进制位数的主机-2</p>
+<li><p>主机的数量=2^二进制位数的主机-2（1个网络地址，1个广播地址）</p>
 </li>
 <li><p>广播地址：网络地址的主机位全部变成1 </p>
 </li>
@@ -1832,7 +1839,7 @@
 <li>TCP、 UDP 为什么存在伪包头？ <ul>
 <li>UDP(TCP)检验和：是根据 UDP(TCP)数据报和伪报头计算得到的差错检测值。 </li>
 <li>伪报头包含源和目的 IP 地址，以及来自 IP 数据报报头的协议值。 IP 数据报在网络中传送时<br>包含 UDP（TCP） 数据报。 </li>
-<li>伪报头并不会在网络中传送，校验和中所包含的伪报头内容可以避免目的端错误地接收错误<br>路由的数据报。校验和值的计算方法和 IP 报头检验和的计算方法类似 </li>
+<li>伪报头并不会在网络中传送，校验和中所包含的伪报头内容可以避免目的端错误地接收错误路由的数据报。校验和值的计算方法和 IP 报头检验和的计算方法类似 </li>
 </ul>
 </li>
 </ul>
@@ -1855,11 +1862,11 @@
 </li>
 <li><p>TCP的可靠性</p>
 <ul>
-<li>应用数据被分割为TCP最为合适发送的大小</li>
-<li>TCP发送一个字段后，启动一个定时器，等待目的端收到报文段，如果不能及时收到ACK,将重新发送</li>
-<li>TCP收到数据，发送延迟的ack（200ms），delayed_ack</li>
-<li>TCP保持首部和数据的校验和</li>
-<li>TCP会对收到的数据进行重新排序</li>
+<li>拥塞控制：应用数据被分割为TCP最为合适发送的大小</li>
+<li>超时重传：TCP发送一个字段后，启动一个定时器，等待目的端收到报文段，如果不能及时收到ACK,将重新发送</li>
+<li>延迟应答：TCP收到数据，发送延迟的ack（200ms），delayed_ack</li>
+<li>校验和：TCP保持首部和数据的校验和</li>
+<li>序列号：TCP会对收到的数据进行重新排序</li>
 <li>TCP提供对流的控制。TCP连接的每一方都有固定大小的缓冲空间。<strong>TCP的接收端只允许另一端发送  接收端缓冲区所能容纳的数据。</strong>这将防止较快主机致使较慢主机的缓冲区溢出</li>
 </ul>
 </li>
@@ -1945,12 +1952,22 @@
 </li>
 <li><p>FIN_WAIT_2</p>
 <ul>
-<li>长时间停在FIN_WAIT_2状态，对端停留在CLOSE_WAIT状态</li>
-<li>一般防火墙都有解决半关闭（FIN_WAIT_2）的超时时间设置，如果超时，防火墙会向双方发送RSET(伪装源)来踢掉连接。</li>
-</ul>
+<li><p>长时间停在FIN_WAIT_2状态，对端停留在CLOSE_WAIT状态</p>
+</li>
+<li><p>一般防火墙都有解决半关闭（FIN_WAIT_2）的超时时间设置，如果超时，防火墙会向双方发送RSET(伪装源)来踢掉连接。</p>
+</li>
+<li><p>父进程打开了socket，然后用派生子进程来处理业务，父进程继续对网络请求进行监听，永远不会终止。客户端发FIN过来的时候，处理业务的子进程的read返回0，子进程发现对端已经关闭了，直接调用close()对本端进行关闭。实际上，仅仅使socket的引用计数减1，socket并没关闭。从而导致系统中又多了一个CLOSE_WAIT的socket。</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子进程的关闭处理应该是这样的：</span></span><br><span class="line">shutdown(sockfd, SHUT_RDWR);</span><br><span class="line">close(sockfd);</span><br><span class="line"><span class="comment">//这样处理，服务器的FIN会被发出，socket进入LAST_ACK状态，等待最后的ACK到来，就能进入初始状态CLOSED。</span></span><br><span class="line"><span class="comment">//在多进程中如果一个进程中shutdown(sfd, SHUT_RDWR)后其它的进程将无法进行通信. 如果一个进程close(sfd)将不会影响到其它进程.</span></span><br></pre></td></tr></table></figure>
+
+
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<pre><code>* 一般情况下，当TCP连接主动关闭时，会向对端发送一个FIN，对端会获得一个读事件，调用read时返回0，表示读到一个EOF，读结束。</code></pre><ul>
 <li><p>TCP交互式数据流</p>
 <ul>
 <li>延迟的ACK<ul>
@@ -1978,8 +1995,8 @@
 </ul>
 </li>
 <li>滑动窗口<ul>
-<li>接受方的流控，发送方快，接收方慢，协调双方工作节奏</li>
-<li>MSS 最大消息长度，在建立连接时确定，为IP中不会被分片的最大数据长度（1500-20-20=1460）</li>
+<li><strong>接受方的流控，发送方快，接收方慢，协调双方工作节奏</strong></li>
+<li>MSS 最大消息长度，在建立连接时确定，为IP中不会被分片的最大数据长度（(MTU)1500-(IP头部)20-（TCP头部）20=1460）</li>
 <li>滑动窗口本质上是描述接受方的TCP数据报缓冲区大小的数据，发送方根据这个数据来计算自己最多能发送多长的数据。</li>
 <li>窗口左边右移<ul>
 <li>发生在数据被发送（发送端）和确认时（接收端）</li>
@@ -1998,7 +2015,7 @@
 <li>已收到ACK，已收到未发送ACK，未收到</li>
 </ul>
 </li>
-<li>发送方根据接收方的窗口连续发送数据窗口大小的数据不受ACK，收到ACK后窗口左边右移</li>
+<li>发送方根据接收方的窗口连续发送数据窗口大小的数据不用收到ACK，收到ACK后窗口左边右移</li>
 <li>接收方则确认ACK 连续的数据分组，对于乱序的分组则先接收下来，避免网络重复传递，丢失的触发超时重传</li>
 </ul>
 </li>
@@ -2012,9 +2029,9 @@
 <li>当 cnwd＜ssthresh，使用慢开始算法</li>
 <li>当 cnwd=ssthresh，既可使用慢开始算法，也可以使用拥塞避免算法</li>
 <li>当 cnwd＞ssthresh，使用拥塞避免算法 <ul>
-<li>拥塞避免并非完全能够避免拥塞，是说在拥塞避免阶段将拥塞窗口控制为按线性规律增<br>长，使网络比较不容易出现拥塞。 </li>
-<li>思路：让拥塞窗口 cwnd 缓慢地增大，即每经过一个往返时间 RTT 就把发送方的拥塞控<br>制窗口加一。 </li>
-<li>无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有<br>收到确认，虽然没有收到确认可能是其他原因的分组丢失，但是因为无法判定，所以都当做<br>拥塞来处理），就把慢开始门限设置为出现拥塞时的发送窗口大小的一半。然后把拥塞窗口<br>设置为 1，执行慢开始算法。 </li>
+<li>拥塞避免并非完全能够避免拥塞，是说在拥塞避免阶段将拥塞窗口控制为按线性规律增长，使网络比较不容易出现拥塞。 </li>
+<li>思路：让拥塞窗口 cwnd 缓慢地增大，即每经过一个往返时间 RTT 就把发送方的拥塞控制窗口加一。 </li>
+<li>无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有收到确认，虽然没有收到确认可能是其他原因的分组丢失，但是因为无法判定，所以都当做拥塞来处理），就把慢开始门限设置为出现拥塞时的发送窗口大小的一半。然后把拥塞窗口设置为 1，执行慢开始算法。 </li>
 <li><img src="cpp-review/1567386917332.png" alt="1567386917332"></li>
 </ul>
 </li>
@@ -2247,7 +2264,7 @@
         <p><span>本文标题:</span><a href="/2019/08/30/cpp-review/">cpp-review</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">bliss7</a></p>
         <p><span>发布时间:</span>2019-08-30, 08:30:52</p>
-        <p><span>最后更新:</span>2019-09-16, 13:26:10</p>
+        <p><span>最后更新:</span>2019-09-18, 10:50:16</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/30/cpp-review/" title="cpp-review">blissseven.top/2019/08/30/cpp-review/</a>
             <span class="copy-path" data-clipboard-text="原文: blissseven.top/2019/08/30/cpp-review/　　作者: bliss7" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -2283,7 +2300,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C"><span class="toc-number">1.</span> <span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#auto-VS-decltype"><span class="toc-number">1.1.</span> <span class="toc-text">auto VS decltype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问权限"><span class="toc-number">1.2.</span> <span class="toc-text">访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序优化"><span class="toc-number">1.3.</span> <span class="toc-text">程序优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">1.4.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四种类型转换"><span class="toc-number">1.5.</span> <span class="toc-text">四种类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-C-函数调用的压栈模型"><span class="toc-number">1.6.</span> <span class="toc-text">C/C++函数调用的压栈模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员初始化列表"><span class="toc-number">1.7.</span> <span class="toc-text">成员初始化列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存泄漏"><span class="toc-number">1.8.</span> <span class="toc-text">内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构体内存对齐"><span class="toc-number">1.9.</span> <span class="toc-text">结构体内存对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.10.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用和指针实现多态"><span class="toc-number">1.11.</span> <span class="toc-text">引用和指针实现多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数的几种关键字-default-delete-0"><span class="toc-number">1.12.</span> <span class="toc-text">构造函数的几种关键字(default  delete   0)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员模板"><span class="toc-number">1.13.</span> <span class="toc-text">成员模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-VS-override"><span class="toc-number">1.14.</span> <span class="toc-text">final  VS override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct-VS-class"><span class="toc-number">1.15.</span> <span class="toc-text">struct VS class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针和引用区别"><span class="toc-number">1.16.</span> <span class="toc-text">指针和引用区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main函数之前"><span class="toc-number">1.17.</span> <span class="toc-text">main函数之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main返回值"><span class="toc-number">1.18.</span> <span class="toc-text">main返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-内存模型"><span class="toc-number">1.19.</span> <span class="toc-text">C++内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的四个特性"><span class="toc-number">1.20.</span> <span class="toc-text">面向对象的四个特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆和栈的区别"><span class="toc-number">1.21.</span> <span class="toc-text">堆和栈的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile"><span class="toc-number">1.22.</span> <span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内联函数VS宏定义"><span class="toc-number">1.23.</span> <span class="toc-text">内联函数VS宏定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-VS-C最大特点"><span class="toc-number">1.24.</span> <span class="toc-text">C++ VS C最大特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-assert"><span class="toc-number">1.25.</span> <span class="toc-text">static_assert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-11新特性"><span class="toc-number">1.26.</span> <span class="toc-text">c++11新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问类的私有变量"><span class="toc-number">1.27.</span> <span class="toc-text">访问类的私有变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组"><span class="toc-number">1.28.</span> <span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚基类表"><span class="toc-number">1.29.</span> <span class="toc-text">虚基类表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extern-C"><span class="toc-number">1.30.</span> <span class="toc-text">extern C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译型VS解释型VS动态语言VS静态语言"><span class="toc-number">1.31.</span> <span class="toc-text">编译型VS解释型VS动态语言VS静态语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝构造VS-赋值构造"><span class="toc-number">1.32.</span> <span class="toc-text">拷贝构造VS 赋值构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overload-VS-override-VS-overwrite"><span class="toc-number">1.33.</span> <span class="toc-text">overload VS override VS overwrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的声明和定义"><span class="toc-number">1.34.</span> <span class="toc-text">变量的声明和定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new的变种"><span class="toc-number">1.35.</span> <span class="toc-text">new的变种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊对象构建"><span class="toc-number">1.36.</span> <span class="toc-text">特殊对象构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存分配方式"><span class="toc-number">1.37.</span> <span class="toc-text">内存分配方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-const关键字"><span class="toc-number">1.38.</span> <span class="toc-text">static const关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#define-和const的区别"><span class="toc-number">1.39.</span> <span class="toc-text">define 和const的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能指针"><span class="toc-number">1.40.</span> <span class="toc-text">智能指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动语义"><span class="toc-number">1.41.</span> <span class="toc-text">移动语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义函数"><span class="toc-number">1.42.</span> <span class="toc-text">自定义函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#STL"><span class="toc-number">2.</span> <span class="toc-text">STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#空间配置器"><span class="toc-number">2.1.</span> <span class="toc-text">空间配置器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代器"><span class="toc-number">2.2.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector实现"><span class="toc-number">2.3.</span> <span class="toc-text">vector实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list实现"><span class="toc-number">2.4.</span> <span class="toc-text">list实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque实现"><span class="toc-number">2.5.</span> <span class="toc-text">deque实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#priority-queue"><span class="toc-number">2.6.</span> <span class="toc-text">priority_queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set-map实现"><span class="toc-number">2.7.</span> <span class="toc-text">set-map实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered-set-map实现"><span class="toc-number">2.8.</span> <span class="toc-text">unordered-set/map实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">2.9.</span> <span class="toc-text">算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-11-多线程"><span class="toc-number">3.</span> <span class="toc-text">C++11 多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux命令"><span class="toc-number">3.1.</span> <span class="toc-text">linux命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统"><span class="toc-number">4.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面置换算法"><span class="toc-number">4.1.</span> <span class="toc-text">页面置换算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程调度"><span class="toc-number">4.2.</span> <span class="toc-text">进程调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存分配方式及错误"><span class="toc-number">4.3.</span> <span class="toc-text">内存分配方式及错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存溢出VS内存泄漏"><span class="toc-number">4.4.</span> <span class="toc-text">内存溢出VS内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟内存VS-swap分区"><span class="toc-number">4.5.</span> <span class="toc-text">虚拟内存VS swap分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断VS异常"><span class="toc-number">4.6.</span> <span class="toc-text">中断VS异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程终止的方式"><span class="toc-number">4.7.</span> <span class="toc-text">进程终止的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊进程"><span class="toc-number">4.8.</span> <span class="toc-text">特殊进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么回收线程"><span class="toc-number">4.9.</span> <span class="toc-text">怎么回收线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-线程数量"><span class="toc-number">4.10.</span> <span class="toc-text">进程/线程数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个程序从开始运行到结束的完整过程"><span class="toc-number">4.11.</span> <span class="toc-text">一个程序从开始运行到结束的完整过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户态VS内核态"><span class="toc-number">4.12.</span> <span class="toc-text">用户态VS内核态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁"><span class="toc-number">4.13.</span> <span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信方式"><span class="toc-number">4.14.</span> <span class="toc-text">进程间通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux-IO模型"><span class="toc-number">4.15.</span> <span class="toc-text">linux IO模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select-VS-epoll"><span class="toc-number">4.16.</span> <span class="toc-text">select VS epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程VS-线程VS-协程"><span class="toc-number">4.17.</span> <span class="toc-text">进程VS 线程VS 协程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机网络"><span class="toc-number">5.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP协议体系"><span class="toc-number">5.1.</span> <span class="toc-text">TCP/IP协议体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据链路层"><span class="toc-number">5.2.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP"><span class="toc-number">5.3.</span> <span class="toc-text">IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">5.4.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">5.5.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">5.6.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">5.7.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套接字socket"><span class="toc-number">5.8.</span> <span class="toc-text">套接字socket</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构和算法"><span class="toc-number">6.</span> <span class="toc-text">数据结构和算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#各种树"><span class="toc-number">6.1.</span> <span class="toc-text">各种树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashtable-哈希表"><span class="toc-number">6.2.</span> <span class="toc-text">hashtable 哈希表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树性质"><span class="toc-number">6.3.</span> <span class="toc-text">二叉树性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡二叉树"><span class="toc-number">6.4.</span> <span class="toc-text">平衡二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法"><span class="toc-number">6.5.</span> <span class="toc-text">排序算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库"><span class="toc-number">7.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目"><span class="toc-number">8.</span> <span class="toc-text">项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计模式"><span class="toc-number">9.</span> <span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#singleton"><span class="toc-number">9.1.</span> <span class="toc-text">singleton</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C"><span class="toc-number">1.</span> <span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-C的类型安全"><span class="toc-number">1.1.</span> <span class="toc-text">C++/C的类型安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#auto-VS-decltype"><span class="toc-number">1.2.</span> <span class="toc-text">auto VS decltype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问权限"><span class="toc-number">1.3.</span> <span class="toc-text">访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序优化"><span class="toc-number">1.4.</span> <span class="toc-text">程序优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">1.5.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四种类型转换"><span class="toc-number">1.6.</span> <span class="toc-text">四种类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-C-函数调用的压栈模型"><span class="toc-number">1.7.</span> <span class="toc-text">C/C++函数调用的压栈模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员初始化列表"><span class="toc-number">1.8.</span> <span class="toc-text">成员初始化列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存泄漏"><span class="toc-number">1.9.</span> <span class="toc-text">内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构体内存对齐"><span class="toc-number">1.10.</span> <span class="toc-text">结构体内存对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.11.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用和指针实现多态"><span class="toc-number">1.12.</span> <span class="toc-text">引用和指针实现多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数的几种关键字-default-delete-0"><span class="toc-number">1.13.</span> <span class="toc-text">构造函数的几种关键字(default  delete   0)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员模板"><span class="toc-number">1.14.</span> <span class="toc-text">成员模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-VS-override"><span class="toc-number">1.15.</span> <span class="toc-text">final  VS override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct-VS-class"><span class="toc-number">1.16.</span> <span class="toc-text">struct VS class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针和引用区别"><span class="toc-number">1.17.</span> <span class="toc-text">指针和引用区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main函数之前"><span class="toc-number">1.18.</span> <span class="toc-text">main函数之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main返回值"><span class="toc-number">1.19.</span> <span class="toc-text">main返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-内存模型"><span class="toc-number">1.20.</span> <span class="toc-text">C++内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的四个特性"><span class="toc-number">1.21.</span> <span class="toc-text">面向对象的四个特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆和栈的区别"><span class="toc-number">1.22.</span> <span class="toc-text">堆和栈的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile"><span class="toc-number">1.23.</span> <span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内联函数VS宏定义"><span class="toc-number">1.24.</span> <span class="toc-text">内联函数VS宏定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-VS-C最大特点"><span class="toc-number">1.25.</span> <span class="toc-text">C++ VS C最大特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-assert"><span class="toc-number">1.26.</span> <span class="toc-text">static_assert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-11新特性"><span class="toc-number">1.27.</span> <span class="toc-text">c++11新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问类的私有变量"><span class="toc-number">1.28.</span> <span class="toc-text">访问类的私有变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组"><span class="toc-number">1.29.</span> <span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚基类表"><span class="toc-number">1.30.</span> <span class="toc-text">虚基类表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extern-C"><span class="toc-number">1.31.</span> <span class="toc-text">extern C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译型VS解释型VS动态语言VS静态语言"><span class="toc-number">1.32.</span> <span class="toc-text">编译型VS解释型VS动态语言VS静态语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数-VS析构函数"><span class="toc-number">1.33.</span> <span class="toc-text">构造函数 VS析构函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝构造VS-赋值构造"><span class="toc-number">1.34.</span> <span class="toc-text">拷贝构造VS 赋值构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overload-VS-override-VS-overwrite"><span class="toc-number">1.35.</span> <span class="toc-text">overload VS override VS overwrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的声明和定义"><span class="toc-number">1.36.</span> <span class="toc-text">变量的声明和定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new的变种"><span class="toc-number">1.37.</span> <span class="toc-text">new的变种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊对象构建"><span class="toc-number">1.38.</span> <span class="toc-text">特殊对象构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存分配方式"><span class="toc-number">1.39.</span> <span class="toc-text">内存分配方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-const关键字"><span class="toc-number">1.40.</span> <span class="toc-text">static const关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#define-和const的区别"><span class="toc-number">1.41.</span> <span class="toc-text">define 和const的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能指针"><span class="toc-number">1.42.</span> <span class="toc-text">智能指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动语义"><span class="toc-number">1.43.</span> <span class="toc-text">移动语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义函数"><span class="toc-number">1.44.</span> <span class="toc-text">自定义函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#STL"><span class="toc-number">2.</span> <span class="toc-text">STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#空间配置器"><span class="toc-number">2.1.</span> <span class="toc-text">空间配置器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代器"><span class="toc-number">2.2.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector实现"><span class="toc-number">2.3.</span> <span class="toc-text">vector实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list实现"><span class="toc-number">2.4.</span> <span class="toc-text">list实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque实现"><span class="toc-number">2.5.</span> <span class="toc-text">deque实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#priority-queue"><span class="toc-number">2.6.</span> <span class="toc-text">priority_queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set-map实现"><span class="toc-number">2.7.</span> <span class="toc-text">set-map实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered-set-map实现"><span class="toc-number">2.8.</span> <span class="toc-text">unordered-set/map实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">2.9.</span> <span class="toc-text">算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-11-多线程"><span class="toc-number">3.</span> <span class="toc-text">C++11 多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux命令"><span class="toc-number">3.1.</span> <span class="toc-text">linux命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统"><span class="toc-number">4.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面置换算法"><span class="toc-number">4.1.</span> <span class="toc-text">页面置换算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程调度"><span class="toc-number">4.2.</span> <span class="toc-text">进程调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存分配方式及错误"><span class="toc-number">4.3.</span> <span class="toc-text">内存分配方式及错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存溢出VS内存泄漏"><span class="toc-number">4.4.</span> <span class="toc-text">内存溢出VS内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟内存VS-swap分区"><span class="toc-number">4.5.</span> <span class="toc-text">虚拟内存VS swap分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断VS异常"><span class="toc-number">4.6.</span> <span class="toc-text">中断VS异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程终止的方式"><span class="toc-number">4.7.</span> <span class="toc-text">进程终止的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊进程"><span class="toc-number">4.8.</span> <span class="toc-text">特殊进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么回收线程"><span class="toc-number">4.9.</span> <span class="toc-text">怎么回收线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-线程数量"><span class="toc-number">4.10.</span> <span class="toc-text">进程/线程数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个程序从开始运行到结束的完整过程"><span class="toc-number">4.11.</span> <span class="toc-text">一个程序从开始运行到结束的完整过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户态VS内核态"><span class="toc-number">4.12.</span> <span class="toc-text">用户态VS内核态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁"><span class="toc-number">4.13.</span> <span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信方式"><span class="toc-number">4.14.</span> <span class="toc-text">进程间通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux-IO模型"><span class="toc-number">4.15.</span> <span class="toc-text">linux IO模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select-VS-epoll"><span class="toc-number">4.16.</span> <span class="toc-text">select VS epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程VS-线程VS-协程"><span class="toc-number">4.17.</span> <span class="toc-text">进程VS 线程VS 协程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机网络"><span class="toc-number">5.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP协议体系"><span class="toc-number">5.1.</span> <span class="toc-text">TCP/IP协议体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据链路层"><span class="toc-number">5.2.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP"><span class="toc-number">5.3.</span> <span class="toc-text">IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">5.4.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">5.5.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">5.6.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">5.7.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套接字socket"><span class="toc-number">5.8.</span> <span class="toc-text">套接字socket</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构和算法"><span class="toc-number">6.</span> <span class="toc-text">数据结构和算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#各种树"><span class="toc-number">6.1.</span> <span class="toc-text">各种树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashtable-哈希表"><span class="toc-number">6.2.</span> <span class="toc-text">hashtable 哈希表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树性质"><span class="toc-number">6.3.</span> <span class="toc-text">二叉树性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡二叉树"><span class="toc-number">6.4.</span> <span class="toc-text">平衡二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法"><span class="toc-number">6.5.</span> <span class="toc-text">排序算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库"><span class="toc-number">7.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目"><span class="toc-number">8.</span> <span class="toc-text">项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计模式"><span class="toc-number">9.</span> <span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#singleton"><span class="toc-number">9.1.</span> <span class="toc-text">singleton</span></a></li></ol></li></ol>
         
     </div>
     <style>
